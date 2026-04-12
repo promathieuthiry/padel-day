@@ -30,16 +30,22 @@ const homeLocation = {
   href: '/',
 } satisfies DocumentLocation
 
-// resolveHref() is a convenience function that resolves the URL
-// path for different document types and used in the presentation tool.
+// resolveHref() resolves the URL path for different document types
 function resolveHref(documentType?: string, slug?: string): string | undefined {
   switch (documentType) {
-    case 'post':
-      return slug ? `/posts/${slug}` : undefined
+    case 'homePage':
+      return '/'
+    case 'installerPage':
+      return '/installer-un-terrain'
+    case 'notreSitePage':
+      return '/notre-site'
+    case 'aProposPage':
+      return '/a-propos'
+    case 'contactPage':
+      return '/contact'
     case 'page':
       return slug ? `/${slug}` : undefined
     default:
-      console.warn('Invalid document type:', documentType)
       return undefined
   }
 }
@@ -62,43 +68,56 @@ export default defineConfig({
         },
       },
       resolve: {
-        // The Main Document Resolver API provides a method of resolving a main document from a given route or route pattern. https://www.sanity.io/docs/visual-editing/presentation-resolver-api#57720a5678d9
         mainDocuments: defineDocuments([
           {
             route: '/',
-            filter: `_type == "settings" && _id == "siteSettings"`,
+            filter: `_type == "homePage"`,
+          },
+          {
+            route: '/installer-un-terrain',
+            filter: `_type == "installerPage"`,
+          },
+          {
+            route: '/notre-site',
+            filter: `_type == "notreSitePage"`,
+          },
+          {
+            route: '/a-propos',
+            filter: `_type == "aProposPage"`,
+          },
+          {
+            route: '/contact',
+            filter: `_type == "contactPage"`,
           },
           {
             route: '/:slug',
-            filter: `_type == "page" && slug.current == $slug || _id == $slug`,
-          },
-          {
-            route: '/posts/:slug',
-            filter: `_type == "post" && slug.current == $slug || _id == $slug`,
+            filter: `_type == "page" && slug.current == $slug`,
           },
         ]),
-        // Locations Resolver API allows you to define where data is being used in your application. https://www.sanity.io/docs/visual-editing/presentation-resolver-api#8d8bca7bfcd7
         locations: {
           settings: defineLocations({
             locations: [homeLocation],
             message: 'This document is used on all pages',
             tone: 'positive',
           }),
-          page: defineLocations({
-            select: {
-              name: 'name',
-              slug: 'slug.current',
-            },
-            resolve: (doc) => ({
-              locations: [
-                {
-                  title: doc?.name || 'Untitled',
-                  href: resolveHref('page', doc?.slug)!,
-                },
-              ],
-            }),
+          homePage: defineLocations({
+            locations: [homeLocation],
+            message: 'Home page',
+            tone: 'positive',
           }),
-          post: defineLocations({
+          installerPage: defineLocations({
+            locations: [{title: 'Installer un terrain', href: '/installer-un-terrain'}],
+          }),
+          notreSitePage: defineLocations({
+            locations: [{title: 'Notre Site', href: '/notre-site'}],
+          }),
+          aProposPage: defineLocations({
+            locations: [{title: 'À Propos', href: '/a-propos'}],
+          }),
+          contactPage: defineLocations({
+            locations: [{title: 'Contact', href: '/contact'}],
+          }),
+          page: defineLocations({
             select: {
               title: 'title',
               slug: 'slug.current',
@@ -107,13 +126,9 @@ export default defineConfig({
               locations: [
                 {
                   title: doc?.title || 'Untitled',
-                  href: resolveHref('post', doc?.slug)!,
+                  href: resolveHref('page', doc?.slug)!,
                 },
-                {
-                  title: 'Home',
-                  href: '/',
-                } satisfies DocumentLocation,
-              ].filter(Boolean) as DocumentLocation[],
+              ],
             }),
           }),
         },
