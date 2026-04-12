@@ -65,6 +65,7 @@ export type PageReference = {
 
 export type Link = {
   _type: 'link'
+  title: string
   linkType?: 'href' | 'page'
   href?: string
   page?: PageReference
