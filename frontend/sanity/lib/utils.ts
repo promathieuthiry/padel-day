@@ -1,17 +1,13 @@
-import {Link} from '@/sanity.types'
 import {dataset, projectId, studioUrl} from '@/sanity/lib/api'
 import {createDataAttribute, CreateDataAttributeProps} from 'next-sanity'
 import {createImageUrlBuilder, type SanityImageSource} from '@sanity/image-url'
-import {DereferencedLink} from '@/sanity/lib/types'
 
 const builder = createImageUrlBuilder({
   projectId: projectId || '',
   dataset: dataset || '',
 })
 
-// Create an image URL builder using the client
-// Export a function that can be used to get image URLs
-function urlForImage(source: SanityImageSource) {
+export function urlForImage(source: SanityImageSource) {
   return builder.image(source)
 }
 
@@ -26,26 +22,22 @@ export function resolveOpenGraphImage(
   return {url, alt: (image as {alt?: string})?.alt || '', width, height}
 }
 
-// Depending on the type of link, we need to fetch the corresponding page, post, or URL.  Otherwise return null.
-export function linkResolver(link: Link | DereferencedLink | undefined) {
+export function linkResolver(link: {linkType?: string; href?: string; page?: string | {slug?: {current?: string}}} | undefined): string | null {
   if (!link) return null
 
-  // If linkType is not set but href is, lets set linkType to "href".  This comes into play when pasting links into the portable text editor because a link type is not assumed.
-  if (!link.linkType && link.href) {
-    link.linkType = 'href'
-  }
+  const effectiveLinkType = link.linkType || (link.href ? 'href' : undefined)
 
-  switch (link.linkType) {
+  switch (effectiveLinkType) {
     case 'href':
       return link.href || null
     case 'page':
-      if (link?.page && typeof link.page === 'string') {
+      if (typeof link.page === 'string') {
         return `/${link.page}`
       }
-    case 'post':
-      if (link?.post && typeof link.post === 'string') {
-        return `/posts/${link.post}`
+      if (link.page?.slug?.current) {
+        return `/${link.page.slug.current}`
       }
+      return null
     default:
       return null
   }
