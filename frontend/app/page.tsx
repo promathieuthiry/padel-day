@@ -5,7 +5,7 @@ import {homePageQuery, faqItemsQuery} from '@/sanity/lib/queries'
 import FadeIn from '@/app/components/FadeIn'
 import StructuredData from '@/app/components/StructuredData'
 import HeroSection from '@/app/components/sections/HeroSection'
-import IntroSection from '@/app/components/sections/IntroSection'
+import FactsSection from '@/app/components/sections/FactsSection'
 import ValuesSection from '@/app/components/sections/ValuesSection'
 import HowItWorksSection from '@/app/components/sections/HowItWorksSection'
 import ImpactSection from '@/app/components/sections/ImpactSection'
@@ -52,16 +52,7 @@ export default async function Page() {
         secondaryCta={homePage?.heroSecondaryCta}
       />
 
-      {homePage?.introHeading && (
-        <FadeIn>
-          <IntroSection
-            heading={homePage.introHeading}
-            body={homePage.introBody ?? undefined}
-            primaryCta={homePage.introPrimaryCta}
-            secondaryCta={homePage.introSecondaryCta}
-          />
-        </FadeIn>
-      )}
+      <FactsSection />
 
       {homePage?.values && homePage.values.length > 0 && (
         <FadeIn>
