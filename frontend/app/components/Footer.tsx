@@ -3,6 +3,7 @@ import Image from 'next/image'
 import {sanityFetch} from '@/sanity/lib/live'
 import {siteSettingsQuery} from '@/sanity/lib/queries'
 import Container from './ui/Container'
+import FooterWordmark from './FooterWordmark'
 
 export default async function Footer() {
   const {data: settings} = await sanityFetch({
@@ -26,23 +27,33 @@ export default async function Footer() {
 
   return (
     <footer
-      className="relative overflow-hidden bg-dark text-white isolate"
+      className="relative overflow-hidden bg-blue text-white isolate"
       aria-labelledby="footer-heading"
     >
-      {/* Court tramlines — echoes CtaBannerSection */}
+      {/* Court tramlines — echoes CtaBannerSection (softened for blue ground) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        className="pointer-events-none absolute inset-0 opacity-[0.08]"
         style={{
           backgroundImage:
             'linear-gradient(90deg, transparent 0, transparent calc(50% - 0.5px), #fff calc(50% - 0.5px), #fff calc(50% + 0.5px), transparent calc(50% + 0.5px)), linear-gradient(0deg, transparent 0, transparent calc(50% - 0.5px), #fff calc(50% - 0.5px), #fff calc(50% + 0.5px), transparent calc(50% + 0.5px))',
         }}
       />
 
-      {/* Lime bloom — anchored bottom-left, opposite to CtaBanner's right-side bloom */}
+      {/* Deep blue vignette — adds depth on the otherwise flat brand blue */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-60 -bottom-80 h-[50rem] w-[50rem] rounded-full blur-[160px] opacity-[0.18]"
+        className="pointer-events-none absolute inset-0 opacity-60"
+        style={{
+          background:
+            'radial-gradient(120% 80% at 50% 0%, transparent 0%, transparent 55%, rgba(10,20,60,0.45) 100%)',
+        }}
+      />
+
+      {/* Lime bloom — anchored bottom-left. Lower opacity: lime on blue is already vivid */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-60 -bottom-80 h-[50rem] w-[50rem] rounded-full blur-[160px] opacity-[0.14]"
         style={{background: 'radial-gradient(circle, var(--color-lime) 0%, transparent 65%)'}}
       />
 
@@ -94,7 +105,7 @@ export default async function Footer() {
               </span>
             </Link>
 
-            <p className="mt-6 block w-full max-w-[42ch] text-[0.95rem] leading-relaxed text-white/65">
+            <p className="mt-6 block w-full max-w-[42ch] text-[0.95rem] leading-relaxed text-white/80">
               Des complexes de padel automatisés, pensés pour les municipalités et les clubs qui
               veulent ouvrir un terrain sans complexité opérationnelle.
             </p>
@@ -103,7 +114,7 @@ export default async function Footer() {
           {/* Contact column */}
           <div className="col-span-12 sm:col-span-6 lg:col-span-3 lg:col-start-7 min-w-0">
             <h3
-              className="text-[11px] font-medium uppercase tracking-[0.18em] text-white/50 mb-5"
+              className="text-[11px] font-medium uppercase tracking-[0.18em] text-white/60 mb-5"
               style={{fontFamily: 'var(--font-poppins), sans-serif'}}
             >
               Contact
@@ -117,7 +128,7 @@ export default async function Footer() {
                   {contactEmail}
                   <span
                     aria-hidden="true"
-                    className="absolute left-0 right-0 -bottom-0.5 h-px bg-white/20 group-hover:bg-lime/60 transition-colors duration-200"
+                    className="absolute left-0 right-0 -bottom-0.5 h-px bg-white/30 group-hover:bg-lime transition-colors duration-200"
                   />
                 </span>
               </a>
@@ -131,7 +142,7 @@ export default async function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
-                    className="group flex size-11 items-center justify-center rounded-full border border-white/15 text-white/70 hover:text-dark hover:bg-lime hover:border-lime transition-colors duration-200 active:scale-[0.97]"
+                    className="group flex size-11 items-center justify-center rounded-full border border-white/20 text-white/85 hover:text-dark hover:bg-lime hover:border-lime transition-colors duration-200 active:scale-[0.97]"
                   >
                     <svg
                       width="18"
@@ -155,7 +166,7 @@ export default async function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Facebook"
-                    className="group flex size-11 items-center justify-center rounded-full border border-white/15 text-white/70 hover:text-dark hover:bg-lime hover:border-lime transition-colors duration-200 active:scale-[0.97]"
+                    className="group flex size-11 items-center justify-center rounded-full border border-white/20 text-white/85 hover:text-dark hover:bg-lime hover:border-lime transition-colors duration-200 active:scale-[0.97]"
                   >
                     <svg
                       width="18"
@@ -207,7 +218,7 @@ export default async function Footer() {
               className="col-span-12 sm:col-span-6 lg:col-span-3 lg:col-start-10 min-w-0"
             >
               <h3
-                className="text-[11px] font-medium uppercase tracking-[0.18em] text-white/50 mb-5"
+                className="text-[11px] font-medium uppercase tracking-[0.18em] text-white/60 mb-5"
                 style={{fontFamily: 'var(--font-poppins), sans-serif'}}
               >
                 Navigation
@@ -219,11 +230,11 @@ export default async function Footer() {
                       href={resolveHref(link)}
                       target={link.openInNewTab ? '_blank' : undefined}
                       rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
-                      className="group inline-flex items-center gap-2 text-[0.95rem] text-white/75 hover:text-white transition-colors duration-200"
+                      className="group inline-flex items-center gap-2 text-[0.95rem] text-white/85 hover:text-white transition-colors duration-200"
                     >
                       <span
                         aria-hidden="true"
-                        className="inline-block h-px w-3 shrink-0 bg-white/25 transition-[width,background-color] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-6 group-hover:bg-lime"
+                        className="inline-block h-px w-3 shrink-0 bg-white/35 transition-[width,background-color] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-6 group-hover:bg-lime"
                       />
                       <span className="break-words">{link.title || resolveHref(link)}</span>
                     </Link>
@@ -234,31 +245,29 @@ export default async function Footer() {
           )}
         </div>
 
-        {/* Oversized wordmark — closing statement */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none relative mt-4 md:mt-10 select-none overflow-hidden"
-        >
-          <span
-            className="font-display font-bold leading-[0.85] tracking-[-0.045em] whitespace-nowrap block"
-            style={{
-              fontSize: 'clamp(4rem, 17vw, 15rem)',
-              WebkitTextStroke: '1px rgba(255,255,255,0.1)',
-              color: 'transparent',
-            }}
-          >
-            padel.day
-          </span>
-        </div>
+        {/* Oversized wordmark — scroll-driven left→right lime fill */}
+        <FooterWordmark />
 
         {/* Base line — copyright + meta */}
-        <div className="border-t border-white/10 py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <p className="text-xs text-white/45 tracking-wide">{copyrightText}</p>
+        <div className="border-t border-white/15 py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <p className="text-xs text-white/60 tracking-wide">{copyrightText}</p>
           <p
-            className="text-[11px] uppercase tracking-[0.18em] text-white/35"
+            className="text-[11px] uppercase tracking-[0.18em] text-white/50"
             style={{fontFamily: 'var(--font-poppins), sans-serif'}}
           >
-            Conçu en France · Jouez partout
+            Made with{' '}
+            <span aria-hidden="true" className="heart-beat">
+              ❤️
+            </span>
+            <span className="sr-only">love</span> by{' '}
+            <a
+              href="https://github.com/promathieuthiry"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/70 hover:text-lime transition-colors duration-200 underline-offset-4 hover:underline"
+            >
+              Mathieu Thiry
+            </a>{' '}
           </p>
         </div>
       </Container>
