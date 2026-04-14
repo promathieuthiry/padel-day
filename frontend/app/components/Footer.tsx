@@ -1,6 +1,8 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import {sanityFetch} from '@/sanity/lib/live'
 import {siteSettingsQuery} from '@/sanity/lib/queries'
+import Container from './ui/Container'
 
 export default async function Footer() {
   const {data: settings} = await sanityFetch({
@@ -19,6 +21,8 @@ export default async function Footer() {
       : link.linkType === 'page' && link.page
         ? `/${link.page}`
         : '#'
+
+  const contactHref = contactEmail ? `mailto:${contactEmail}` : '#contact'
 
   return (
     <footer
@@ -46,11 +50,11 @@ export default async function Footer() {
         Pied de page
       </h2>
 
-      <div className="relative z-10 w-full px-6 md:px-12 lg:px-16">
+      <Container className="relative z-10">
         {/* Top editorial band */}
         <div className="pt-24 md:pt-32 pb-16 md:pb-20 grid grid-cols-12 gap-x-6 gap-y-14">
           {/* Brand block */}
-          <div className="col-span-12 lg:col-span-5">
+          <div className="col-span-12 lg:col-span-5 min-w-0">
             <div className="flex items-center gap-3 mb-6">
               <span aria-hidden="true" className="relative inline-flex size-2.5">
                 <span className="absolute inset-0 rounded-full bg-lime opacity-60 animate-ping" />
@@ -66,20 +70,38 @@ export default async function Footer() {
 
             <Link
               href="/"
-              className="inline-block font-display font-bold leading-[0.9] tracking-[-0.035em] text-white"
-              style={{fontSize: 'clamp(3rem, 6vw, 5rem)'}}
+              aria-label="Padel Day — Accueil"
+              className="group inline-flex items-center gap-4"
             >
-              Padel<span className="text-lime">.</span>Day
+              <span
+                aria-hidden="true"
+                className="relative inline-flex size-14 md:size-16 shrink-0 items-center justify-center rounded-full bg-lime ring-1 ring-lime text-dark"
+              >
+                <Image
+                  src="/logo_padel_day.svg"
+                  alt=""
+                  width={40}
+                  height={40}
+                  className="size-8 md:size-10"
+                  style={{filter: 'none'}}
+                />
+              </span>
+              <span
+                className="font-display font-bold leading-[0.9] tracking-[-0.035em] text-white"
+                style={{fontSize: 'clamp(2.5rem, 4.5vw, 3.75rem)'}}
+              >
+                Padel Day
+              </span>
             </Link>
 
-            <p className="mt-6 max-w-md text-[0.95rem] leading-relaxed text-white/65 text-balance">
+            <p className="mt-6 block w-full max-w-[42ch] text-[0.95rem] leading-relaxed text-white/65">
               Des complexes de padel automatisés, pensés pour les municipalités et les clubs qui
               veulent ouvrir un terrain sans complexité opérationnelle.
             </p>
           </div>
 
           {/* Contact column */}
-          <div className="col-span-12 sm:col-span-6 lg:col-span-3 lg:col-start-7">
+          <div className="col-span-12 sm:col-span-6 lg:col-span-3 lg:col-start-7 min-w-0">
             <h3
               className="text-[11px] font-medium uppercase tracking-[0.18em] text-white/50 mb-5"
               style={{fontFamily: 'var(--font-poppins), sans-serif'}}
@@ -89,9 +111,9 @@ export default async function Footer() {
             {contactEmail && (
               <a
                 href={`mailto:${contactEmail}`}
-                className="group inline-flex items-baseline gap-2 font-display text-xl md:text-2xl tracking-[-0.02em] text-white hover:text-lime transition-colors duration-200"
+                className="group block max-w-full font-display text-base md:text-lg tracking-[-0.015em] text-white hover:text-lime transition-colors duration-200 break-words min-w-0"
               >
-                <span className="relative">
+                <span className="relative inline-block max-w-full break-words">
                   {contactEmail}
                   <span
                     aria-hidden="true"
@@ -151,13 +173,38 @@ export default async function Footer() {
                 )}
               </div>
             )}
+            {/* Contact CTA */}
+            <Link
+              href={contactHref}
+              className="group relative mt-8 inline-flex items-center gap-4 bg-lime text-dark rounded-full pl-6 pr-2 py-2 font-semibold text-[0.95rem] whitespace-nowrap transition-transform duration-200 ease-out active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime"
+            >
+              <span>Nous contacter</span>
+              <span
+                aria-hidden="true"
+                className="flex size-10 shrink-0 items-center justify-center rounded-full bg-dark text-lime transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-1"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M4 9h10" />
+                  <path d="M10 4l5 5-5 5" />
+                </svg>
+              </span>
+            </Link>
           </div>
 
           {/* Nav column */}
           {footerLinks.length > 0 && (
             <nav
               aria-label="Liens de pied de page"
-              className="col-span-12 sm:col-span-6 lg:col-span-2 lg:col-start-10"
+              className="col-span-12 sm:col-span-6 lg:col-span-3 lg:col-start-10 min-w-0"
             >
               <h3
                 className="text-[11px] font-medium uppercase tracking-[0.18em] text-white/50 mb-5"
@@ -167,7 +214,7 @@ export default async function Footer() {
               </h3>
               <ul className="flex flex-col gap-3">
                 {footerLinks.map((link: any, index: number) => (
-                  <li key={index}>
+                  <li key={index} className="min-w-0">
                     <Link
                       href={resolveHref(link)}
                       target={link.openInNewTab ? '_blank' : undefined}
@@ -176,9 +223,9 @@ export default async function Footer() {
                     >
                       <span
                         aria-hidden="true"
-                        className="inline-block h-px w-3 bg-white/25 transition-[width,background-color] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-6 group-hover:bg-lime"
+                        className="inline-block h-px w-3 shrink-0 bg-white/25 transition-[width,background-color] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-6 group-hover:bg-lime"
                       />
-                      <span>{link.title || resolveHref(link)}</span>
+                      <span className="break-words">{link.title || resolveHref(link)}</span>
                     </Link>
                   </li>
                 ))}
@@ -195,7 +242,7 @@ export default async function Footer() {
           <span
             className="font-display font-bold leading-[0.85] tracking-[-0.045em] whitespace-nowrap block"
             style={{
-              fontSize: 'clamp(5rem, 19vw, 18rem)',
+              fontSize: 'clamp(4rem, 17vw, 15rem)',
               WebkitTextStroke: '1px rgba(255,255,255,0.1)',
               color: 'transparent',
             }}
@@ -214,7 +261,7 @@ export default async function Footer() {
             Conçu en France · Jouez partout
           </p>
         </div>
-      </div>
+      </Container>
     </footer>
   )
 }
