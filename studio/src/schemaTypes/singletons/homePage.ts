@@ -146,6 +146,13 @@ export const homePage = defineType({
       of: [defineArrayMember({type: 'step'})],
       fieldset: 'howItWorks',
     }),
+    defineField({
+      name: 'howItWorksImage',
+      title: 'Decorative Image',
+      type: 'image',
+      options: {hotspot: true},
+      fieldset: 'howItWorks',
+    }),
 
     // Impact
     defineField({

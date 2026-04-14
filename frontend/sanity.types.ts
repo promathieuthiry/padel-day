@@ -330,6 +330,13 @@ export type HomePage = {
       _key: string
     } & Step
   >
+  howItWorksImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   impactHeading?: string
   impactBody?: BlockContent
   impactCta?: Cta
@@ -772,6 +779,13 @@ export type HomePageQueryResult = {
       _key: string
     } & Step
   >
+  howItWorksImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
   impactHeading?: string
   impactBody?: BlockContent
   impactCta?: Cta

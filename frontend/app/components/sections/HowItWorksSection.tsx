@@ -1,6 +1,9 @@
+import Image from 'next/image'
+
 import {Stagger, StaggerItem} from '@/app/components/Stagger'
 import Container from '@/app/components/ui/Container'
 import SectionIntro from '@/app/components/ui/SectionIntro'
+import {urlForImage} from '@/sanity/lib/utils'
 
 interface StepItem {
   _key: string
@@ -12,46 +15,98 @@ interface StepItem {
 interface HowItWorksSectionProps {
   heading: string
   steps: StepItem[]
+  image?: {asset?: {_ref: string}} | null
 }
 
-export default function HowItWorksSection({heading, steps}: HowItWorksSectionProps) {
+export default function HowItWorksSection({heading, steps, image}: HowItWorksSectionProps) {
   if (!steps || steps.length === 0) return null
+
+  const imageUrl = image?.asset
+    ? urlForImage(image).width(800).height(1000).fit('crop').quality(85).url()
+    : null
 
   return (
     <section className="bg-surface-2 border-y border-hairline py-20 md:py-28">
       <Container>
         <SectionIntro eyebrow="Le parcours" heading={heading} className="mb-12 md:mb-16" />
 
-        <Stagger as="ol" className="border-t border-hairline" staggerDelay={0.08}>
-          {steps.map((step) => (
-            <StaggerItem
-              as="li"
-              key={step._key}
-              className="group grid grid-cols-12 gap-x-4 md:gap-x-8 items-start py-6 md:py-8 border-b border-hairline transition-colors hover:bg-surface-2/50"
-            >
-              <div className="col-span-2 md:col-span-1 pt-1">
-                <span
-                  className="font-heading font-medium text-ink-faint tabular-nums"
-                  style={{fontSize: 'clamp(1.25rem, 1.6vw, 1.625rem)'}}
-                  aria-hidden="true"
+        <div className={`grid grid-cols-1 lg:gap-x-12 lg:items-center ${imageUrl ? 'lg:grid-cols-12' : ''}`}>
+          {imageUrl ? (
+            <aside className="lg:col-span-5 xl:col-span-5 mb-10 lg:mb-0">
+              <figure className="relative">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-hairline bg-surface-2">
+                  <Image
+                    src={imageUrl}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    className="object-cover"
+                    aria-hidden="true"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 mix-blend-multiply"
+                    style={{
+                      background:
+                        'linear-gradient(160deg, rgba(10,18,28,0.55) 0%, rgba(10,18,28,0.15) 45%, rgba(132,204,22,0.18) 100%)',
+                    }}
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 opacity-[0.08]"
+                    style={{
+                      backgroundImage:
+                        'radial-gradient(rgba(255,255,255,0.9) 1px, transparent 1px)',
+                      backgroundSize: '3px 3px',
+                    }}
+                  />
+                  <span
+                    aria-hidden="true"
+                    className="absolute left-4 top-4 h-6 w-6 border-l border-t border-lime"
+                  />
+                  <span
+                    aria-hidden="true"
+                    className="absolute right-4 bottom-4 h-6 w-6 border-r border-b border-lime"
+                  />
+                </div>
+              </figure>
+            </aside>
+          ) : null}
+
+          <div className={imageUrl ? 'lg:col-span-7 xl:col-span-7' : ''}>
+            <Stagger as="ol" className="border-t border-hairline" staggerDelay={0.08}>
+              {steps.map((step) => (
+                <StaggerItem
+                  as="li"
+                  key={step._key}
+                  className="group grid grid-cols-12 gap-x-4 items-start py-6 md:py-7 border-b border-hairline transition-colors hover:bg-surface-2/50"
                 >
-                  {String(step.number).padStart(2, '0')}
-                </span>
-              </div>
+                  <div className="col-span-2 pt-1">
+                    <span
+                      className="font-heading font-medium text-ink-faint tabular-nums"
+                      style={{fontSize: 'clamp(1.25rem, 1.6vw, 1.625rem)'}}
+                      aria-hidden="true"
+                    >
+                      {String(step.number).padStart(2, '0')}
+                    </span>
+                  </div>
 
-              <h3
-                className="col-span-10 md:col-span-5 font-heading font-medium text-ink tracking-tight leading-[1.15]"
-                style={{fontSize: 'clamp(1.25rem, 2vw, 1.75rem)'}}
-              >
-                {step.title}
-              </h3>
-
-              <p className="col-start-3 col-span-10 md:col-start-auto md:col-span-6 mt-2 md:mt-0 md:pt-2 font-body text-base text-ink-muted leading-relaxed max-w-[60ch]">
-                {step.description}
-              </p>
-            </StaggerItem>
-          ))}
-        </Stagger>
+                  <div className="col-span-10">
+                    <h3
+                      className="font-heading font-medium text-ink tracking-tight leading-[1.15]"
+                      style={{fontSize: 'clamp(1.25rem, 2vw, 1.75rem)'}}
+                    >
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 font-body text-base text-ink-muted leading-relaxed max-w-[60ch]">
+                      {step.description}
+                    </p>
+                  </div>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
+        </div>
       </Container>
     </section>
   )

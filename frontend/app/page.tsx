@@ -65,6 +65,7 @@ export default async function Page() {
           <HowItWorksSection
             heading={homePage.howItWorksHeading}
             steps={homePage.howItWorksSteps}
+            image={homePage.howItWorksImage}
           />
         </FadeIn>
       )}
