@@ -2,6 +2,7 @@
 
 import {useEffect, useRef, useState} from 'react'
 import Container from '@/app/components/ui/Container'
+import SectionIntro from '@/app/components/ui/SectionIntro'
 
 type Fact = {
   label: string
@@ -113,26 +114,13 @@ export default function FactsSection({eyebrow, heading, body}: FactsSectionProps
       className="relative bg-surface border-t border-hairline"
     >
       <Container className="py-20 md:py-28">
-        <div className="mb-14 md:mb-20 max-w-[62rem]">
-          <p className="eyebrow mb-6 flex items-center gap-3">
-            <span aria-hidden="true" className="relative inline-flex size-2.5">
-              <span className="absolute inset-0 rounded-full bg-lime opacity-60 animate-ping" />
-              <span className="relative inline-block size-2.5 rounded-full bg-lime" />
-            </span>
-            <span>{eyebrow}</span>
-            <span aria-hidden="true" className="inline-block h-px w-10 bg-blue/40" />
-          </p>
-          <h2
-            id="facts-heading"
-            className="font-display font-bold text-ink leading-[0.95] tracking-[-0.025em]"
-            style={{fontSize: 'clamp(1.75rem, 4vw, 3rem)'}}
-          >
-            {heading}
-          </h2>
-          <p className="mt-6 md:mt-8 text-ink-muted max-w-[56ch] text-base md:text-lg leading-[1.55]">
-            {body}
-          </p>
-        </div>
+        <SectionIntro
+          eyebrow={eyebrow}
+          heading={heading}
+          body={body}
+          headingId="facts-heading"
+          className="mb-14 md:mb-20"
+        />
 
         <dl className="grid grid-cols-1 md:grid-cols-3">
           {FACTS.map((fact, i) => (

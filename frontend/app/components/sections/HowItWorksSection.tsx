@@ -1,5 +1,6 @@
 import {Stagger, StaggerItem} from '@/app/components/Stagger'
 import Container from '@/app/components/ui/Container'
+import SectionIntro from '@/app/components/ui/SectionIntro'
 
 interface StepItem {
   _key: string
@@ -19,15 +20,7 @@ export default function HowItWorksSection({heading, steps}: HowItWorksSectionPro
   return (
     <section className="bg-surface py-24 md:py-36">
       <Container>
-        <header className="max-w-[40ch] mb-16 md:mb-20">
-          <p className="eyebrow mb-4">Le parcours</p>
-          <h2
-            className="font-heading font-semibold text-ink tracking-tight leading-[1.05]"
-            style={{fontSize: 'clamp(2rem, 4vw, 3.25rem)'}}
-          >
-            {heading}
-          </h2>
-        </header>
+        <SectionIntro eyebrow="Le parcours" heading={heading} className="mb-16 md:mb-20" />
 
         <Stagger as="ol" className="border-t border-hairline" staggerDelay={0.08}>
           {steps.map((step) => (

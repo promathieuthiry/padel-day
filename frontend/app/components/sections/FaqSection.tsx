@@ -5,6 +5,7 @@ import {PortableText} from '@portabletext/react'
 import type {BlockContent} from '@/sanity.types'
 import {Stagger, StaggerItem} from '@/app/components/Stagger'
 import Container from '@/app/components/ui/Container'
+import SectionIntro from '@/app/components/ui/SectionIntro'
 
 interface FaqItem {
   _id: string
@@ -82,15 +83,11 @@ export default function FaqSection({items}: FaqSectionProps) {
   return (
     <section className="bg-surface-2 py-24 md:py-36">
       <Container>
-        <header className="max-w-[40ch] mb-12 md:mb-16">
-          <p className="eyebrow mb-4">Questions fréquentes</p>
-          <h2
-            className="font-heading font-semibold text-ink tracking-tight leading-[1.05]"
-            style={{fontSize: 'clamp(2rem, 4vw, 3.25rem)'}}
-          >
-            Tout ce qu'il faut savoir avant de jouer.
-          </h2>
-        </header>
+        <SectionIntro
+          eyebrow="Questions fréquentes"
+          heading="Tout ce qu'il faut savoir avant de jouer."
+          className="mb-12 md:mb-16"
+        />
 
         <Stagger className="border-t border-hairline" staggerDelay={0.06}>
           {items.map((item, index) => (
