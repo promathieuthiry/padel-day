@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import {sanityFetch} from '@/sanity/lib/live'
+import Logo from '@/app/components/Logo'
 import {siteSettingsQuery} from '@/sanity/lib/queries'
 import Button from '@/app/components/Button'
 import MobileNav from '@/app/components/MobileNav'
@@ -45,16 +45,11 @@ export default async function Header() {
   return (
     <header className="fixed z-50 inset-x-0 top-0 h-16 bg-surface/85 backdrop-blur-lg border-b border-hairline">
       <div className="container flex h-full items-center justify-between">
-        <Link href="/" aria-label="Padel Day" className="flex h-full items-center gap-2">
-          <Image
-            src="/logo_padel_day.svg"
-            alt=""
-            width={64}
-            height={64}
-            priority
-            className="h-full w-auto"
-          />
-          <span className="font-display text-xl font-semibold tracking-tight">Padel Day</span>
+        <Link href="/" aria-label="Padel Day" className="flex items-center gap-2.5">
+          <Logo className="h-9 w-9 text-[var(--color-blue)]" aria-hidden />
+          <span className="font-(family-name:--font-poppins) text-xl font-semibold tracking-tight text-ink">
+            Padel Day
+          </span>
         </Link>
 
         <nav className="hidden md:block">
