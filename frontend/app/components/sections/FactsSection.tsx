@@ -97,7 +97,13 @@ function Counter({
   return <>{value}</>
 }
 
-export default function FactsSection() {
+type FactsSectionProps = {
+  eyebrow?: string
+  heading?: string
+  body?: string
+}
+
+export default function FactsSection({eyebrow, heading, body}: FactsSectionProps) {
   const {ref, inView} = useInView<HTMLElement>()
 
   return (
@@ -113,7 +119,7 @@ export default function FactsSection() {
               <span className="absolute inset-0 rounded-full bg-lime opacity-60 animate-ping" />
               <span className="relative inline-block size-2.5 rounded-full bg-lime" />
             </span>
-            <span>Notre ambition</span>
+            <span>{eyebrow}</span>
             <span aria-hidden="true" className="inline-block h-px w-10 bg-blue/40" />
           </p>
           <h2
@@ -121,11 +127,10 @@ export default function FactsSection() {
             className="font-display font-bold text-ink leading-[0.95] tracking-[-0.025em]"
             style={{fontSize: 'clamp(1.75rem, 4vw, 3rem)'}}
           >
-            Démocratiser le padel.
+            {heading}
           </h2>
           <p className="mt-6 md:mt-8 text-ink-muted max-w-[56ch] text-base md:text-lg leading-[1.55]">
-            Fini les trajets d’une heure pour un terrain libre. Padel Day apporte le jeu dans les
-            villes moyennes, au plus près des joueurs.
+            {body}
           </p>
         </div>
 

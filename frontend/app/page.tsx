@@ -15,7 +15,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const {data: homePage} = await sanityFetch({query: homePageQuery, stega: false})
   return {
     title: homePage?.metaTitle || 'Padel Day — Le padel, simplement.',
-    description: homePage?.metaDescription || 'Padel Day rend le padel accessible a tous. Decouvrez notre concept, nos terrains et notre mission.',
+    description:
+      homePage?.metaDescription ||
+      'Padel Day rend le padel accessible a tous. Decouvrez notre concept, nos terrains et notre mission.',
   }
 }
 
@@ -28,13 +30,13 @@ export default async function Page() {
   const localBusinessJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: 'Padel Day',
-    description: homePage?.metaDescription || 'Le padel, simplement.',
-    url: 'https://padelday.fr',
-    sameAs: [],
-    address: {
+    'name': 'Padel Day',
+    'description': homePage?.metaDescription || 'Le padel, simplement.',
+    'url': 'https://padelday.fr',
+    'sameAs': [],
+    'address': {
       '@type': 'PostalAddress',
-      addressCountry: 'FR',
+      'addressCountry': 'FR',
     },
   }
 
@@ -50,10 +52,15 @@ export default async function Page() {
         primaryCta={homePage?.heroPrimaryCta}
         secondaryCta={homePage?.heroSecondaryCta}
       />
+      <FadeIn direction="up">
+        <FactsSection
+          eyebrow={homePage?.factsEyebrow ?? undefined}
+          heading={homePage?.factsHeading ?? undefined}
+          body={homePage?.factsBody ?? undefined}
+        />
+      </FadeIn>
 
-      <FactsSection />
-
-{homePage?.howItWorksHeading && homePage?.howItWorksSteps && (
+      {homePage?.howItWorksHeading && homePage?.howItWorksSteps && (
         <FadeIn>
           <HowItWorksSection
             heading={homePage.howItWorksHeading}

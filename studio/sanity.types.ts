@@ -321,6 +321,9 @@ export type HomePage = {
   introBody?: BlockContent
   introPrimaryCta?: Cta
   introSecondaryCta?: Cta
+  factsEyebrow?: string
+  factsHeading?: string
+  factsBody?: string
   howItWorksHeading?: string
   howItWorksSteps?: Array<
     {

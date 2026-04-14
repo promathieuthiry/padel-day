@@ -10,6 +10,7 @@ export const homePage = defineType({
     {name: 'meta', title: 'SEO / Metadata'},
     {name: 'hero', title: 'Hero Section'},
     {name: 'intro', title: 'Introduction Section'},
+    {name: 'facts', title: 'Facts / Ambition Section'},
     {name: 'howItWorks', title: 'How It Works Section'},
     {name: 'impact', title: 'Impact Section'},
     {name: 'ctaBanner', title: 'CTA Banner Section'},
@@ -108,6 +109,27 @@ export const homePage = defineType({
       title: 'Intro Secondary CTA',
       type: 'cta',
       fieldset: 'intro',
+    }),
+
+    // Facts / Ambition
+    defineField({
+      name: 'factsEyebrow',
+      title: 'Eyebrow',
+      type: 'string',
+      fieldset: 'facts',
+    }),
+    defineField({
+      name: 'factsHeading',
+      title: 'Heading',
+      type: 'string',
+      fieldset: 'facts',
+    }),
+    defineField({
+      name: 'factsBody',
+      title: 'Body',
+      type: 'text',
+      rows: 3,
+      fieldset: 'facts',
     }),
 
     // How It Works
