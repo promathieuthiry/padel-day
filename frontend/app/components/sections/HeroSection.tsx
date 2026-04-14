@@ -21,8 +21,11 @@ interface HeroSectionProps {
 function renderHeading(heading: string, highlightWords?: string[]) {
   if (!highlightWords || highlightWords.length === 0) return heading
   const words = heading.split(' ')
+  let highlightIndex = 0
   return words.map((word, i) => {
     const isHighlighted = highlightWords.some((hw) => word.toLowerCase().includes(hw.toLowerCase()))
+    const delay = isHighlighted ? 1100 + highlightIndex * 180 : 0
+    if (isHighlighted) highlightIndex += 1
     return (
       <span key={i}>
         {isHighlighted ? (
@@ -30,7 +33,8 @@ function renderHeading(heading: string, highlightWords?: string[]) {
             <span className="relative z-10">{word}</span>
             <span
               aria-hidden="true"
-              className="absolute left-[-0.05em] right-[-0.05em] bottom-[0.06em] h-[0.28em] bg-lime -z-0 skew-x-[-4deg]"
+              className="hero-underline absolute left-[-0.04em] right-[-0.04em] bottom-[0.04em] h-[0.14em] bg-lime -z-0 rounded-[2px]"
+              style={{animationDelay: `${delay}ms`}}
             />
           </span>
         ) : (

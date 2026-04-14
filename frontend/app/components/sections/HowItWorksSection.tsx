@@ -46,7 +46,7 @@ export default function HowItWorksSection({heading, steps}: HowItWorksSectionPro
                 {step.title}
               </h3>
 
-              <p className="col-start-3 md:col-start-auto md:col-span-6 mt-2 md:mt-0 md:pt-2 font-body text-base text-ink-muted leading-relaxed max-w-[60ch]">
+              <p className="col-start-3 col-span-10 md:col-start-auto md:col-span-6 mt-2 md:mt-0 md:pt-2 font-body text-base text-ink-muted leading-relaxed max-w-[60ch]">
                 {step.description}
               </p>
             </StaggerItem>
