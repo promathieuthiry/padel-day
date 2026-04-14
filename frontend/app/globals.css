@@ -24,11 +24,6 @@
   }
 }
 
-@utility container {
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
 @utility eyebrow {
   font-family: var(--font-poppins), sans-serif;
   font-weight: 500;

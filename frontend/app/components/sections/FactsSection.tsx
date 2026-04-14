@@ -1,6 +1,7 @@
 'use client'
 
 import {useEffect, useRef, useState} from 'react'
+import Container from '@/app/components/ui/Container'
 
 type Fact = {
   label: string
@@ -105,7 +106,7 @@ export default function FactsSection() {
       aria-labelledby="facts-heading"
       className="relative bg-surface border-t border-hairline"
     >
-      <div className="max-w-[1440px] mx-auto px-5 md:px-10 py-20 md:py-28">
+      <Container className="py-20 md:py-28">
         <div className="mb-14 md:mb-20 max-w-[62rem]">
           <p className="eyebrow mb-6 flex items-center gap-3">
             <span aria-hidden="true" className="relative inline-flex size-2.5">
@@ -144,13 +145,13 @@ export default function FactsSection() {
               </dt>
 
               <dd
-                className="mt-4 font-display font-bold text-blue leading-[0.95] tracking-[-0.03em] tabular-nums"
+                className="mt-4 font-display font-bold text-ink leading-[0.95] tracking-[-0.03em] tabular-nums"
                 style={{fontSize: 'clamp(3rem, 6vw, 5rem)'}}
                 aria-label={`${fact.target}${fact.suffix ?? ''}`}
               >
                 <span aria-hidden="true">
                   <Counter target={fact.target} start={inView} duration={1400 + i * 200} />
-                  {fact.suffix}
+                  <span className="text-blue">{fact.suffix}</span>
                 </span>
               </dd>
 
@@ -164,7 +165,7 @@ export default function FactsSection() {
             </div>
           ))}
         </dl>
-      </div>
+      </Container>
     </section>
   )
 }

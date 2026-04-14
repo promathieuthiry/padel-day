@@ -3,6 +3,7 @@ import {PortableText} from '@portabletext/react'
 import type {BlockContent, Cta} from '@/sanity.types'
 import Button from '@/app/components/Button'
 import {urlForImage} from '@/sanity/lib/utils'
+import Container from '@/app/components/ui/Container'
 
 interface ImpactSectionProps {
   heading: string
@@ -18,7 +19,7 @@ export default function ImpactSection({heading, body, cta, image}: ImpactSection
 
   return (
     <section className="bg-surface-2 py-24 md:py-36 overflow-hidden">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+      <Container>
         <div className="grid grid-cols-12 gap-x-6 gap-y-12 md:gap-y-0 items-center">
           <div className="col-span-12 md:col-span-5 md:col-start-1">
             {imageUrl ? (
@@ -69,7 +70,7 @@ export default function ImpactSection({heading, body, cta, image}: ImpactSection
             )}
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

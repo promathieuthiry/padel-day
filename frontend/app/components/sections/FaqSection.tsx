@@ -4,6 +4,7 @@ import {useState} from 'react'
 import {PortableText} from '@portabletext/react'
 import type {BlockContent} from '@/sanity.types'
 import {Stagger, StaggerItem} from '@/app/components/Stagger'
+import Container from '@/app/components/ui/Container'
 
 interface FaqItem {
   _id: string
@@ -80,7 +81,7 @@ export default function FaqSection({items}: FaqSectionProps) {
 
   return (
     <section className="bg-surface-2 py-24 md:py-36">
-      <div className="max-w-[1100px] mx-auto px-6 md:px-10">
+      <Container>
         <header className="max-w-[40ch] mb-12 md:mb-16">
           <p className="eyebrow mb-4">Questions fréquentes</p>
           <h2
@@ -98,7 +99,7 @@ export default function FaqSection({items}: FaqSectionProps) {
             </StaggerItem>
           ))}
         </Stagger>
-      </div>
+      </Container>
     </section>
   )
 }

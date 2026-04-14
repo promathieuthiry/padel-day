@@ -1,6 +1,7 @@
 import {PortableText} from '@portabletext/react'
 import type {BlockContent, Cta} from '@/sanity.types'
 import Button from '@/app/components/Button'
+import Container from '@/app/components/ui/Container'
 
 interface IntroSectionProps {
   heading: string
@@ -17,7 +18,7 @@ export default function IntroSection({
 }: IntroSectionProps) {
   return (
     <section className="bg-surface py-24 md:py-36">
-      <div className="max-w-[1100px] mx-auto px-6 md:px-10">
+      <Container>
         <div className="grid grid-cols-12 gap-x-6">
           <div className="col-span-12 md:col-span-3 md:pt-3 mb-6 md:mb-0">
             <p className="eyebrow">Le concept</p>
@@ -49,7 +50,7 @@ export default function IntroSection({
             )}
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

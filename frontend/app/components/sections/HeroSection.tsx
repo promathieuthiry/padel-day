@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import {urlForImage} from '@/sanity/lib/utils'
 import Button from '@/app/components/Button'
+import Container from '@/app/components/ui/Container'
 import type {Cta} from '@/sanity.types'
 
 interface HeroImage {
@@ -94,7 +95,7 @@ export default function HeroSection({
         }}
       />
 
-      <div className="relative z-10 min-h-[100dvh] flex items-center px-5 md:px-10 py-28 md:py-24 max-w-[1440px] mx-auto">
+      <Container className="relative z-10 min-h-[100dvh] flex items-center py-28 md:py-24">
         <div className="w-full md:max-w-[46rem]">
           <p
             className="eyebrow mb-8 md:mb-10 flex items-center gap-3 hero-reveal"
@@ -137,7 +138,7 @@ export default function HeroSection({
             )}
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

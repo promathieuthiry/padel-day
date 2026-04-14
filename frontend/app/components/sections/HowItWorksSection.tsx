@@ -1,4 +1,5 @@
 import {Stagger, StaggerItem} from '@/app/components/Stagger'
+import Container from '@/app/components/ui/Container'
 
 interface StepItem {
   _key: string
@@ -17,7 +18,7 @@ export default function HowItWorksSection({heading, steps}: HowItWorksSectionPro
 
   return (
     <section className="bg-surface py-24 md:py-36">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+      <Container>
         <header className="max-w-[40ch] mb-16 md:mb-20">
           <p className="eyebrow mb-4">Le parcours</p>
           <h2
@@ -58,7 +59,7 @@ export default function HowItWorksSection({heading, steps}: HowItWorksSectionPro
             </StaggerItem>
           ))}
         </Stagger>
-      </div>
+      </Container>
     </section>
   )
 }

@@ -4,6 +4,7 @@ import Logo from '@/app/components/Logo'
 import {siteSettingsQuery} from '@/sanity/lib/queries'
 import Button from '@/app/components/Button'
 import MobileNav from '@/app/components/MobileNav'
+import Container from '@/app/components/ui/Container'
 
 export default async function Header() {
   const {data: settings} = await sanityFetch({
@@ -43,11 +44,11 @@ export default async function Header() {
   }))
 
   return (
-    <header className="fixed z-50 inset-x-0 top-0 h-16 bg-surface/85 backdrop-blur-lg border-b border-hairline">
-      <div className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-5 md:px-10">
+    <header className="fixed z-50 inset-x-0 top-0 h-16 bg-blue/90 backdrop-blur-lg border-b border-white/10 text-white">
+      <Container className="flex h-full items-center justify-between">
         <Link href="/" aria-label="Padel Day" className="flex items-center gap-2.5">
-          <Logo className="h-9 w-9 text-[var(--color-blue)]" aria-hidden />
-          <span className="font-(family-name:--font-poppins) text-xl font-semibold tracking-tight text-ink">
+          <Logo className="h-9 w-9 text-white" aria-hidden />
+          <span className="font-(family-name:--font-poppins) text-xl font-semibold tracking-tight text-white">
             Padel Day
           </span>
         </Link>
@@ -75,7 +76,7 @@ export default async function Header() {
                 <li key={link._key}>
                   <Link
                     href={href}
-                    className="text-ink-muted transition-colors hover:text-ink"
+                    className="text-white/80 transition-colors hover:text-white"
                     target={link.openInNewTab ? '_blank' : undefined}
                     rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
                   >
@@ -89,7 +90,7 @@ export default async function Header() {
 
         {/* Mobile hamburger */}
         <MobileNav navLinks={mobileLinks} />
-      </div>
+      </Container>
     </header>
   )
 }

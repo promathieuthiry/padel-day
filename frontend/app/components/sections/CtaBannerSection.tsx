@@ -1,5 +1,6 @@
 import type {Cta} from '@/sanity.types'
 import Button from '@/app/components/Button'
+import Container from '@/app/components/ui/Container'
 
 interface CtaBannerSectionProps {
   heading: string
@@ -14,7 +15,7 @@ export default function CtaBannerSection({
 }: CtaBannerSectionProps) {
   return (
     <section className="bg-surface py-24 md:py-32">
-      <div className="max-w-[1100px] mx-auto px-6 md:px-10">
+      <Container>
         <div className="border-t border-ink/20 pt-12 md:pt-16 grid grid-cols-12 gap-x-6 gap-y-10 items-end">
           <div className="col-span-12 md:col-span-8">
             <p className="eyebrow mb-5">Prêt à jouer ?</p>
@@ -37,7 +38,7 @@ export default function CtaBannerSection({
             </div>
           )}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }
