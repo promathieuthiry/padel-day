@@ -47,7 +47,7 @@ export default async function Header() {
     <header className="fixed z-50 inset-x-0 top-0 h-16 bg-blue/90 backdrop-blur-lg border-b border-white/10 text-white">
       <Container className="flex h-full items-center justify-between">
         <Link href="/" aria-label="Padel Day" className="flex items-center gap-2.5">
-          <Logo className="h-9 w-9 text-white" aria-hidden />
+          <Logo className="h-9 w-9 text-lime" aria-hidden />
           <span className="font-(family-name:--font-poppins) text-xl font-semibold tracking-tight text-white">
             Padel Day
           </span>
