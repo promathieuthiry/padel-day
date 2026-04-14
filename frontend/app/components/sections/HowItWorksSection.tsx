@@ -18,9 +18,9 @@ export default function HowItWorksSection({heading, steps}: HowItWorksSectionPro
   if (!steps || steps.length === 0) return null
 
   return (
-    <section className="bg-surface py-24 md:py-36">
+    <section className="bg-surface-2 border-y border-hairline py-20 md:py-28">
       <Container>
-        <SectionIntro eyebrow="Le parcours" heading={heading} className="mb-16 md:mb-20" />
+        <SectionIntro eyebrow="Le parcours" heading={heading} className="mb-12 md:mb-16" />
 
         <Stagger as="ol" className="border-t border-hairline" staggerDelay={0.08}>
           {steps.map((step) => (
