@@ -14,13 +14,28 @@
   }
 
   body {
-    @apply font-body;
+    @apply font-body text-ink bg-surface;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+  ::selection {
+    background: oklch(0.72 0.18 120 / 0.35);
+    color: #1a1a2e;
   }
 }
 
 @utility container {
   margin: 0 auto;
   padding: 0 2rem;
+}
+
+@utility eyebrow {
+  font-family: var(--font-poppins), sans-serif;
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-blue);
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -33,6 +48,18 @@
   --color-dark: #1a1a2e;
   --color-black: #0b0b0b;
   --color-white: #fff;
+
+  /* Neutrals carry a slight blue chroma so they read as intentional next to --color-blue. */
+  --color-surface: oklch(0.985 0.004 255);
+  --color-surface-2: oklch(0.968 0.006 255);
+  --color-surface-3: oklch(0.945 0.008 255);
+
+  --color-ink: #1a1a2e;
+  --color-ink-muted: oklch(0.45 0.025 258);
+  --color-ink-faint: oklch(0.62 0.018 258);
+
+  --color-hairline: oklch(0.9 0.006 255);
+
   --color-gray-50: #f6f6f8;
   --color-gray-100: #eeeef1;
   --color-gray-200: #e3e4e8;
@@ -46,7 +73,20 @@
   --color-gray-950: #13141b;
 
   --font-heading: var(--font-fredoka), sans-serif;
+  --font-display: var(--font-bricolage), sans-serif;
   --font-body: var(--font-poppins), sans-serif;
 
+  --spacing-2xs: 0.25rem;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  --spacing-4xl: 6rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --default-transition-duration: 250ms;
 }

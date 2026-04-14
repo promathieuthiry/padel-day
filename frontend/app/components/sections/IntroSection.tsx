@@ -16,37 +16,38 @@ export default function IntroSection({
   secondaryCta,
 }: IntroSectionProps) {
   return (
-    <section className="bg-white py-20 md:py-28">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-heading text-3xl md:text-5xl font-semibold text-dark tracking-tight">
-            {heading}
-          </h2>
+    <section className="bg-surface py-24 md:py-36">
+      <div className="max-w-[1100px] mx-auto px-6 md:px-10">
+        <div className="grid grid-cols-12 gap-x-6">
+          <div className="col-span-12 md:col-span-3 md:pt-3 mb-6 md:mb-0">
+            <p className="eyebrow">Le concept</p>
+          </div>
 
-          {body && (
-            <div className="mt-6 text-base md:text-lg text-gray-600 leading-relaxed font-body prose prose-gray mx-auto max-w-[60ch]">
-              <PortableText value={body} />
-            </div>
-          )}
+          <div className="col-span-12 md:col-span-9">
+            <h2
+              className="font-heading font-semibold text-ink tracking-tight leading-[1.05] max-w-[22ch]"
+              style={{fontSize: 'clamp(2rem, 4.2vw, 3.75rem)'}}
+            >
+              {heading}
+            </h2>
 
-          {(primaryCta || secondaryCta) && (
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-              {primaryCta && (
-                <Button
-                  label={primaryCta.label}
-                  href={primaryCta.href}
-                  variant="primary"
-                />
-              )}
-              {secondaryCta && (
-                <Button
-                  label={secondaryCta.label}
-                  href={secondaryCta.href}
-                  variant="secondary"
-                />
-              )}
-            </div>
-          )}
+            {body && (
+              <div className="mt-8 md:mt-10 text-lg md:text-xl text-ink-muted leading-[1.65] font-body prose max-w-[62ch] prose-p:my-6 prose-strong:text-ink prose-strong:font-medium">
+                <PortableText value={body} />
+              </div>
+            )}
+
+            {(primaryCta || secondaryCta) && (
+              <div className="mt-10 md:mt-12 flex flex-col sm:flex-row gap-4">
+                {primaryCta && (
+                  <Button label={primaryCta.label} href={primaryCta.href} variant="primary" />
+                )}
+                {secondaryCta && (
+                  <Button label={secondaryCta.label} href={secondaryCta.href} variant="secondary" />
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

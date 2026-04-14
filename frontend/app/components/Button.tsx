@@ -17,7 +17,7 @@ const variantStyles: Record<ButtonVariant, string> = {
 }
 
 const baseStyles =
-  'inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold text-sm transition-colors duration-200'
+  'inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold text-sm transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue'
 
 export default function Button({
   label,

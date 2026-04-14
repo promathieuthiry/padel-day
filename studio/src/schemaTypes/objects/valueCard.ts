@@ -9,7 +9,7 @@ export const valueCard = defineType({
       name: 'icon',
       title: 'Icon',
       type: 'string',
-      validation: (rule) => rule.required(),
+      hidden: true,
     }),
     defineField({
       name: 'title',

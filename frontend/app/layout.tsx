@@ -2,7 +2,7 @@ import './globals.css'
 
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
-import {Fredoka, Poppins} from 'next/font/google'
+import {Bricolage_Grotesque, Fredoka, Poppins} from 'next/font/google'
 import Script from 'next/script'
 import {draftMode} from 'next/headers'
 import {VisualEditing} from 'next-sanity/visual-editing'
@@ -54,6 +54,12 @@ const fredoka = Fredoka({
   display: 'swap',
 })
 
+const bricolage = Bricolage_Grotesque({
+  variable: '--font-bricolage',
+  subsets: ['latin'],
+  display: 'swap',
+})
+
 const poppins = Poppins({
   variable: '--font-poppins',
   weight: ['300', '400', '500', '600', '700'],
@@ -68,7 +74,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
   const gaId = rawGaId && /^(G-[A-Z0-9]+|UA-\d+-\d+)$/i.test(rawGaId) ? rawGaId : null
 
   return (
-    <html lang="fr" className={`${fredoka.variable} ${poppins.variable} bg-white text-black`}>
+    <html lang="fr" className={`${fredoka.variable} ${bricolage.variable} ${poppins.variable} bg-surface text-ink`}>
       <body>
         {gaId && (
           <>

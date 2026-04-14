@@ -62,6 +62,26 @@ export const homePage = defineType({
       title: 'Hero Image',
       type: 'image',
       options: {hotspot: true},
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alternative text',
+          type: 'string',
+          description: 'Describe the image for accessibility and SEO.',
+        }),
+      ],
+      fieldset: 'hero',
+    }),
+    defineField({
+      name: 'heroPrimaryCta',
+      title: 'Hero Primary CTA',
+      type: 'cta',
+      fieldset: 'hero',
+    }),
+    defineField({
+      name: 'heroSecondaryCta',
+      title: 'Hero Secondary CTA',
+      type: 'cta',
       fieldset: 'hero',
     }),
 

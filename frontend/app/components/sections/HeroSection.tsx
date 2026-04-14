@@ -1,27 +1,39 @@
 import Image from 'next/image'
 import {urlForImage} from '@/sanity/lib/utils'
+import Button from '@/app/components/Button'
+import type {Cta} from '@/sanity.types'
+
+interface HeroImage {
+  asset?: {_ref: string}
+  alt?: string | null
+}
 
 interface HeroSectionProps {
   heading: string
   highlightWords?: string[]
   slogan?: string
-  image?: {asset?: {_ref: string}} | null
+  image?: HeroImage | null
+  primaryCta?: Cta | null
+  secondaryCta?: Cta | null
 }
 
 function renderHeading(heading: string, highlightWords?: string[]) {
-  if (!highlightWords || highlightWords.length === 0) {
-    return heading
-  }
-
+  if (!highlightWords || highlightWords.length === 0) return heading
   const words = heading.split(' ')
   return words.map((word, i) => {
-    const isHighlighted = highlightWords.some(
-      (hw) => word.toLowerCase().includes(hw.toLowerCase()),
+    const isHighlighted = highlightWords.some((hw) =>
+      word.toLowerCase().includes(hw.toLowerCase()),
     )
     return (
       <span key={i}>
         {isHighlighted ? (
-          <span className="text-lime">{word}</span>
+          <span className="relative inline-block">
+            <span className="relative z-10">{word}</span>
+            <span
+              aria-hidden="true"
+              className="absolute left-0 right-0 bottom-0 h-[0.22em] bg-lime -z-0"
+            />
+          </span>
         ) : (
           word
         )}
@@ -36,74 +48,76 @@ export default function HeroSection({
   highlightWords,
   slogan,
   image,
+  primaryCta,
+  secondaryCta,
 }: HeroSectionProps) {
   const bgUrl = image?.asset
-    ? urlForImage(image).width(1920).quality(80).url()
+    ? urlForImage(image).width(2400).quality(85).url()
     : null
+  const imageAlt = image?.alt ?? ''
+  const hasDescriptiveAlt = imageAlt.trim().length > 0
+
+  const primary = primaryCta ?? {label: 'Contact', href: '/contact', style: 'primary'}
+  const secondary =
+    secondaryCta ?? {label: 'En savoir plus', href: '/installer-un-terrain', style: 'secondary'}
 
   return (
     <section
-      className="relative min-h-[100dvh] flex items-center overflow-hidden bg-dark"
+      className="relative min-h-[100dvh] overflow-hidden bg-surface"
+      aria-labelledby="hero-heading"
     >
-      {/* Background image layer */}
       {bgUrl && (
         <Image
           src={bgUrl}
-          alt=""
+          alt={imageAlt}
           fill
           priority
-          className="absolute inset-0 object-cover object-center opacity-20"
-          aria-hidden="true"
+          sizes="100vw"
+          className="absolute inset-0 object-cover object-center"
+          aria-hidden={hasDescriptiveAlt ? undefined : true}
         />
       )}
 
-      {/* Decorative gradient overlay */}
       <div
-        className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 80% 60% at 70% 40%, oklch(0.85 0.18 120 / 0.06), transparent), radial-gradient(ellipse 50% 50% at 20% 80%, oklch(0.45 0.12 260 / 0.08), transparent)',
+            'linear-gradient(180deg, transparent 0%, oklch(0.2 0.02 258 / 0.08) 100%)',
         }}
       />
 
-      {/* Decorative geometric shapes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        {/* Padel ball shape - large */}
-        <svg
-          className="absolute -right-16 top-1/4 w-64 h-64 md:w-96 md:h-96 opacity-[0.04]"
-          viewBox="0 0 200 200"
-          fill="none"
-        >
-          <circle cx="100" cy="100" r="90" stroke="currentColor" strokeWidth="2" className="text-lime" />
-          <path d="M30 100 Q100 60 170 100" stroke="currentColor" strokeWidth="2" className="text-lime" />
-          <path d="M30 100 Q100 140 170 100" stroke="currentColor" strokeWidth="2" className="text-lime" />
-        </svg>
 
-        {/* Small accent circle */}
-        <div className="absolute left-[10%] bottom-[20%] w-3 h-3 rounded-full bg-lime/20" />
-        <div className="absolute right-[25%] top-[15%] w-2 h-2 rounded-full bg-blue/30" />
-      </div>
+      <div className="relative z-10 min-h-[100dvh] flex items-center px-5 md:px-10 py-28 md:py-24 max-w-[1440px] mx-auto">
+        <div className="w-full md:w-auto md:max-w-[42rem] bg-surface/96 backdrop-blur-sm px-6 py-8 md:px-12 md:py-14 shadow-[0_24px_60px_-20px_oklch(0.2_0.02_258/0.18)]">
+          <p className="eyebrow mb-6 flex items-center gap-3">
+            <span>Play Simple</span>
+            <span aria-hidden="true" className="inline-block h-px w-8 bg-blue/60" />
+            <span className="text-ink-faint">Ouvert 7 j/7</span>
+          </p>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full py-32 md:py-0">
-        <div className="max-w-3xl">
-          <h1 className="font-heading text-4xl sm:text-5xl md:text-7xl font-semibold text-white leading-[1.08] tracking-tight">
+          <h1
+            id="hero-heading"
+            className="font-display font-bold text-ink leading-[0.95] tracking-[-0.025em]"
+            style={{fontSize: 'clamp(2.5rem, 7vw, 6rem)'}}
+          >
             {renderHeading(heading, highlightWords)}
           </h1>
 
           {slogan && (
-            <p className="mt-6 md:mt-8 text-lg md:text-xl text-gray-300 font-body max-w-xl">
+            <p className="mt-6 md:mt-8 text-base md:text-lg text-ink-muted font-body max-w-[42ch] leading-relaxed">
               {slogan}
             </p>
           )}
-        </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2" aria-hidden="true">
-        <div className="w-5 h-8 rounded-full border-2 border-white/20 flex justify-center pt-1.5">
-          <div className="w-1 h-2 rounded-full bg-white/40 animate-bounce" />
+          <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3">
+            {primary && (
+              <Button label={primary.label} href={primary.href} variant="primary" />
+            )}
+            {secondary && (
+              <Button label={secondary.label} href={secondary.href} variant="secondary" />
+            )}
+          </div>
         </div>
       </div>
     </section>

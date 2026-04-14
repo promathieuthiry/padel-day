@@ -13,32 +13,30 @@ export default function CtaBannerSection({
   secondaryCta,
 }: CtaBannerSectionProps) {
   return (
-    <section className="bg-lime py-20 md:py-28">
-      <div className="max-w-7xl mx-auto px-6 text-center">
-        <h2 className="font-heading text-3xl md:text-5xl font-semibold text-dark tracking-tight max-w-3xl mx-auto">
-          {heading}
-        </h2>
-
-        {(primaryCta || secondaryCta) && (
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            {primaryCta && (
-              <Button
-                label={primaryCta.label}
-                href={primaryCta.href}
-                variant="primary"
-                className="bg-dark text-white border-dark hover:bg-dark/90 hover:border-dark/90"
-              />
-            )}
-            {secondaryCta && (
-              <Button
-                label={secondaryCta.label}
-                href={secondaryCta.href}
-                variant="secondary"
-                className="border-dark text-dark hover:bg-dark hover:text-white"
-              />
-            )}
+    <section className="bg-surface py-24 md:py-32">
+      <div className="max-w-[1100px] mx-auto px-6 md:px-10">
+        <div className="border-t border-ink/20 pt-12 md:pt-16 grid grid-cols-12 gap-x-6 gap-y-10 items-end">
+          <div className="col-span-12 md:col-span-8">
+            <p className="eyebrow mb-5">Prêt à jouer ?</p>
+            <h2
+              className="font-heading font-semibold text-ink tracking-tight leading-[1]"
+              style={{fontSize: 'clamp(2.5rem, 6vw, 5rem)'}}
+            >
+              {heading}
+            </h2>
           </div>
-        )}
+
+          {(primaryCta || secondaryCta) && (
+            <div className="col-span-12 md:col-span-4 flex flex-col sm:flex-row md:flex-col lg:flex-row gap-3 md:justify-end md:items-end">
+              {primaryCta && (
+                <Button label={primaryCta.label} href={primaryCta.href} variant="primary" />
+              )}
+              {secondaryCta && (
+                <Button label={secondaryCta.label} href={secondaryCta.href} variant="secondary" />
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   )

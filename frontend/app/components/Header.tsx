@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import {sanityFetch} from '@/sanity/lib/live'
 import {siteSettingsQuery} from '@/sanity/lib/queries'
 import Button from '@/app/components/Button'
@@ -11,21 +12,30 @@ export default async function Header() {
 
   const rawNavLinks = settings?.navLinks ?? []
 
-  const resolvedLinks = rawNavLinks.map((link: {_key: string; linkType?: string; href?: string; page?: unknown; title?: string; openInNewTab?: boolean}) => {
-    const pageSlug = typeof link.page === 'string' ? link.page : null
-    const href =
-      link.linkType === 'href'
-        ? (link.href || '#')
-        : link.linkType === 'page' && pageSlug
-          ? `/${pageSlug}`
-          : '#'
-    return {
-      _key: link._key,
-      title: link.title || href,
-      href,
-      openInNewTab: link.openInNewTab,
-    }
-  })
+  const resolvedLinks = rawNavLinks.map(
+    (link: {
+      _key: string
+      linkType?: string
+      href?: string
+      page?: unknown
+      title?: string
+      openInNewTab?: boolean
+    }) => {
+      const pageSlug = typeof link.page === 'string' ? link.page : null
+      const href =
+        link.linkType === 'href'
+          ? link.href || '#'
+          : link.linkType === 'page' && pageSlug
+            ? `/${pageSlug}`
+            : '#'
+      return {
+        _key: link._key,
+        title: link.title || href,
+        href,
+        openInNewTab: link.openInNewTab,
+      }
+    },
+  )
 
   const mobileLinks = resolvedLinks.map((link) => ({
     label: link.title,
@@ -33,10 +43,18 @@ export default async function Header() {
   }))
 
   return (
-    <header className="fixed z-50 inset-x-0 top-0 h-16 bg-white/80 backdrop-blur-lg border-b border-gray-100">
+    <header className="fixed z-50 inset-x-0 top-0 h-16 bg-surface/85 backdrop-blur-lg border-b border-hairline">
       <div className="container flex h-full items-center justify-between">
-        <Link href="/" className="font-heading text-xl font-semibold tracking-tight">
-          Padel Day
+        <Link href="/" aria-label="Padel Day" className="flex h-full items-center gap-2">
+          <Image
+            src="/logo_padel_day.svg"
+            alt=""
+            width={64}
+            height={64}
+            priority
+            className="h-full w-auto"
+          />
+          <span className="font-display text-xl font-semibold tracking-tight">Padel Day</span>
         </Link>
 
         <nav className="hidden md:block">
@@ -62,7 +80,7 @@ export default async function Header() {
                 <li key={link._key}>
                   <Link
                     href={href}
-                    className="text-gray-700 transition-colors hover:text-dark"
+                    className="text-ink-muted transition-colors hover:text-ink"
                     target={link.openInNewTab ? '_blank' : undefined}
                     rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
                   >

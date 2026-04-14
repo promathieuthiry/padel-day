@@ -44,7 +44,7 @@ export type Step = {
 
 export type ValueCard = {
   _type: 'valueCard'
-  icon: string
+  icon?: string
   title: string
   description: string
 }
@@ -319,8 +319,11 @@ export type HomePage = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
+  heroPrimaryCta?: Cta
+  heroSecondaryCta?: Cta
   introHeading?: string
   introBody?: BlockContent
   introPrimaryCta?: Cta
@@ -761,8 +764,11 @@ export type HomePageQueryResult = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
+  heroPrimaryCta?: Cta
+  heroSecondaryCta?: Cta
   introHeading?: string
   introBody?: BlockContent
   introPrimaryCta?: Cta

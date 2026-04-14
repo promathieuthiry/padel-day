@@ -11,66 +11,55 @@ interface ImpactSectionProps {
   image?: {asset?: {_ref: string}} | null
 }
 
-export default function ImpactSection({
-  heading,
-  body,
-  cta,
-  image,
-}: ImpactSectionProps) {
+export default function ImpactSection({heading, body, cta, image}: ImpactSectionProps) {
   const imageUrl = image?.asset
-    ? urlForImage(image).width(800).height(600).fit('crop').quality(80).url()
+    ? urlForImage(image).width(1200).height(1500).fit('crop').quality(85).url()
     : null
 
   return (
-    <section className="bg-dark py-20 md:py-28 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid gap-12 md:gap-16 md:grid-cols-2 items-center">
-          {/* Image - shows first on mobile */}
-          <div className="order-first md:order-last">
+    <section className="bg-surface-2 py-24 md:py-36 overflow-hidden">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-10">
+        <div className="grid grid-cols-12 gap-x-6 gap-y-12 md:gap-y-0 items-center">
+          <div className="col-span-12 md:col-span-5 md:col-start-1">
             {imageUrl ? (
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
+              <figure className="relative aspect-[4/5] overflow-hidden">
                 <Image
                   src={imageUrl}
                   alt=""
-                  className="w-full h-full object-cover"
+                  className="object-cover"
+                  fill
+                  sizes="(min-width: 768px) 40vw, 100vw"
                   loading="lazy"
-                  width={800}
-                  height={600}
                 />
-                {/* Subtle overlay for depth */}
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background: 'linear-gradient(135deg, oklch(0.2 0.02 260 / 0.3), transparent 60%)',
-                  }}
-                  aria-hidden="true"
-                />
-              </div>
+              </figure>
             ) : (
-              <div className="rounded-2xl bg-gray-800/50 aspect-[4/3] flex items-center justify-center">
-                <svg viewBox="0 0 120 120" className="w-24 h-24 text-gray-700" fill="none">
-                  <rect x="10" y="30" width="100" height="60" rx="4" stroke="currentColor" strokeWidth="2" />
-                  <circle cx="40" cy="55" r="10" stroke="currentColor" strokeWidth="2" />
-                  <path d="M65 90 L80 60 L100 90" stroke="currentColor" strokeWidth="2" />
+              <div className="aspect-[4/5] bg-surface-3 flex items-center justify-center">
+                <svg viewBox="0 0 120 120" className="w-20 h-20 text-ink-faint" fill="none">
+                  <rect x="10" y="30" width="100" height="60" stroke="currentColor" strokeWidth="1.5" />
+                  <circle cx="40" cy="55" r="10" stroke="currentColor" strokeWidth="1.5" />
+                  <path d="M65 90 L80 60 L100 90" stroke="currentColor" strokeWidth="1.5" />
                 </svg>
               </div>
             )}
           </div>
 
-          {/* Text content */}
-          <div>
-            <h2 className="font-heading text-3xl md:text-5xl font-semibold text-white tracking-tight">
+          <div className="col-span-12 md:col-span-6 md:col-start-7">
+            <p className="eyebrow mb-4">Notre impact</p>
+            <h2
+              className="font-heading font-semibold text-ink tracking-tight leading-[1.05]"
+              style={{fontSize: 'clamp(2rem, 4vw, 3.25rem)'}}
+            >
               {heading}
             </h2>
 
             {body && (
-              <div className="mt-6 text-base md:text-lg text-gray-300 leading-relaxed font-body prose prose-invert max-w-[55ch]">
+              <div className="mt-8 text-base md:text-lg text-ink-muted leading-relaxed font-body prose max-w-[52ch] prose-strong:text-ink prose-strong:font-medium">
                 <PortableText value={body} />
               </div>
             )}
 
             {cta && (
-              <div className="mt-8">
+              <div className="mt-10">
                 <Button
                   label={cta.label}
                   href={cta.href}

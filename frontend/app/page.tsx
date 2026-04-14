@@ -48,6 +48,8 @@ export default async function Page() {
         highlightWords={homePage?.heroHighlightWords ?? undefined}
         slogan={homePage?.heroSlogan ?? undefined}
         image={homePage?.heroImage}
+        primaryCta={homePage?.heroPrimaryCta}
+        secondaryCta={homePage?.heroSecondaryCta}
       />
 
       {homePage?.introHeading && (
