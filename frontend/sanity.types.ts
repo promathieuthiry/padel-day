@@ -42,13 +42,6 @@ export type Step = {
   icon?: string
 }
 
-export type ValueCard = {
-  _type: 'valueCard'
-  icon?: string
-  title: string
-  description: string
-}
-
 export type Cta = {
   _type: 'cta'
   label: string
@@ -328,11 +321,6 @@ export type HomePage = {
   introBody?: BlockContent
   introPrimaryCta?: Cta
   introSecondaryCta?: Cta
-  values?: Array<
-    {
-      _key: string
-    } & ValueCard
-  >
   howItWorksHeading?: string
   howItWorksSteps?: Array<
     {
@@ -653,7 +641,6 @@ export type AllSanitySchemaTypes =
   | Feature
   | Benefit
   | Step
-  | ValueCard
   | Cta
   | PageReference
   | Link
@@ -773,11 +760,6 @@ export type HomePageQueryResult = {
   introBody?: BlockContent
   introPrimaryCta?: Cta
   introSecondaryCta?: Cta
-  values?: Array<
-    {
-      _key: string
-    } & ValueCard
-  >
   howItWorksHeading?: string
   howItWorksSteps?: Array<
     {

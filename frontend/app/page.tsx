@@ -6,7 +6,6 @@ import FadeIn from '@/app/components/FadeIn'
 import StructuredData from '@/app/components/StructuredData'
 import HeroSection from '@/app/components/sections/HeroSection'
 import FactsSection from '@/app/components/sections/FactsSection'
-import ValuesSection from '@/app/components/sections/ValuesSection'
 import HowItWorksSection from '@/app/components/sections/HowItWorksSection'
 import ImpactSection from '@/app/components/sections/ImpactSection'
 import CtaBannerSection from '@/app/components/sections/CtaBannerSection'
@@ -54,13 +53,7 @@ export default async function Page() {
 
       <FactsSection />
 
-      {homePage?.values && homePage.values.length > 0 && (
-        <FadeIn>
-          <ValuesSection values={homePage.values} />
-        </FadeIn>
-      )}
-
-      {homePage?.howItWorksHeading && homePage?.howItWorksSteps && (
+{homePage?.howItWorksHeading && homePage?.howItWorksSteps && (
         <FadeIn>
           <HowItWorksSection
             heading={homePage.howItWorksHeading}

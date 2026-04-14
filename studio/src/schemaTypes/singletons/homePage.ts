@@ -10,7 +10,6 @@ export const homePage = defineType({
     {name: 'meta', title: 'SEO / Metadata'},
     {name: 'hero', title: 'Hero Section'},
     {name: 'intro', title: 'Introduction Section'},
-    {name: 'values', title: 'Values Section'},
     {name: 'howItWorks', title: 'How It Works Section'},
     {name: 'impact', title: 'Impact Section'},
     {name: 'ctaBanner', title: 'CTA Banner Section'},
@@ -109,15 +108,6 @@ export const homePage = defineType({
       title: 'Intro Secondary CTA',
       type: 'cta',
       fieldset: 'intro',
-    }),
-
-    // Values
-    defineField({
-      name: 'values',
-      title: 'Values',
-      type: 'array',
-      of: [defineArrayMember({type: 'valueCard'})],
-      fieldset: 'values',
     }),
 
     // How It Works

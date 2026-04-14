@@ -11,7 +11,6 @@ import {contactPage} from './singletons/contactPage'
 import {blockContent} from './objects/blockContent'
 import {link} from './objects/link'
 import {cta} from './objects/cta'
-import {valueCard} from './objects/valueCard'
 import {step} from './objects/step'
 import {benefit} from './objects/benefit'
 import {feature} from './objects/feature'
@@ -34,7 +33,6 @@ export const schemaTypes = [
   blockContent,
   link,
   cta,
-  valueCard,
   step,
   benefit,
   feature,

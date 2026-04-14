@@ -120,40 +120,6 @@ const homePage = {
     href: '/contact',
     style: 'secondary',
   },
-  values: [
-    {
-      _type: 'valueCard',
-      _key: key(),
-      icon: 'smartphone',
-      title: '100% automatisé',
-      description:
-        'Aucun personnel sur place. Réservation, paiement et accès au terrain se font entièrement via smartphone.',
-    },
-    {
-      _type: 'valueCard',
-      _key: key(),
-      icon: 'heart',
-      title: 'Accessible à tous',
-      description:
-        "Des tarifs pensés pour tous les budgets, dans des villes où le padel n'existait pas encore.",
-    },
-    {
-      _type: 'valueCard',
-      _key: key(),
-      icon: 'calendar',
-      title: 'Ouvert 7j/7',
-      description:
-        'De 7h à minuit, 365 jours par an. Jouez quand vous voulez, sans contrainte horaire.',
-    },
-    {
-      _type: 'valueCard',
-      _key: key(),
-      icon: 'lightning',
-      title: 'Expérience digitale',
-      description:
-        'Réservation en ligne, paiement sécurisé, code d\'accès unique. Tout depuis votre téléphone.',
-    },
-  ],
   howItWorksHeading: 'Comment ça marche ?',
   howItWorksSteps: [
     {
