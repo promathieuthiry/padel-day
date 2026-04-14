@@ -1,6 +1,7 @@
 'use client'
 
 import {useState, useEffect, useCallback, useRef} from 'react'
+import {createPortal} from 'react-dom'
 import {usePathname} from 'next/navigation'
 import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
 import Link from 'next/link'
@@ -14,7 +15,10 @@ const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const
 
 export default function MobileNav({navLinks}: {navLinks: NavLink[]}) {
   const [isOpen, setIsOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
+
+  useEffect(() => setMounted(true), [])
   const prefersReducedMotion = useReducedMotion()
   const drawerRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
@@ -122,7 +126,8 @@ export default function MobileNav({navLinks}: {navLinks: NavLink[]}) {
         </span>
       </button>
 
-      <AnimatePresence>
+      {mounted && createPortal(
+        <AnimatePresence>
         {isOpen && (
           <motion.div
             ref={drawerRef}
@@ -130,7 +135,7 @@ export default function MobileNav({navLinks}: {navLinks: NavLink[]}) {
             role="dialog"
             aria-modal="true"
             aria-label="Menu de navigation"
-            className="md:hidden fixed inset-0 z-40 flex flex-col bg-surface/97 backdrop-blur-xl"
+            className="md:hidden fixed inset-0 z-[60] flex flex-col bg-white"
             {...panelAnim}
           >
             {/* Top bar — mirrors the header height & paddings to keep the close glyph in place */}
@@ -275,7 +280,9 @@ export default function MobileNav({navLinks}: {navLinks: NavLink[]}) {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+        </AnimatePresence>,
+        document.body,
+      )}
     </>
   )
 }
