@@ -1,3 +1,5 @@
+import {Stagger, StaggerItem} from '@/app/components/Stagger'
+
 interface StepItem {
   _key: string
   number: number
@@ -26,9 +28,10 @@ export default function HowItWorksSection({heading, steps}: HowItWorksSectionPro
           </h2>
         </header>
 
-        <ol className="border-t border-hairline">
+        <Stagger as="ol" className="border-t border-hairline" staggerDelay={0.08}>
           {steps.map((step) => (
-            <li
+            <StaggerItem
+              as="li"
               key={step._key}
               className="group grid grid-cols-12 gap-x-4 md:gap-x-8 items-start py-6 md:py-8 border-b border-hairline transition-colors hover:bg-surface-2/50"
             >
@@ -52,9 +55,9 @@ export default function HowItWorksSection({heading, steps}: HowItWorksSectionPro
               <p className="col-start-3 md:col-start-auto md:col-span-6 mt-2 md:mt-0 md:pt-2 font-body text-base text-ink-muted leading-relaxed max-w-[60ch]">
                 {step.description}
               </p>
-            </li>
+            </StaggerItem>
           ))}
-        </ol>
+        </Stagger>
       </div>
     </section>
   )

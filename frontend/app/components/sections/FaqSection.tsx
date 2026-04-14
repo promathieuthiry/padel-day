@@ -3,6 +3,7 @@
 import {useState} from 'react'
 import {PortableText} from '@portabletext/react'
 import type {BlockContent} from '@/sanity.types'
+import {Stagger, StaggerItem} from '@/app/components/Stagger'
 
 interface FaqItem {
   _id: string
@@ -90,11 +91,13 @@ export default function FaqSection({items}: FaqSectionProps) {
           </h2>
         </header>
 
-        <div className="border-t border-hairline">
+        <Stagger className="border-t border-hairline" staggerDelay={0.06}>
           {items.map((item, index) => (
-            <FaqRow key={item._id} item={item} index={index} />
+            <StaggerItem key={item._id}>
+              <FaqRow item={item} index={index} />
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
     </section>
   )

@@ -89,8 +89,11 @@ export default function HeroSection({
 
 
       <div className="relative z-10 min-h-[100dvh] flex items-center px-5 md:px-10 py-28 md:py-24 max-w-[1440px] mx-auto">
-        <div className="w-full md:w-auto md:max-w-[42rem] bg-surface/96 backdrop-blur-sm px-6 py-8 md:px-12 md:py-14 shadow-[0_24px_60px_-20px_oklch(0.2_0.02_258/0.18)]">
-          <p className="eyebrow mb-6 flex items-center gap-3">
+        <div className="w-full md:w-auto md:max-w-[42rem] bg-surface/96 backdrop-blur-sm px-6 py-8 md:px-12 md:py-14 shadow-[0_24px_60px_-20px_oklch(0.2_0.02_258/0.18)] hero-reveal" style={{animationDelay: '80ms'}}>
+          <p
+            className="eyebrow mb-6 flex items-center gap-3 hero-reveal"
+            style={{animationDelay: '320ms'}}
+          >
             <span>Play Simple</span>
             <span aria-hidden="true" className="inline-block h-px w-8 bg-blue/60" />
             <span className="text-ink-faint">Ouvert 7 j/7</span>
@@ -98,19 +101,28 @@ export default function HeroSection({
 
           <h1
             id="hero-heading"
-            className="font-display font-bold text-ink leading-[0.95] tracking-[-0.025em]"
-            style={{fontSize: 'clamp(2.5rem, 7vw, 6rem)'}}
+            className="font-display font-bold text-ink leading-[0.95] tracking-[-0.025em] hero-reveal"
+            style={{
+              fontSize: 'clamp(2.5rem, 7vw, 6rem)',
+              animationDelay: '440ms',
+            }}
           >
             {renderHeading(heading, highlightWords)}
           </h1>
 
           {slogan && (
-            <p className="mt-6 md:mt-8 text-base md:text-lg text-ink-muted font-body max-w-[42ch] leading-relaxed">
+            <p
+              className="mt-6 md:mt-8 text-base md:text-lg text-ink-muted font-body max-w-[42ch] leading-relaxed hero-reveal"
+              style={{animationDelay: '600ms'}}
+            >
               {slogan}
             </p>
           )}
 
-          <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3">
+          <div
+            className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 hero-reveal"
+            style={{animationDelay: '740ms'}}
+          >
             {primary && (
               <Button label={primary.label} href={primary.href} variant="primary" />
             )}
