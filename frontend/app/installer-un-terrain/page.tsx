@@ -124,6 +124,15 @@ export default async function InstallerPage() {
   const heroImageAlt = heroImage?.alt?.trim() || ''
   const heroImageHasAlt = heroImageAlt.length > 0
 
+  const heroEyebrow = page.heroEyebrow ?? 'Pour collectivités & clubs'
+  const heroPrimary = page.heroPrimaryCta ?? {label: 'Découvrir le parcours', href: '#process'}
+  const heroSecondary = page.heroSecondaryCta ?? {label: 'Parler à un expert', href: '/contact'}
+  const stepsEyebrow = page.stepsEyebrow ?? 'Le parcours'
+  const benefitsEyebrow = page.benefitsEyebrow ?? 'Les bénéfices'
+  const featuresEyebrow = page.featuresEyebrow ?? "Inclus dans l'offre"
+  const ctaEyebrow = page.ctaEyebrow ?? 'Prêt à lancer votre projet'
+  const ctaSecondary = page.ctaSecondary ?? {label: 'Poser une question', href: '/contact'}
+
   return (
     <>
       <section
@@ -160,7 +169,7 @@ export default async function InstallerPage() {
                     <span className="absolute inset-0 rounded-full bg-lime opacity-60 animate-ping" />
                     <span className="relative inline-block size-2.5 rounded-full bg-lime" />
                   </span>
-                  <span>Pour collectivités &amp; clubs</span>
+                  <span>{heroEyebrow}</span>
                   <span aria-hidden="true" className="inline-block h-px w-10 bg-blue/40" />
                 </p>
               </FadeIn>
@@ -186,10 +195,10 @@ export default async function InstallerPage() {
               <FadeIn delay={0.3}>
                 <div className="mt-10 md:mt-12 flex flex-col sm:flex-row sm:items-center gap-4">
                   <Link
-                    href="#process"
+                    href={heroPrimary.href || '#process'}
                     className="group relative inline-flex items-center gap-3 self-start bg-dark text-lime rounded-full pl-7 pr-2 py-2 font-semibold text-[0.95rem] whitespace-nowrap transition-transform duration-200 ease-out active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue"
                   >
-                    <span>Découvrir le parcours</span>
+                    <span>{heroPrimary.label}</span>
                     <span
                       aria-hidden="true"
                       className="flex size-10 shrink-0 items-center justify-center rounded-full bg-lime text-dark transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-y-0.5"
@@ -210,11 +219,11 @@ export default async function InstallerPage() {
                     </span>
                   </Link>
                   <Link
-                    href="/contact"
+                    href={heroSecondary.href || '/contact'}
                     className="group inline-flex items-center gap-2 self-start text-ink font-semibold text-[0.95rem] py-2 transition-colors duration-200 hover:text-blue focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue rounded-sm"
                   >
                     <span className="relative">
-                      Parler à un expert
+                      {heroSecondary.label}
                       <span
                         aria-hidden="true"
                         className="absolute left-0 right-0 -bottom-1 h-px bg-current"
@@ -317,7 +326,7 @@ export default async function InstallerPage() {
           <Container>
             <FadeIn>
               <SectionIntro
-                eyebrow="Le parcours"
+                eyebrow={stepsEyebrow}
                 heading={page.stepsHeading || undefined}
                 className="mb-16 md:mb-20"
               />
@@ -371,7 +380,7 @@ export default async function InstallerPage() {
           <Container className="relative">
             <FadeIn>
               <SectionIntro
-                eyebrow="Les bénéfices"
+                eyebrow={benefitsEyebrow}
                 heading={page.benefitsHeading || undefined}
                 className="mb-16 md:mb-20"
               />
@@ -413,7 +422,7 @@ export default async function InstallerPage() {
           <Container>
             <FadeIn>
               <SectionIntro
-                eyebrow="Inclus dans l'offre"
+                eyebrow={featuresEyebrow}
                 heading={page.featuresHeading || undefined}
                 className="mb-12 md:mb-16"
               />
@@ -474,7 +483,7 @@ export default async function InstallerPage() {
         <Container className="relative z-10 py-28 md:py-40">
           <FadeIn>
             <div>
-              <p className="eyebrow text-lime/90 mb-8">Prêt à lancer votre projet</p>
+              <p className="eyebrow text-lime/90 mb-8">{ctaEyebrow}</p>
               {page.ctaHeading && (
                 <h2
                   className="font-display font-semibold text-white leading-[0.98] tracking-[-0.035em] text-balance"
@@ -494,11 +503,11 @@ export default async function InstallerPage() {
                 <div className="mt-12 flex flex-col sm:flex-row sm:items-center gap-6">
                   <Button label={page.cta.label} href={page.cta.href} variant="primary" />
                   <Link
-                    href="/contact"
+                    href={ctaSecondary.href || '/contact'}
                     className="group inline-flex items-center gap-2 text-white/80 font-semibold text-[0.95rem] hover:text-lime transition-colors"
                   >
                     <span className="relative">
-                      Poser une question
+                      {ctaSecondary.label}
                       <span
                         aria-hidden="true"
                         className="absolute left-0 right-0 -bottom-1 h-px bg-current"

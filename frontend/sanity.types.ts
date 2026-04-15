@@ -179,8 +179,30 @@ export type ContactPage = {
   _rev: string
   metaTitle?: string
   metaDescription?: string
+  heroEyebrow?: string
   heading?: string
   introBody?: BlockContent
+  highlights?: Array<{
+    label?: string
+    value?: string
+    _key: string
+  }>
+  formEyebrow?: string
+  formHeading?: string
+  formBody?: string
+  channelsEyebrow?: string
+  channelsHeading?: string
+  channelsBody?: string
+  channelLabels?: {
+    email?: string
+    instagram?: string
+    facebook?: string
+  }
+  reassurance?: {
+    eyebrow?: string
+    title?: string
+    body?: string
+  }
 }
 
 export type AProposPage = {
@@ -198,6 +220,7 @@ export type AProposPage = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  heroEyebrow?: string
   storyHeading?: string
   storyBody?: BlockContent
   storyImage?: {
@@ -205,15 +228,29 @@ export type AProposPage = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   teamHeading?: string
+  missionEyebrow?: string
   missionHeading?: string
+  missionBody?: string
   missionCards?: Array<
     {
       _key: string
     } & MissionCard
   >
+  ctaEyebrow?: string
+  ctaHeading?: string
+  ctaBody?: string
+  ctaPrimary?: {
+    label?: string
+    href?: string
+  }
+  ctaSecondary?: {
+    label?: string
+    href?: string
+  }
 }
 
 export type NotreSitePage = {
@@ -231,8 +268,8 @@ export type NotreSitePage = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  heroEyebrow?: string
   heading?: string
-  description?: BlockContent
   courtImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -242,12 +279,31 @@ export type NotreSitePage = {
   }
   status?: 'coming_soon' | 'open'
   statusLabel?: string
+  statusEyebrow?: string
   locationLabel?: string
+  locationEyebrow?: string
+  featuresEyebrow?: string
+  featuresHeading?: string
+  featuresBody?: string
   features?: Array<
     {
       _key: string
     } & Feature
   >
+  descriptionEyebrow?: string
+  descriptionHeading?: string
+  description?: BlockContent
+  ctaEyebrow?: string
+  ctaHeading?: string
+  ctaBody?: string
+  ctaPrimary?: {
+    label?: string
+    href?: string
+  }
+  ctaSecondary?: {
+    label?: string
+    href?: string
+  }
 }
 
 export type InstallerPage = {
@@ -265,6 +321,7 @@ export type InstallerPage = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  heroEyebrow?: string
   heroHeading?: string
   heroHighlightWords?: Array<string>
   heroBody?: BlockContent
@@ -276,27 +333,43 @@ export type InstallerPage = {
     alt?: string
     _type: 'image'
   }
+  heroPrimaryCta?: {
+    label?: string
+    href?: string
+  }
+  heroSecondaryCta?: {
+    label?: string
+    href?: string
+  }
+  stepsEyebrow?: string
   stepsHeading?: string
   steps?: Array<
     {
       _key: string
     } & Step
   >
+  benefitsEyebrow?: string
   benefitsHeading?: string
   benefits?: Array<
     {
       _key: string
     } & Benefit
   >
+  featuresEyebrow?: string
   featuresHeading?: string
   features?: Array<
     {
       _key: string
     } & Feature
   >
+  ctaEyebrow?: string
   ctaHeading?: string
   ctaBody?: BlockContent
   cta?: Cta
+  ctaSecondary?: {
+    label?: string
+    href?: string
+  }
 }
 
 export type HomePage = {
@@ -438,21 +511,32 @@ export type Settings = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  googleAnalyticsId?: string
   navLinks?: Array<
     {
       _key: string
     } & Link
   >
+  footerEyebrow?: string
+  footerTagline?: string
+  footerContactLabel?: string
+  footerNavLabel?: string
+  footerContactCtaLabel?: string
   footerLinks?: Array<
     {
       _key: string
     } & Link
   >
+  copyrightText?: string
+  footerCredit?: {
+    prefix?: string
+    suffix?: string
+    name?: string
+    url?: string
+  }
+  contactEmail?: string
   socialInstagram?: string
   socialFacebook?: string
-  contactEmail?: string
-  copyrightText?: string
-  googleAnalyticsId?: string
 }
 
 export type SanityAssistInstructionTask = {
@@ -762,21 +846,32 @@ export type SiteSettingsQueryResult = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  googleAnalyticsId?: string
   navLinks?: Array<
     {
       _key: string
     } & Link
   >
+  footerEyebrow?: string
+  footerTagline?: string
+  footerContactLabel?: string
+  footerNavLabel?: string
+  footerContactCtaLabel?: string
   footerLinks?: Array<
     {
       _key: string
     } & Link
   >
+  copyrightText?: string
+  footerCredit?: {
+    prefix?: string
+    suffix?: string
+    name?: string
+    url?: string
+  }
+  contactEmail?: string
   socialInstagram?: string
   socialFacebook?: string
-  contactEmail?: string
-  copyrightText?: string
-  googleAnalyticsId?: string
 } | null
 
 // Source: sanity/lib/queries.ts
@@ -900,6 +995,7 @@ export type InstallerPageQueryResult = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  heroEyebrow?: string
   heroHeading?: string
   heroHighlightWords?: Array<string>
   heroBody?: BlockContent
@@ -911,27 +1007,43 @@ export type InstallerPageQueryResult = {
     alt?: string
     _type: 'image'
   }
+  heroPrimaryCta?: {
+    label?: string
+    href?: string
+  }
+  heroSecondaryCta?: {
+    label?: string
+    href?: string
+  }
+  stepsEyebrow?: string
   stepsHeading?: string
   steps?: Array<
     {
       _key: string
     } & Step
   >
+  benefitsEyebrow?: string
   benefitsHeading?: string
   benefits?: Array<
     {
       _key: string
     } & Benefit
   >
+  featuresEyebrow?: string
   featuresHeading?: string
   features?: Array<
     {
       _key: string
     } & Feature
   >
+  ctaEyebrow?: string
   ctaHeading?: string
   ctaBody?: BlockContent
   cta?: Cta
+  ctaSecondary?: {
+    label?: string
+    href?: string
+  }
 } | null
 
 // Source: sanity/lib/queries.ts
@@ -952,8 +1064,8 @@ export type NotreSitePageQueryResult = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  heroEyebrow?: string
   heading?: string
-  description?: BlockContent
   courtImage?: {
     asset?: SanityImageAssetReference
     media?: unknown
@@ -963,12 +1075,31 @@ export type NotreSitePageQueryResult = {
   }
   status?: 'coming_soon' | 'open'
   statusLabel?: string
+  statusEyebrow?: string
   locationLabel?: string
+  locationEyebrow?: string
+  featuresEyebrow?: string
+  featuresHeading?: string
+  featuresBody?: string
   features?: Array<
     {
       _key: string
     } & Feature
   >
+  descriptionEyebrow?: string
+  descriptionHeading?: string
+  description?: BlockContent
+  ctaEyebrow?: string
+  ctaHeading?: string
+  ctaBody?: string
+  ctaPrimary?: {
+    label?: string
+    href?: string
+  }
+  ctaSecondary?: {
+    label?: string
+    href?: string
+  }
 } | null
 
 // Source: sanity/lib/queries.ts
@@ -989,6 +1120,7 @@ export type AProposPageQueryResult = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  heroEyebrow?: string
   storyHeading?: string
   storyBody?: BlockContent
   storyImage?: {
@@ -996,15 +1128,29 @@ export type AProposPageQueryResult = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   teamHeading?: string
+  missionEyebrow?: string
   missionHeading?: string
+  missionBody?: string
   missionCards?: Array<
     {
       _key: string
     } & MissionCard
   >
+  ctaEyebrow?: string
+  ctaHeading?: string
+  ctaBody?: string
+  ctaPrimary?: {
+    label?: string
+    href?: string
+  }
+  ctaSecondary?: {
+    label?: string
+    href?: string
+  }
 } | null
 
 // Source: sanity/lib/queries.ts
@@ -1040,8 +1186,30 @@ export type ContactPageQueryResult = {
   _rev: string
   metaTitle?: string
   metaDescription?: string
+  heroEyebrow?: string
   heading?: string
   introBody?: BlockContent
+  highlights?: Array<{
+    label?: string
+    value?: string
+    _key: string
+  }>
+  formEyebrow?: string
+  formHeading?: string
+  formBody?: string
+  channelsEyebrow?: string
+  channelsHeading?: string
+  channelsBody?: string
+  channelLabels?: {
+    email?: string
+    instagram?: string
+    facebook?: string
+  }
+  reassurance?: {
+    eyebrow?: string
+    title?: string
+    body?: string
+  }
 } | null
 
 // Source: sanity/lib/queries.ts

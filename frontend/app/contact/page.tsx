@@ -26,6 +26,39 @@ export default async function ContactPage() {
   const socialInstagram = settings?.socialInstagram
   const socialFacebook = settings?.socialFacebook
 
+  const heroEyebrow = page?.heroEyebrow ?? 'Contact · Parlons de votre projet'
+  const highlights = page?.highlights?.length
+    ? page.highlights
+    : [
+        {label: 'Réponse', value: 'Sous 48h ouvrées'},
+        {label: 'Zone', value: 'France métropolitaine'},
+        {label: 'Interlocuteurs', value: 'Collectivités · Clubs'},
+      ]
+  const formEyebrow = page?.formEyebrow ?? 'Formulaire'
+  const formHeading = page?.formHeading ?? 'Décrivez-nous votre projet.'
+  const formBody =
+    page?.formBody ??
+    'Quelques lignes suffisent. Plus vous nous en dites sur le contexte — commune, club, calendrier — plus notre réponse sera précise.'
+  const channelsEyebrow = page?.channelsEyebrow ?? 'Autres canaux'
+  const channelsHeading = page?.channelsHeading ?? 'Joignez-nous directement.'
+  const channelsBody =
+    page?.channelsBody ??
+    'Pour une question rapide ou un premier échange informel, choisissez le canal qui vous convient.'
+  const channelLabels = {
+    email: page?.channelLabels?.email ?? 'Écrire un email',
+    instagram: page?.channelLabels?.instagram ?? 'Suivre sur Instagram',
+    facebook: page?.channelLabels?.facebook ?? 'Visiter notre page',
+  }
+  const reassurance = {
+    eyebrow: page?.reassurance?.eyebrow ?? 'Engagement',
+    title:
+      page?.reassurance?.title ??
+      'Chaque demande reçoit une réponse personnalisée, jamais un formulaire générique.',
+    body:
+      page?.reassurance?.body ??
+      'Nous étudions votre contexte — terrain, usage, budget — avant de vous rappeler.',
+  }
+
   const channels: Array<{
     key: string
     label: string
@@ -38,7 +71,7 @@ export default async function ContactPage() {
   if (contactEmail) {
     channels.push({
       key: 'email',
-      label: 'Écrire un email',
+      label: channelLabels.email,
       value: contactEmail,
       href: `mailto:${contactEmail}`,
       icon: (
@@ -61,7 +94,7 @@ export default async function ContactPage() {
   if (socialInstagram) {
     channels.push({
       key: 'instagram',
-      label: 'Suivre sur Instagram',
+      label: channelLabels.instagram,
       value: 'Instagram',
       href: socialInstagram,
       external: true,
@@ -86,7 +119,7 @@ export default async function ContactPage() {
   if (socialFacebook) {
     channels.push({
       key: 'facebook',
-      label: 'Visiter notre page',
+      label: channelLabels.facebook,
       value: 'Facebook',
       href: socialFacebook,
       external: true,
@@ -141,7 +174,7 @@ export default async function ContactPage() {
                     <span className="absolute inset-0 rounded-full bg-lime opacity-60 animate-ping" />
                     <span className="relative inline-block size-2.5 rounded-full bg-lime" />
                   </span>
-                  <span>Contact · Parlons de votre projet</span>
+                  <span>{heroEyebrow}</span>
                   <span aria-hidden="true" className="inline-block h-px w-10 bg-blue/40" />
                 </p>
               </FadeIn>
@@ -175,24 +208,14 @@ export default async function ContactPage() {
             <div className="col-span-12 lg:col-span-4 lg:pb-4">
               <FadeIn delay={0.3}>
                 <dl className="flex flex-row lg:flex-col gap-8 lg:gap-7 pt-6 lg:border-l lg:border-hairline lg:pl-8">
-                  <div>
-                    <dt className="eyebrow text-ink-faint mb-2">Réponse</dt>
-                    <dd className="font-display text-ink text-base md:text-lg leading-tight">
-                      Sous 48h ouvrées
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="eyebrow text-ink-faint mb-2">Zone</dt>
-                    <dd className="font-display text-ink text-base md:text-lg leading-tight">
-                      France métropolitaine
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="eyebrow text-ink-faint mb-2">Interlocuteurs</dt>
-                    <dd className="font-display text-ink text-base md:text-lg leading-tight">
-                      Collectivités · Clubs
-                    </dd>
-                  </div>
+                  {highlights.map((highlight, i) => (
+                    <div key={highlight.label ?? i}>
+                      <dt className="eyebrow text-ink-faint mb-2">{highlight.label}</dt>
+                      <dd className="font-display text-ink text-base md:text-lg leading-tight">
+                        {highlight.value}
+                      </dd>
+                    </div>
+                  ))}
                 </dl>
               </FadeIn>
             </div>
@@ -210,9 +233,9 @@ export default async function ContactPage() {
             <div className="col-span-12 lg:col-span-7">
               <FadeIn>
                 <SectionIntro
-                  eyebrow="Formulaire"
-                  heading="Décrivez-nous votre projet."
-                  body="Quelques lignes suffisent. Plus vous nous en dites sur le contexte — commune, club, calendrier — plus notre réponse sera précise."
+                  eyebrow={formEyebrow}
+                  heading={formHeading}
+                  body={formBody}
                   className="mb-10 md:mb-12"
                 />
               </FadeIn>
@@ -240,17 +263,16 @@ export default async function ContactPage() {
               <FadeIn delay={0.15}>
                 <p className="eyebrow mb-6 flex items-center gap-3">
                   <span aria-hidden="true" className="inline-block h-px w-10 bg-blue/40" />
-                  <span>Autres canaux</span>
+                  <span>{channelsEyebrow}</span>
                 </p>
                 <h2
                   className="font-display font-semibold text-ink tracking-tight leading-[1.05]"
                   style={{fontSize: 'clamp(1.5rem, 2.4vw, 2rem)'}}
                 >
-                  Joignez-nous directement.
+                  {channelsHeading}
                 </h2>
                 <p className="mt-4 font-body text-ink-muted text-base leading-[1.6] max-w-[38ch]">
-                  Pour une question rapide ou un premier échange informel, choisissez le canal qui
-                  vous convient.
+                  {channelsBody}
                 </p>
               </FadeIn>
 
@@ -333,12 +355,12 @@ export default async function ContactPage() {
                         'radial-gradient(circle, var(--color-lime) 0%, var(--color-blue) 55%, transparent 75%)',
                     }}
                   />
-                  <p className="relative eyebrow text-lime/90 mb-4">Engagement</p>
+                  <p className="relative eyebrow text-lime/90 mb-4">{reassurance.eyebrow}</p>
                   <p className="relative font-display text-white text-lg md:text-xl leading-[1.35] tracking-[-0.01em] max-w-[28ch]">
-                    Chaque demande reçoit une réponse personnalisée, jamais un formulaire générique.
+                    {reassurance.title}
                   </p>
                   <p className="relative mt-4 font-body text-white/65 text-sm leading-[1.6]">
-                    Nous étudions votre contexte — terrain, usage, budget — avant de vous rappeler.
+                    {reassurance.body}
                   </p>
                 </div>
               </FadeIn>

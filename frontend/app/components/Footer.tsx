@@ -15,6 +15,18 @@ export default async function Footer() {
   const contactEmail = settings?.contactEmail
   const socialInstagram = settings?.socialInstagram
   const socialFacebook = settings?.socialFacebook
+  const eyebrow = settings?.footerEyebrow ?? 'Padel Day · Automated courts'
+  const tagline =
+    settings?.footerTagline ??
+    'Des complexes de padel automatisés, pensés pour les municipalités et les clubs qui veulent ouvrir un terrain sans complexité opérationnelle.'
+  const contactLabel = settings?.footerContactLabel ?? 'Contact'
+  const navLabel = settings?.footerNavLabel ?? 'Navigation'
+  const contactCtaLabel = settings?.footerContactCtaLabel ?? 'Nous contacter'
+  const credit = settings?.footerCredit
+  const creditPrefix = credit?.prefix ?? 'Made with'
+  const creditSuffix = credit?.suffix ?? 'by'
+  const creditName = credit?.name ?? 'Mathieu Thiry'
+  const creditUrl = credit?.url ?? 'https://github.com/promathieuthiry'
 
   const resolveHref = (link: any) =>
     link.linkType === 'href'
@@ -75,7 +87,7 @@ export default async function Footer() {
                 className="text-[11px] font-medium uppercase tracking-[0.22em] text-lime"
                 style={{fontFamily: 'var(--font-poppins), sans-serif'}}
               >
-                Padel Day · Automated courts
+                {eyebrow}
               </span>
             </div>
 
@@ -106,8 +118,7 @@ export default async function Footer() {
             </Link>
 
             <p className="mt-6 block w-full max-w-[42ch] text-[0.95rem] leading-relaxed text-white/80">
-              Des complexes de padel automatisés, pensés pour les municipalités et les clubs qui
-              veulent ouvrir un terrain sans complexité opérationnelle.
+              {tagline}
             </p>
           </div>
 
@@ -117,7 +128,7 @@ export default async function Footer() {
               className="text-[11px] font-medium uppercase tracking-[0.18em] text-white/60 mb-5"
               style={{fontFamily: 'var(--font-poppins), sans-serif'}}
             >
-              Contact
+              {contactLabel}
             </h3>
             {contactEmail && (
               <a
@@ -189,7 +200,7 @@ export default async function Footer() {
               href={contactHref}
               className="group relative mt-8 inline-flex items-center gap-4 bg-lime text-dark rounded-full pl-6 pr-2 py-2 font-semibold text-[0.95rem] whitespace-nowrap transition-transform duration-200 ease-out active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime"
             >
-              <span>Nous contacter</span>
+              <span>{contactCtaLabel}</span>
               <span
                 aria-hidden="true"
                 className="flex size-10 shrink-0 items-center justify-center rounded-full bg-dark text-lime transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-1"
@@ -221,7 +232,7 @@ export default async function Footer() {
                 className="text-[11px] font-medium uppercase tracking-[0.18em] text-white/60 mb-5"
                 style={{fontFamily: 'var(--font-poppins), sans-serif'}}
               >
-                Navigation
+                {navLabel}
               </h3>
               <ul className="flex flex-col gap-3">
                 {footerLinks.map((link: any, index: number) => (
@@ -255,18 +266,18 @@ export default async function Footer() {
             className="text-[11px] uppercase tracking-[0.18em] text-white/50"
             style={{fontFamily: 'var(--font-poppins), sans-serif'}}
           >
-            Made with{' '}
+            {creditPrefix}{' '}
             <span aria-hidden="true" className="heart-beat">
               ❤️
             </span>
-            <span className="sr-only">love</span> by{' '}
+            <span className="sr-only">love</span> {creditSuffix}{' '}
             <a
-              href="https://github.com/promathieuthiry"
+              href={creditUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/70 hover:text-lime transition-colors duration-200 underline-offset-4 hover:underline"
             >
-              Mathieu Thiry
+              {creditName}
             </a>{' '}
           </p>
         </div>

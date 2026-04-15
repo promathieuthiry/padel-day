@@ -34,6 +34,24 @@ export default async function NotreSitePage() {
   const features = page.features ?? []
   const hasFeatures = features.length > 0
 
+  const heroEyebrow = page.heroEyebrow ?? 'Notre référence · Projet pilote'
+  const locationEyebrow = page.locationEyebrow ?? 'Localisation'
+  const statusEyebrow = page.statusEyebrow ?? 'Statut'
+  const featuresEyebrow = page.featuresEyebrow ?? 'Fiche technique'
+  const featuresHeading = page.featuresHeading ?? 'Un terrain conçu pour durer.'
+  const featuresBody =
+    page.featuresBody ??
+    'Chaque détail — structure, revêtement, éclairage — a été pensé pour offrir une expérience de jeu fiable, saison après saison.'
+  const descriptionEyebrow = page.descriptionEyebrow ?? 'À propos du site'
+  const descriptionHeading = page.descriptionHeading ?? 'Le lieu, en détail.'
+  const ctaEyebrow = page.ctaEyebrow ?? 'Votre projet'
+  const ctaHeading = page.ctaHeading ?? 'Un terrain comme celui-ci, dans votre commune.'
+  const ctaBody =
+    page.ctaBody ??
+    "Collectivités et clubs : nous accompagnons l'étude, l'installation et l'exploitation de votre terrain de padel, de la faisabilité à la première réservation."
+  const ctaPrimary = page.ctaPrimary ?? {label: 'Installer un terrain', href: '/installer-un-terrain'}
+  const ctaSecondary = page.ctaSecondary ?? {label: 'Visiter le site', href: '/contact'}
+
   return (
     <>
       {/* HERO — editorial, aurora-tinted, asymmetric */}
@@ -71,7 +89,7 @@ export default async function NotreSitePage() {
                     <span className="absolute inset-0 rounded-full bg-lime opacity-60 animate-ping" />
                     <span className="relative inline-block size-2.5 rounded-full bg-lime" />
                   </span>
-                  <span>Notre référence · Projet pilote</span>
+                  <span>{heroEyebrow}</span>
                   <span aria-hidden="true" className="inline-block h-px w-10 bg-blue/40" />
                 </p>
               </FadeIn>
@@ -92,7 +110,7 @@ export default async function NotreSitePage() {
                 <dl className="flex flex-row lg:flex-col gap-8 lg:gap-6 pt-6">
                   {page.locationLabel && (
                     <div>
-                      <dt className="eyebrow text-ink-faint mb-2">Localisation</dt>
+                      <dt className="eyebrow text-ink-faint mb-2">{locationEyebrow}</dt>
                       <dd className="font-display text-ink text-base md:text-lg leading-tight">
                         {page.locationLabel}
                       </dd>
@@ -100,7 +118,7 @@ export default async function NotreSitePage() {
                   )}
                   {page.status && page.statusLabel && (
                     <div>
-                      <dt className="eyebrow text-ink-faint mb-2">Statut</dt>
+                      <dt className="eyebrow text-ink-faint mb-2">{statusEyebrow}</dt>
                       <dd>
                         <StatusBadge status={page.status} label={page.statusLabel} />
                       </dd>
@@ -212,9 +230,9 @@ export default async function NotreSitePage() {
               <div className="col-span-12 lg:col-span-4 lg:sticky lg:top-24">
                 <FadeIn>
                   <SectionIntro
-                    eyebrow="Fiche technique"
-                    heading="Un terrain conçu pour durer."
-                    body="Chaque détail — structure, revêtement, éclairage — a été pensé pour offrir une expérience de jeu fiable, saison après saison."
+                    eyebrow={featuresEyebrow}
+                    heading={featuresHeading}
+                    body={featuresBody}
                   />
                 </FadeIn>
               </div>
@@ -263,7 +281,7 @@ export default async function NotreSitePage() {
             <div className="grid grid-cols-12 gap-x-6 gap-y-10">
               <div className="col-span-12 lg:col-span-3">
                 <FadeIn>
-                  <SectionIntro eyebrow="À propos du site" heading="Le lieu, en détail." />
+                  <SectionIntro eyebrow={descriptionEyebrow} heading={descriptionHeading} />
                 </FadeIn>
               </div>
               <div className="col-span-12 lg:col-span-9">
@@ -304,28 +322,26 @@ export default async function NotreSitePage() {
             <FadeIn>
               <p className="eyebrow text-lime/90 mb-8 flex items-center gap-3">
                 <span aria-hidden="true" className="inline-block h-px w-10 bg-lime/40" />
-                <span>Votre projet</span>
+                <span>{ctaEyebrow}</span>
               </p>
               <h2
                 className="font-display font-semibold text-white leading-[0.98] tracking-[-0.035em] text-balance w-full"
                 style={{fontSize: 'clamp(2rem, 5.4vw, 4.25rem)'}}
               >
-                Un terrain comme celui-ci, dans votre commune.
+                {ctaHeading}
               </h2>
               <p className="mt-8 md:mt-10 text-base md:text-lg text-white/70 leading-[1.6] font-body max-w-[72ch]">
-                Collectivités et clubs : nous accompagnons l&apos;étude, l&apos;installation et
-                l&apos;exploitation de votre terrain de padel, de la faisabilité à la première
-                réservation.
+                {ctaBody}
               </p>
             </FadeIn>
 
             <FadeIn delay={0.15}>
               <div className="mt-12 md:mt-14 flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-6 sm:gap-8">
                 <Link
-                  href="/installer-un-terrain"
+                  href={ctaPrimary.href || '/installer-un-terrain'}
                   className="group relative inline-flex items-center gap-3 self-start bg-lime text-dark rounded-full pl-7 pr-2 py-2 font-semibold text-[0.95rem] whitespace-nowrap transition-transform duration-200 ease-out active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime"
                 >
-                  <span>Installer un terrain</span>
+                  <span>{ctaPrimary.label}</span>
                   <span
                     aria-hidden="true"
                     className="flex size-10 shrink-0 items-center justify-center rounded-full bg-dark text-lime transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0.5"
@@ -346,11 +362,11 @@ export default async function NotreSitePage() {
                   </span>
                 </Link>
                 <Link
-                  href="/contact"
+                  href={ctaSecondary.href || '/contact'}
                   className="group inline-flex items-center gap-2 self-start text-white/85 font-semibold text-[0.95rem] py-2 transition-colors duration-200 hover:text-lime focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime rounded-sm"
                 >
                   <span className="relative">
-                    Visiter le site
+                    {ctaSecondary.label}
                     <span
                       aria-hidden="true"
                       className="absolute left-0 right-0 -bottom-1 h-px bg-current"

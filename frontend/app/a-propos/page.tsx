@@ -35,6 +35,19 @@ export default async function AProposPage() {
 
   const missionCards = page?.missionCards ?? []
 
+  const heroEyebrow = page?.heroEyebrow ?? 'À propos · Notre histoire'
+  const missionEyebrow = page?.missionEyebrow ?? 'Notre mission'
+  const missionBody =
+    page?.missionBody ??
+    "Les principes qui orientent chacune de nos décisions, de la conception du terrain à l'expérience joueur."
+  const ctaEyebrow = page?.ctaEyebrow ?? 'Travaillons ensemble'
+  const ctaHeading = page?.ctaHeading ?? 'Un projet de terrain dans votre commune\u00A0?'
+  const ctaBody =
+    page?.ctaBody ??
+    "Collectivités, clubs, promoteurs : parlons de votre projet. Nous accompagnons l'étude, l'installation et l'exploitation de votre terrain de padel."
+  const ctaPrimary = page?.ctaPrimary ?? {label: 'Installer un terrain', href: '/installer-un-terrain'}
+  const ctaSecondary = page?.ctaSecondary ?? {label: 'Nous contacter', href: '/contact'}
+
   return (
     <>
       {/* HERO — editorial aurora, story lede */}
@@ -72,7 +85,7 @@ export default async function AProposPage() {
                     <span className="absolute inset-0 rounded-full bg-lime opacity-60 animate-ping" />
                     <span className="relative inline-block size-2.5 rounded-full bg-lime" />
                   </span>
-                  <span>À propos · Notre histoire</span>
+                  <span>{heroEyebrow}</span>
                   <span aria-hidden="true" className="inline-block h-px w-10 bg-blue/40" />
                 </p>
               </FadeIn>
@@ -260,9 +273,9 @@ export default async function AProposPage() {
               <div className="col-span-12 lg:col-span-4 lg:sticky lg:top-24">
                 <FadeIn>
                   <SectionIntro
-                    eyebrow="Notre mission"
+                    eyebrow={missionEyebrow}
                     heading={page?.missionHeading || 'Ce qui nous guide.'}
-                    body="Les principes qui orientent chacune de nos décisions, de la conception du terrain à l'expérience joueur."
+                    body={missionBody}
                   />
                 </FadeIn>
               </div>
@@ -329,27 +342,26 @@ export default async function AProposPage() {
           <FadeIn>
             <p className="eyebrow text-lime/90 mb-8 flex items-center gap-3">
               <span aria-hidden="true" className="inline-block h-px w-10 bg-lime/40" />
-              <span>Travaillons ensemble</span>
+              <span>{ctaEyebrow}</span>
             </p>
             <h2
               className="font-display font-semibold text-white leading-[0.98] tracking-[-0.035em] text-balance max-w-[20ch]"
               style={{fontSize: 'clamp(2rem, 5.4vw, 4.25rem)'}}
             >
-              Un projet de terrain dans votre commune&nbsp;?
+              {ctaHeading}
             </h2>
             <p className="mt-8 md:mt-10 text-base md:text-lg text-white/70 leading-[1.6] font-body max-w-[64ch]">
-              Collectivités, clubs, promoteurs : parlons de votre projet. Nous accompagnons
-              l&apos;étude, l&apos;installation et l&apos;exploitation de votre terrain de padel.
+              {ctaBody}
             </p>
           </FadeIn>
 
           <FadeIn delay={0.15}>
             <div className="mt-12 md:mt-14 flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-6 sm:gap-8">
               <Link
-                href="/installer-un-terrain"
+                href={ctaPrimary.href || '/installer-un-terrain'}
                 className="group relative inline-flex items-center gap-3 self-start bg-lime text-dark rounded-full pl-7 pr-2 py-2 font-semibold text-[0.95rem] whitespace-nowrap transition-transform duration-200 ease-out active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime"
               >
-                <span>Installer un terrain</span>
+                <span>{ctaPrimary.label}</span>
                 <span
                   aria-hidden="true"
                   className="flex size-10 shrink-0 items-center justify-center rounded-full bg-dark text-lime transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0.5"
@@ -370,11 +382,11 @@ export default async function AProposPage() {
                 </span>
               </Link>
               <Link
-                href="/contact"
+                href={ctaSecondary.href || '/contact'}
                 className="group inline-flex items-center gap-2 self-start text-white/85 font-semibold text-[0.95rem] py-2 transition-colors duration-200 hover:text-lime focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime rounded-sm"
               >
                 <span className="relative">
-                  Nous contacter
+                  {ctaSecondary.label}
                   <span
                     aria-hidden="true"
                     className="absolute left-0 right-0 -bottom-1 h-px bg-current"
