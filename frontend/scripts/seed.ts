@@ -7,7 +7,7 @@
  * Usage: npx tsx scripts/seed.ts
  */
 
-import {createClient} from '@sanity/client'
+import {createClient, type IdentifiedSanityDocumentStub} from '@sanity/client'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
@@ -16,6 +16,13 @@ const token = process.env.SANITY_API_WRITE_TOKEN
 if (!projectId || !dataset) {
   console.error(
     'Missing required environment variables: NEXT_PUBLIC_SANITY_PROJECT_ID, NEXT_PUBLIC_SANITY_DATASET',
+  )
+  process.exit(1)
+}
+
+if (dataset === 'production' && process.env.SEED_ALLOW_PRODUCTION !== 'true') {
+  console.error(
+    'Refusing to seed the "production" dataset. Set SEED_ALLOW_PRODUCTION=true to override.',
   )
   process.exit(1)
 }
@@ -449,7 +456,7 @@ const legalPages = [
 // ---------------------------------------------------------------------------
 
 async function seed() {
-  const allDocuments = [
+  const allDocuments: IdentifiedSanityDocumentStub[] = [
     siteSettings,
     homePage,
     installerPage,
