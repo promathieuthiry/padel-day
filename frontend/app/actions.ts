@@ -29,7 +29,7 @@ export async function submitContactForm(
   formData: FormData,
 ): Promise<{success: boolean; error?: string}> {
   // Honeypot — bots fill hidden fields
-  if (formData.get('website')) {
+  if (formData.get('pd_hp_field')) {
     return {success: false, error: 'Spam detected.'}
   }
 

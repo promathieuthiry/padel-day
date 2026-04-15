@@ -66,7 +66,10 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
       {/* Honeypot — hidden from real users, filled by bots */}
-      <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute opacity-0 h-0 w-0 overflow-hidden pointer-events-none" />
+      <div aria-hidden="true" style={{position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden'}}>
+        <label htmlFor="pd_hp_field">Laissez ce champ vide</label>
+        <input type="text" id="pd_hp_field" name="pd_hp_field" tabIndex={-1} autoComplete="off" defaultValue="" />
+      </div>
 
       {/* Name */}
       <div>
