@@ -44,6 +44,14 @@ export const installerPage = defineType({
       title: 'Hero Image',
       type: 'image',
       options: {hotspot: true},
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alternative text',
+          type: 'string',
+          description: 'Describe the image for accessibility and SEO.',
+        }),
+      ],
     }),
     defineField({
       name: 'stepsHeading',
