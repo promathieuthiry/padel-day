@@ -361,9 +361,19 @@ export type Page = {
   _rev: string
   title: string
   slug: Slug
+  eyebrow?: string
+  subtitle?: string
+  heroImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  body?: BlockContent
   metaTitle?: string
   metaDescription?: string
-  body?: BlockContent
 }
 
 export type Slug = {
@@ -980,10 +990,27 @@ export type ContactPageQueryResult = {
 
 // Source: sanity/lib/queries.ts
 // Variable: pageBySlugQuery
-// Query: *[_type == "page" && slug.current == $slug][0]{ _id, title, metaTitle, metaDescription, body }
+// Query: *[_type == "page" && slug.current == $slug][0]{    _id,    title,    eyebrow,    subtitle,    heroImage{..., asset->{_id, url, metadata{lqip, dimensions}}},    metaTitle,    metaDescription,    body  }
 export type PageBySlugQueryResult = {
   _id: string
   title: string
+  eyebrow: string | null
+  subtitle: string | null
+  heroImage: {
+    asset: {
+      _id: string
+      url: string
+      metadata: {
+        lqip: string | null
+        dimensions: SanityImageDimensions | null
+      } | null
+    } | null
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  } | null
   metaTitle: string | null
   metaDescription: string | null
   body: BlockContent | null
@@ -1016,7 +1043,7 @@ declare module '@sanity/client' {
     '*[_type == "aProposPage"][0]': AProposPageQueryResult
     '*[_type == "teamMember"] | order(order asc)': TeamMembersQueryResult
     '*[_type == "contactPage"][0]': ContactPageQueryResult
-    '*[_type == "page" && slug.current == $slug][0]{ _id, title, metaTitle, metaDescription, body }': PageBySlugQueryResult
+    '*[_type == "page" && slug.current == $slug][0]{\n    _id,\n    title,\n    eyebrow,\n    subtitle,\n    heroImage{..., asset->{_id, url, metadata{lqip, dimensions}}},\n    metaTitle,\n    metaDescription,\n    body\n  }': PageBySlugQueryResult
     '*[_type == "page" && defined(slug.current)]{"slug": slug.current}': AllPageSlugsQueryResult
     '*[_type == "page" && defined(slug.current)]{ "slug": slug.current, _updatedAt }': SitemapDataQueryResult
   }

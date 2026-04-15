@@ -361,9 +361,19 @@ export type Page = {
   _rev: string
   title: string
   slug: Slug
+  eyebrow?: string
+  subtitle?: string
+  heroImage?: {
+    asset?: SanityImageAssetReference
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    alt?: string
+    _type: 'image'
+  }
+  body?: BlockContent
   metaTitle?: string
   metaDescription?: string
-  body?: BlockContent
 }
 
 export type Slug = {

@@ -17,7 +17,16 @@ export const teamMembersQuery = defineQuery(`*[_type == "teamMember"] | order(or
 export const contactPageQuery = defineQuery(`*[_type == "contactPage"][0]`)
 
 export const pageBySlugQuery = defineQuery(
-  `*[_type == "page" && slug.current == $slug][0]{ _id, title, metaTitle, metaDescription, body }`,
+  `*[_type == "page" && slug.current == $slug][0]{
+    _id,
+    title,
+    eyebrow,
+    subtitle,
+    heroImage{..., asset->{_id, url, metadata{lqip, dimensions}}},
+    metaTitle,
+    metaDescription,
+    body
+  }`,
 )
 
 export const allPageSlugsQuery = defineQuery(
