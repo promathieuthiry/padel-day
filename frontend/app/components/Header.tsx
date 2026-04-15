@@ -2,7 +2,6 @@ import Link from 'next/link'
 import {sanityFetch} from '@/sanity/lib/live'
 import Logo from '@/app/components/Logo'
 import {siteSettingsQuery} from '@/sanity/lib/queries'
-import Button from '@/app/components/Button'
 import MobileNav from '@/app/components/MobileNav'
 import Container from '@/app/components/ui/Container'
 
@@ -44,30 +43,66 @@ export default async function Header() {
   }))
 
   return (
-    <header className="fixed z-50 inset-x-0 top-0 h-16 bg-blue/90 backdrop-blur-lg border-b border-white/10 text-white">
-      <Container className="flex h-full items-center justify-between">
-        <Link href="/" aria-label="Padel Day" className="flex items-center gap-2.5">
-          <Logo className="h-9 w-9 text-lime" aria-hidden />
-          <span className="font-(family-name:--font-poppins) text-xl font-semibold tracking-tight text-white">
+    <header className="fixed z-50 inset-x-0 top-0 h-16 bg-blue/92 backdrop-blur-lg border-b border-white/10 text-white isolate">
+      {/* Court tramlines — faint echo of the Footer motif */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.07]"
+        style={{
+          backgroundImage:
+            'linear-gradient(90deg, transparent 0, transparent calc(50% - 0.5px), #fff calc(50% - 0.5px), #fff calc(50% + 0.5px), transparent calc(50% + 0.5px))',
+        }}
+      />
+
+      <Container className="relative flex h-full items-center justify-between">
+        <Link href="/" aria-label="Padel Day — Accueil" className="group flex items-center gap-3">
+          <span
+            aria-hidden="true"
+            className="relative inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-lime text-dark ring-1 ring-lime/80 transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-rotate-6"
+          >
+            <Logo className="h-5 w-5 text-dark" aria-hidden />
+          </span>
+          <span
+            className="font-display text-lg font-semibold tracking-[-0.02em] text-white"
+          >
             Padel Day
           </span>
         </Link>
 
         <nav className="hidden md:block">
-          <ul className="flex items-center gap-6 text-sm font-medium">
+          <ul className="flex items-center gap-8 text-sm">
             {resolvedLinks.map((link, index: number) => {
-              const href = link.href
               const isLast = index === resolvedLinks.length - 1
 
               if (isLast) {
                 return (
                   <li key={link._key}>
-                    <Button
-                      label={link.title}
-                      href={href}
-                      variant="primary"
-                      className="text-xs px-4 py-2"
-                    />
+                    <Link
+                      href={link.href}
+                      target={link.openInNewTab ? '_blank' : undefined}
+                      rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
+                      className="group relative inline-flex items-center gap-2 bg-lime text-dark rounded-full pl-4 pr-1 py-1 font-semibold text-[0.8rem] whitespace-nowrap transition-transform duration-200 ease-out active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime"
+                    >
+                      <span>{link.title}</span>
+                      <span
+                        aria-hidden="true"
+                        className="flex size-7 shrink-0 items-center justify-center rounded-full bg-dark text-lime transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0.5"
+                      >
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 18 18"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M4 9h10" />
+                          <path d="M10 4l5 5-5 5" />
+                        </svg>
+                      </span>
+                    </Link>
                   </li>
                 )
               }
@@ -75,12 +110,16 @@ export default async function Header() {
               return (
                 <li key={link._key}>
                   <Link
-                    href={href}
-                    className="text-white/80 transition-colors hover:text-white"
+                    href={link.href}
                     target={link.openInNewTab ? '_blank' : undefined}
                     rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
+                    className="group inline-flex items-center gap-2 text-white/85 transition-colors duration-200 hover:text-white"
                   >
-                    {link.title}
+                    <span
+                      aria-hidden="true"
+                      className="inline-block h-px w-0 bg-lime transition-[width] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-4"
+                    />
+                    <span>{link.title}</span>
                   </Link>
                 </li>
               )
