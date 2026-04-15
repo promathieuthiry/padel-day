@@ -1,15 +1,18 @@
 import Link from 'next/link'
-import type {Cta} from '@/sanity.types'
 import Container from '@/app/components/ui/Container'
+
+type BannerCta = {label?: string; href?: string}
 
 interface CtaBannerSectionProps {
   heading: string
-  primaryCta?: Cta | null
-  secondaryCta?: Cta | null
+  eyebrow?: string
+  primaryCta?: BannerCta | null
+  secondaryCta?: BannerCta | null
 }
 
 export default function CtaBannerSection({
   heading,
+  eyebrow = 'Prêt à jouer ?',
   primaryCta,
   secondaryCta,
 }: CtaBannerSectionProps) {
@@ -65,7 +68,7 @@ export default function CtaBannerSection({
                 className="text-xs font-medium uppercase tracking-[0.18em] text-lime"
                 style={{fontFamily: 'var(--font-poppins), sans-serif'}}
               >
-                Prêt à jouer ?
+                {eyebrow}
               </span>
             </div>
 

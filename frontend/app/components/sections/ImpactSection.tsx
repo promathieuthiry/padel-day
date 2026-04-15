@@ -9,12 +9,19 @@ import {Stagger, StaggerItem} from '@/app/components/Stagger'
 
 interface ImpactSectionProps {
   heading: string
+  eyebrow?: string
   body?: BlockContent
   cta?: Cta | null
   image?: {asset?: {_ref: string}} | null
 }
 
-export default function ImpactSection({heading, body, cta, image}: ImpactSectionProps) {
+export default function ImpactSection({
+  heading,
+  eyebrow = 'Notre impact',
+  body,
+  cta,
+  image,
+}: ImpactSectionProps) {
   const imageUrl = image?.asset
     ? urlForImage(image).width(1200).height(1500).fit('crop').quality(85).url()
     : null
@@ -24,7 +31,7 @@ export default function ImpactSection({heading, body, cta, image}: ImpactSection
       <Container>
         <div className="grid gap-12 md:grid-cols-2 md:gap-16 md:items-center">
           <Stagger className="flex flex-col" staggerDelay={0.1}>
-            <SectionIntro eyebrow="Notre impact" heading={heading} className="mb-8 md:mb-10" />
+            <SectionIntro eyebrow={eyebrow} heading={heading} className="mb-8 md:mb-10" />
 
             {body && (
               <StaggerItem>

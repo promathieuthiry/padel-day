@@ -1,5 +1,56 @@
 [
   {
+    "name": "fact",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "fact"
+          }
+        },
+        "label": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        },
+        "target": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "number"
+          },
+          "optional": false
+        },
+        "suffix": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "subline": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "caption": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
     "name": "missionCard",
     "type": "type",
     "value": {
@@ -1761,6 +1812,13 @@
         },
         "optional": true
       },
+      "heroEyebrow": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "heroHeading": {
         "type": "objectAttribute",
         "value": {
@@ -1842,47 +1900,69 @@
       "heroPrimaryCta": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "cta"
+          "type": "object",
+          "attributes": {
+            "label": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
+            "href": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            }
+          }
         },
         "optional": true
       },
       "heroSecondaryCta": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "cta"
+          "type": "object",
+          "attributes": {
+            "label": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
+            "href": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            }
+          }
         },
         "optional": true
       },
-      "introHeading": {
+      "heroCredentialsChip": {
         "type": "objectAttribute",
         "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "introBody": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "blockContent"
-        },
-        "optional": true
-      },
-      "introPrimaryCta": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "cta"
-        },
-        "optional": true
-      },
-      "introSecondaryCta": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "cta"
+          "type": "object",
+          "attributes": {
+            "label": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
+            "text": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            }
+          }
         },
         "optional": true
       },
@@ -1901,6 +1981,35 @@
         "optional": true
       },
       "factsBody": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "factsItems": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "fact"
+            }
+          }
+        },
+        "optional": true
+      },
+      "howItWorksEyebrow": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -1983,6 +2092,13 @@
         },
         "optional": true
       },
+      "impactEyebrow": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "impactHeading": {
         "type": "objectAttribute",
         "value": {
@@ -2053,6 +2169,13 @@
         },
         "optional": true
       },
+      "ctaBannerEyebrow": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "ctaBannerHeading": {
         "type": "objectAttribute",
         "value": {
@@ -2063,16 +2186,60 @@
       "ctaBannerPrimaryCta": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "cta"
+          "type": "object",
+          "attributes": {
+            "label": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
+            "href": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            }
+          }
         },
         "optional": true
       },
       "ctaBannerSecondaryCta": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "cta"
+          "type": "object",
+          "attributes": {
+            "label": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
+            "href": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "faqEyebrow": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "faqHeading": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
         },
         "optional": true
       }

@@ -2,20 +2,22 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {urlForImage} from '@/sanity/lib/utils'
 import Container from '@/app/components/ui/Container'
-import type {Cta} from '@/sanity.types'
-
 interface HeroImage {
   asset?: {_ref: string}
   alt?: string | null
 }
 
+type HeroCta = {label?: string; href?: string}
+
 interface HeroSectionProps {
   heading: string
   highlightWords?: string[]
   slogan?: string
+  eyebrow?: string
   image?: HeroImage | null
-  primaryCta?: Cta | null
-  secondaryCta?: Cta | null
+  primaryCta?: HeroCta | null
+  secondaryCta?: HeroCta | null
+  credentialsChip?: {label?: string; text?: string} | null
 }
 
 function renderHeading(heading: string, highlightWords?: string[]) {
@@ -50,10 +52,17 @@ export default function HeroSection({
   heading,
   highlightWords,
   slogan,
+  eyebrow,
   image,
   primaryCta,
   secondaryCta,
+  credentialsChip,
 }: HeroSectionProps) {
+  const eyebrowText = eyebrow ?? 'Padel automatisé'
+  const chipLabel = credentialsChip?.label ?? 'Partenaire installation'
+  const chipText =
+    credentialsChip?.text ??
+    'Étude de site, financement et exploitation gérés de bout en bout.'
   const bgUrl = image?.asset ? urlForImage(image).width(1600).quality(88).url() : null
   const imageAlt = image?.alt ?? ''
   const hasDescriptiveAlt = imageAlt.trim().length > 0
@@ -61,12 +70,10 @@ export default function HeroSection({
   const primary = primaryCta ?? {
     label: 'Installer un terrain',
     href: '/installer-un-terrain',
-    style: 'primary',
   }
   const secondary = secondaryCta ?? {
     label: 'Découvrir notre site',
     href: '/notre-site',
-    style: 'secondary',
   }
 
   return (
@@ -109,7 +116,7 @@ export default function HeroSection({
                 <span className="absolute inset-0 rounded-full bg-lime opacity-60 animate-ping" />
                 <span className="relative inline-block size-2.5 rounded-full bg-lime" />
               </span>
-              <span>Padel automatisé</span>
+              <span>{eyebrowText}</span>
             </p>
 
             {/* Headline */}
@@ -290,11 +297,11 @@ export default function HeroSection({
                     className="text-[10px] font-medium uppercase tracking-[0.18em] text-ink-muted"
                     style={{fontFamily: 'var(--font-poppins), sans-serif'}}
                   >
-                    Partenaire installation
+                    {chipLabel}
                   </span>
                 </div>
                 <p className="mt-3 font-display text-[0.95rem] leading-snug text-ink tracking-[-0.01em]">
-                  Étude de site, financement et exploitation gérés de bout en bout.
+                  {chipText}
                 </p>
               </div>
 

@@ -12,30 +12,6 @@ type Fact = {
   caption: string
 }
 
-const FACTS: Fact[] = [
-  {
-    label: 'Horaires',
-    target: 17,
-    suffix: 'h',
-    subline: '7h → minuit',
-    caption: 'Plage d’ouverture quotidienne, sans personnel sur place.',
-  },
-  {
-    label: 'Accès',
-    target: 100,
-    suffix: '%',
-    subline: 'Autonome',
-    caption: 'Réservation, ouverture et éclairage gérés par smartphone.',
-  },
-  {
-    label: 'Ouverture',
-    target: 7,
-    suffix: 'J',
-    subline: 'Jours fériés inclus',
-    caption: 'Tous les jours de l’année. Zéro interruption.',
-  },
-]
-
 function useInView<T extends HTMLElement>() {
   const ref = useRef<T | null>(null)
   const [inView, setInView] = useState(false)
@@ -98,14 +74,32 @@ function Counter({
   return <>{value}</>
 }
 
+type FactInput = {
+  label?: string | null
+  target?: number | null
+  suffix?: string | null
+  subline?: string | null
+  caption?: string | null
+}
+
 type FactsSectionProps = {
   eyebrow?: string
   heading?: string
   body?: string
+  items?: FactInput[] | null
 }
 
-export default function FactsSection({eyebrow, heading, body}: FactsSectionProps) {
+export default function FactsSection({eyebrow, heading, body, items}: FactsSectionProps) {
   const {ref, inView} = useInView<HTMLElement>()
+  const facts: Fact[] = (items ?? []).map((f) => ({
+    label: f.label ?? '',
+    target: f.target ?? 0,
+    suffix: f.suffix ?? undefined,
+    subline: f.subline ?? '',
+    caption: f.caption ?? '',
+  }))
+
+  if (facts.length === 0) return null
 
   return (
     <section
@@ -123,7 +117,7 @@ export default function FactsSection({eyebrow, heading, body}: FactsSectionProps
         />
 
         <dl className="grid grid-cols-1 md:grid-cols-3">
-          {FACTS.map((fact, i) => (
+          {facts.map((fact, i) => (
             <div
               key={fact.label}
               className={[

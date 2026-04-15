@@ -15,6 +15,8 @@ interface FaqItem {
 
 interface FaqSectionProps {
   items: FaqItem[]
+  eyebrow?: string
+  heading?: string
 }
 
 function FaqRow({item, index}: {item: FaqItem; index: number}) {
@@ -110,7 +112,11 @@ function FaqRow({item, index}: {item: FaqItem; index: number}) {
   )
 }
 
-export default function FaqSection({items}: FaqSectionProps) {
+export default function FaqSection({
+  items,
+  eyebrow = 'Questions fréquentes',
+  heading = "Tout ce qu'il faut savoir avant de jouer.",
+}: FaqSectionProps) {
   if (!items || items.length === 0) return null
 
   return (
@@ -127,11 +133,7 @@ export default function FaqSection({items}: FaqSectionProps) {
 
       <Container className="relative z-10">
         <div className="mb-14 md:mb-20">
-          <SectionIntro
-            eyebrow="Questions fréquentes"
-            heading="Tout ce qu'il faut savoir avant de jouer."
-            headingId="faq-heading"
-          />
+          <SectionIntro eyebrow={eyebrow} heading={heading} headingId="faq-heading" />
         </div>
 
         {/* Accordion shell — hairline top + soft surface shift on open items */}

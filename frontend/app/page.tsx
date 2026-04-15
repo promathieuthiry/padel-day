@@ -48,15 +48,18 @@ export default async function Page() {
         heading={homePage?.heroHeading || 'Padel Day'}
         highlightWords={homePage?.heroHighlightWords ?? undefined}
         slogan={homePage?.heroSlogan ?? undefined}
+        eyebrow={homePage?.heroEyebrow ?? undefined}
         image={homePage?.heroImage}
         primaryCta={homePage?.heroPrimaryCta}
         secondaryCta={homePage?.heroSecondaryCta}
+        credentialsChip={homePage?.heroCredentialsChip}
       />
       <FadeIn direction="up">
         <FactsSection
           eyebrow={homePage?.factsEyebrow ?? undefined}
           heading={homePage?.factsHeading ?? undefined}
           body={homePage?.factsBody ?? undefined}
+          items={homePage?.factsItems}
         />
       </FadeIn>
 
@@ -64,6 +67,7 @@ export default async function Page() {
         <FadeIn>
           <HowItWorksSection
             heading={homePage.howItWorksHeading}
+            eyebrow={homePage.howItWorksEyebrow ?? undefined}
             steps={homePage.howItWorksSteps}
             image={homePage.howItWorksImage}
           />
@@ -74,6 +78,7 @@ export default async function Page() {
         <FadeIn>
           <ImpactSection
             heading={homePage.impactHeading}
+            eyebrow={homePage.impactEyebrow ?? undefined}
             body={homePage.impactBody ?? undefined}
             cta={homePage.impactCta}
             image={homePage.impactImage}
@@ -85,6 +90,7 @@ export default async function Page() {
         <FadeIn>
           <CtaBannerSection
             heading={homePage.ctaBannerHeading}
+            eyebrow={homePage.ctaBannerEyebrow ?? undefined}
             primaryCta={homePage.ctaBannerPrimaryCta}
             secondaryCta={homePage.ctaBannerSecondaryCta}
           />
@@ -93,7 +99,11 @@ export default async function Page() {
 
       {faqItems && faqItems.length > 0 && (
         <FadeIn>
-          <FaqSection items={faqItems} />
+          <FaqSection
+            items={faqItems}
+            eyebrow={homePage?.faqEyebrow ?? undefined}
+            heading={homePage?.faqHeading ?? undefined}
+          />
         </FadeIn>
       )}
     </>

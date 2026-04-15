@@ -14,11 +14,17 @@ interface StepItem {
 
 interface HowItWorksSectionProps {
   heading: string
+  eyebrow?: string
   steps: StepItem[]
   image?: {asset?: {_ref: string}} | null
 }
 
-export default function HowItWorksSection({heading, steps, image}: HowItWorksSectionProps) {
+export default function HowItWorksSection({
+  heading,
+  eyebrow = 'Le parcours',
+  steps,
+  image,
+}: HowItWorksSectionProps) {
   if (!steps || steps.length === 0) return null
 
   const imageUrl = image?.asset
@@ -28,7 +34,7 @@ export default function HowItWorksSection({heading, steps, image}: HowItWorksSec
   return (
     <section className="bg-surface-2 border-y border-hairline py-20 md:py-28">
       <Container>
-        <SectionIntro eyebrow="Le parcours" heading={heading} className="mb-12 md:mb-16" />
+        <SectionIntro eyebrow={eyebrow} heading={heading} className="mb-12 md:mb-16" />
 
         <div className={`grid grid-cols-1 lg:gap-x-12 lg:items-center ${imageUrl ? 'lg:grid-cols-12' : ''}`}>
           {imageUrl ? (

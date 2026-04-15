@@ -15,6 +15,15 @@
 export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: ../sanity.schema.json
+export type Fact = {
+  _type: 'fact'
+  label: string
+  target: number
+  suffix?: string
+  subline?: string
+  caption?: string
+}
+
 export type MissionCard = {
   _type: 'missionCard'
   title: string
@@ -305,6 +314,7 @@ export type HomePage = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  heroEyebrow?: string
   heroHeading?: string
   heroHighlightWords?: Array<string>
   heroSlogan?: string
@@ -318,13 +328,19 @@ export type HomePage = {
   }
   heroPrimaryCta?: Cta
   heroSecondaryCta?: Cta
-  introHeading?: string
-  introBody?: BlockContent
-  introPrimaryCta?: Cta
-  introSecondaryCta?: Cta
+  heroCredentialsChip?: {
+    label?: string
+    text?: string
+  }
   factsEyebrow?: string
   factsHeading?: string
   factsBody?: string
+  factsItems?: Array<
+    {
+      _key: string
+    } & Fact
+  >
+  howItWorksEyebrow?: string
   howItWorksHeading?: string
   howItWorksSteps?: Array<
     {
@@ -338,6 +354,7 @@ export type HomePage = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  impactEyebrow?: string
   impactHeading?: string
   impactBody?: BlockContent
   impactCta?: Cta
@@ -348,6 +365,7 @@ export type HomePage = {
     crop?: SanityImageCrop
     _type: 'image'
   }
+  ctaBannerEyebrow?: string
   ctaBannerHeading?: string
   ctaBannerPrimaryCta?: Cta
   ctaBannerSecondaryCta?: Cta
@@ -658,6 +676,7 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
+  | Fact
   | MissionCard
   | Feature
   | Benefit

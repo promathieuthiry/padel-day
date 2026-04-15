@@ -6,60 +6,68 @@ export const homePage = defineType({
   title: 'Home Page',
   type: 'document',
   icon: HomeIcon,
-  fieldsets: [
-    {name: 'meta', title: 'SEO / Metadata'},
-    {name: 'hero', title: 'Hero Section'},
-    {name: 'intro', title: 'Introduction Section'},
-    {name: 'facts', title: 'Facts / Ambition Section'},
-    {name: 'howItWorks', title: 'How It Works Section'},
-    {name: 'impact', title: 'Impact Section'},
-    {name: 'ctaBanner', title: 'CTA Banner Section'},
+  groups: [
+    {name: 'hero', title: 'Hero', default: true},
+    {name: 'facts', title: 'Facts'},
+    {name: 'howItWorks', title: 'How it works'},
+    {name: 'impact', title: 'Impact'},
+    {name: 'ctaBanner', title: 'CTA banner'},
+    {name: 'faq', title: 'FAQ'},
+    {name: 'meta', title: 'SEO'},
   ],
   fields: [
-    // Meta
+    // ── SEO ────────────────────────────────────────────────
     defineField({
       name: 'metaTitle',
-      title: 'Meta Title',
+      title: 'Meta title',
       type: 'string',
-      fieldset: 'meta',
+      group: 'meta',
     }),
     defineField({
       name: 'metaDescription',
-      title: 'Meta Description',
+      title: 'Meta description',
       type: 'text',
       rows: 3,
-      fieldset: 'meta',
+      group: 'meta',
     }),
     defineField({
       name: 'ogImage',
-      title: 'OG Image',
+      title: 'Social share image',
       type: 'image',
-      fieldset: 'meta',
+      group: 'meta',
     }),
 
-    // Hero
+    // ── Hero ───────────────────────────────────────────────
+    defineField({
+      name: 'heroEyebrow',
+      title: 'Eyebrow',
+      type: 'string',
+      description: 'Small label above the headline (e.g. "Padel automatisé").',
+      group: 'hero',
+    }),
     defineField({
       name: 'heroHeading',
-      title: 'Hero Heading',
+      title: 'Headline',
       type: 'string',
-      fieldset: 'hero',
+      group: 'hero',
     }),
     defineField({
       name: 'heroHighlightWords',
-      title: 'Hero Highlight Words',
+      title: 'Highlighted words',
       type: 'array',
       of: [defineArrayMember({type: 'string'})],
-      fieldset: 'hero',
+      description: 'Words from the headline to underline in lime.',
+      group: 'hero',
     }),
     defineField({
       name: 'heroSlogan',
-      title: 'Hero Slogan',
+      title: 'Slogan / subtitle',
       type: 'string',
-      fieldset: 'hero',
+      group: 'hero',
     }),
     defineField({
       name: 'heroImage',
-      title: 'Hero Image',
+      title: 'Hero image',
       type: 'image',
       options: {hotspot: true},
       fields: [
@@ -70,142 +78,184 @@ export const homePage = defineType({
           description: 'Describe the image for accessibility and SEO.',
         }),
       ],
-      fieldset: 'hero',
+      group: 'hero',
     }),
     defineField({
       name: 'heroPrimaryCta',
-      title: 'Hero Primary CTA',
-      type: 'cta',
-      fieldset: 'hero',
+      title: 'Primary CTA',
+      type: 'object',
+      group: 'hero',
+      fields: [
+        defineField({name: 'label', title: 'Label', type: 'string'}),
+        defineField({name: 'href', title: 'URL', type: 'string'}),
+      ],
     }),
     defineField({
       name: 'heroSecondaryCta',
-      title: 'Hero Secondary CTA',
-      type: 'cta',
-      fieldset: 'hero',
+      title: 'Secondary CTA',
+      type: 'object',
+      group: 'hero',
+      fields: [
+        defineField({name: 'label', title: 'Label', type: 'string'}),
+        defineField({name: 'href', title: 'URL', type: 'string'}),
+      ],
+    }),
+    defineField({
+      name: 'heroCredentialsChip',
+      title: 'Credentials chip',
+      type: 'object',
+      description: 'Small floating card shown below the hero image.',
+      options: {collapsible: true, collapsed: true},
+      group: 'hero',
+      fields: [
+        defineField({name: 'label', title: 'Label', type: 'string'}),
+        defineField({name: 'text', title: 'Text', type: 'text', rows: 2}),
+      ],
     }),
 
-    // Intro
-    defineField({
-      name: 'introHeading',
-      title: 'Intro Heading',
-      type: 'string',
-      fieldset: 'intro',
-    }),
-    defineField({
-      name: 'introBody',
-      title: 'Intro Body',
-      type: 'blockContent',
-      fieldset: 'intro',
-    }),
-    defineField({
-      name: 'introPrimaryCta',
-      title: 'Intro Primary CTA',
-      type: 'cta',
-      fieldset: 'intro',
-    }),
-    defineField({
-      name: 'introSecondaryCta',
-      title: 'Intro Secondary CTA',
-      type: 'cta',
-      fieldset: 'intro',
-    }),
-
-    // Facts / Ambition
+    // ── Facts ──────────────────────────────────────────────
     defineField({
       name: 'factsEyebrow',
       title: 'Eyebrow',
       type: 'string',
-      fieldset: 'facts',
+      group: 'facts',
     }),
     defineField({
       name: 'factsHeading',
       title: 'Heading',
       type: 'string',
-      fieldset: 'facts',
+      group: 'facts',
     }),
     defineField({
       name: 'factsBody',
       title: 'Body',
       type: 'text',
       rows: 3,
-      fieldset: 'facts',
+      group: 'facts',
+    }),
+    defineField({
+      name: 'factsItems',
+      title: 'Facts',
+      type: 'array',
+      description: '3 key numbers displayed as animated counters.',
+      of: [defineArrayMember({type: 'fact'})],
+      validation: (rule) => rule.max(3),
+      group: 'facts',
     }),
 
-    // How It Works
+    // ── How It Works ───────────────────────────────────────
+    defineField({
+      name: 'howItWorksEyebrow',
+      title: 'Eyebrow',
+      type: 'string',
+      group: 'howItWorks',
+    }),
     defineField({
       name: 'howItWorksHeading',
       title: 'Heading',
       type: 'string',
-      fieldset: 'howItWorks',
+      group: 'howItWorks',
     }),
     defineField({
       name: 'howItWorksSteps',
       title: 'Steps',
       type: 'array',
       of: [defineArrayMember({type: 'step'})],
-      fieldset: 'howItWorks',
+      group: 'howItWorks',
     }),
     defineField({
       name: 'howItWorksImage',
-      title: 'Decorative Image',
+      title: 'Decorative image',
       type: 'image',
       options: {hotspot: true},
-      fieldset: 'howItWorks',
+      group: 'howItWorks',
     }),
 
-    // Impact
+    // ── Impact ─────────────────────────────────────────────
+    defineField({
+      name: 'impactEyebrow',
+      title: 'Eyebrow',
+      type: 'string',
+      group: 'impact',
+    }),
     defineField({
       name: 'impactHeading',
       title: 'Heading',
       type: 'string',
-      fieldset: 'impact',
+      group: 'impact',
     }),
     defineField({
       name: 'impactBody',
       title: 'Body',
       type: 'blockContent',
-      fieldset: 'impact',
+      group: 'impact',
     }),
     defineField({
       name: 'impactCta',
-      title: 'Impact CTA',
+      title: 'CTA',
       type: 'cta',
-      fieldset: 'impact',
+      group: 'impact',
     }),
     defineField({
       name: 'impactImage',
-      title: 'Impact Image',
+      title: 'Image',
       type: 'image',
       options: {hotspot: true},
-      fieldset: 'impact',
+      group: 'impact',
     }),
 
-    // CTA Banner
+    // ── CTA Banner ─────────────────────────────────────────
+    defineField({
+      name: 'ctaBannerEyebrow',
+      title: 'Eyebrow',
+      type: 'string',
+      group: 'ctaBanner',
+    }),
     defineField({
       name: 'ctaBannerHeading',
       title: 'Heading',
       type: 'string',
-      fieldset: 'ctaBanner',
+      group: 'ctaBanner',
     }),
     defineField({
       name: 'ctaBannerPrimaryCta',
       title: 'Primary CTA',
-      type: 'cta',
-      fieldset: 'ctaBanner',
+      type: 'object',
+      group: 'ctaBanner',
+      fields: [
+        defineField({name: 'label', title: 'Label', type: 'string'}),
+        defineField({name: 'href', title: 'URL', type: 'string'}),
+      ],
     }),
     defineField({
       name: 'ctaBannerSecondaryCta',
       title: 'Secondary CTA',
-      type: 'cta',
-      fieldset: 'ctaBanner',
+      type: 'object',
+      group: 'ctaBanner',
+      fields: [
+        defineField({name: 'label', title: 'Label', type: 'string'}),
+        defineField({name: 'href', title: 'URL', type: 'string'}),
+      ],
+    }),
+    // ── FAQ ────────────────────────────────────────────────
+    defineField({
+      name: 'faqEyebrow',
+      title: 'Eyebrow',
+      type: 'string',
+      description: 'Small label above the FAQ heading (e.g. "Questions fréquentes").',
+      group: 'faq',
+    }),
+    defineField({
+      name: 'faqHeading',
+      title: 'Heading',
+      type: 'string',
+      description: 'Main heading for the FAQ section.',
+      group: 'faq',
     }),
   ],
   preview: {
     prepare() {
-      return {
-        title: 'Home Page',
-      }
+      return {title: 'Home Page'}
     },
   },
 })
