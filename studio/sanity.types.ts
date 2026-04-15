@@ -264,6 +264,7 @@ export type InstallerPage = {
     media?: unknown
     hotspot?: SanityImageHotspot
     crop?: SanityImageCrop
+    alt?: string
     _type: 'image'
   }
   stepsHeading?: string
