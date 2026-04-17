@@ -77,29 +77,54 @@ export default function HeroSection({
   }
 
   return (
-    <section className="relative overflow-hidden bg-surface isolate" aria-labelledby="hero-heading">
-      {/* Aurora drift — animated brand gradient, sits furthest back.
-          Pure CSS transform/opacity; respects prefers-reduced-motion via globals.css */}
-      <div aria-hidden="true" className="hero-aurora-layer">
-        <div className="hero-aurora-blob hero-aurora-blob--a" />
-        <div className="hero-aurora-blob hero-aurora-blob--b" />
-        <div className="hero-aurora-blob hero-aurora-blob--c" />
-      </div>
-
-      {/* Court tramlines — same motif as Footer, kept very faint on light ground */}
+    <section
+      className="relative overflow-hidden isolate"
+      style={{background: 'oklch(0.26 0.12 258)'}}
+      aria-labelledby="hero-heading"
+    >
+      {/* Aurora drift — richer on dark ground; blobs re-tuned for navy base */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+      >
+        <div
+          className="hero-aurora-blob hero-aurora-blob--a"
+          style={{
+            background: 'radial-gradient(circle, oklch(0.52 0.18 258) 0%, transparent 62%)',
+            opacity: 0.35,
+          }}
+        />
+        <div
+          className="hero-aurora-blob hero-aurora-blob--b"
+          style={{
+            background: 'radial-gradient(circle, oklch(0.40 0.16 258) 0%, transparent 60%)',
+            opacity: 0.3,
+          }}
+        />
+        <div
+          className="hero-aurora-blob hero-aurora-blob--c"
+          style={{
+            background: 'radial-gradient(circle, var(--color-lime) 0%, transparent 58%)',
+            opacity: 0.12,
+            mixBlendMode: 'screen',
+          }}
+        />
+      </div>
+
+      {/* Court tramlines — white at low opacity on dark navy */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.07]"
         style={{
           backgroundImage:
-            'linear-gradient(90deg, transparent 0, transparent calc(50% - 0.5px), var(--color-blue) calc(50% - 0.5px), var(--color-blue) calc(50% + 0.5px), transparent calc(50% + 0.5px)), linear-gradient(0deg, transparent 0, transparent calc(50% - 0.5px), var(--color-blue) calc(50% - 0.5px), var(--color-blue) calc(50% + 0.5px), transparent calc(50% + 0.5px))',
+            'linear-gradient(90deg, transparent 0, transparent calc(50% - 0.5px), rgba(255,255,255,0.9) calc(50% - 0.5px), rgba(255,255,255,0.9) calc(50% + 0.5px), transparent calc(50% + 0.5px)), linear-gradient(0deg, transparent 0, transparent calc(50% - 0.5px), rgba(255,255,255,0.9) calc(50% - 0.5px), rgba(255,255,255,0.9) calc(50% + 0.5px), transparent calc(50% + 0.5px))',
         }}
       />
 
-      {/* Lime bloom — anchored top-right, balances the editorial composition */}
+      {/* Lime bloom — anchored top-right */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full blur-[140px] opacity-[0.22]"
+        className="pointer-events-none absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full blur-[140px] opacity-[0.18]"
         style={{background: 'radial-gradient(circle, var(--color-lime) 0%, transparent 60%)'}}
       />
 
@@ -109,8 +134,16 @@ export default function HeroSection({
           <div className="col-span-12 lg:col-span-7 xl:col-span-7">
             {/* Eyebrow — status pulse + B2B positioning */}
             <p
-              className="eyebrow mb-8 md:mb-10 flex items-center gap-3 hero-reveal"
-              style={{animationDelay: '220ms'}}
+              className="mb-8 md:mb-10 flex items-center gap-3 hero-reveal"
+              style={{
+                animationDelay: '220ms',
+                fontFamily: 'var(--font-poppins), sans-serif',
+                fontWeight: 500,
+                fontSize: '0.75rem',
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase',
+                color: 'var(--color-lime)',
+              }}
             >
               <span aria-hidden="true" className="relative inline-flex size-2.5">
                 <span className="absolute inset-0 rounded-full bg-lime opacity-60 animate-ping" />
@@ -122,10 +155,11 @@ export default function HeroSection({
             {/* Headline */}
             <h1
               id="hero-heading"
-              className="font-display font-bold text-ink leading-[0.92] tracking-[-0.035em] hero-reveal text-balance"
+              className="font-display font-bold leading-[0.92] tracking-[-0.035em] hero-reveal text-balance"
               style={{
                 fontSize: 'clamp(2.75rem, 7.2vw, 6.25rem)',
                 animationDelay: '340ms',
+                color: '#ffffff',
               }}
             >
               {renderHeading(heading, highlightWords)}
@@ -133,14 +167,14 @@ export default function HeroSection({
 
             {slogan && (
               <p
-                className="mt-8 md:mt-10 text-base md:text-[1.075rem] text-ink-muted font-body max-w-[52ch] leading-[1.6] hero-reveal"
-                style={{animationDelay: '520ms'}}
+                className="mt-8 md:mt-10 text-base md:text-[1.075rem] font-body max-w-[52ch] leading-[1.6] hero-reveal"
+                style={{animationDelay: '520ms', color: 'oklch(0.82 0.04 255)'}}
               >
                 {slogan}
               </p>
             )}
 
-            {/* CTAs — editorial pill primary + ghost arrow secondary */}
+            {/* CTAs */}
             <div
               className="mt-10 md:mt-12 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5 hero-reveal"
               style={{animationDelay: '700ms'}}
@@ -148,12 +182,12 @@ export default function HeroSection({
               {primary && (
                 <Link
                   href={primary.href ?? '#'}
-                  className="group relative inline-flex items-center gap-3 self-start bg-dark text-lime rounded-full pl-7 pr-2 py-2 font-semibold text-[0.95rem] whitespace-nowrap transition-transform duration-200 ease-out active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue"
+                  className="group relative inline-flex items-center gap-3 self-start bg-lime text-dark rounded-full pl-7 pr-2 py-2 font-semibold text-[0.95rem] whitespace-nowrap transition-transform duration-200 ease-out active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime"
                 >
                   <span>{primary.label}</span>
                   <span
                     aria-hidden="true"
-                    className="flex size-10 shrink-0 items-center justify-center rounded-full bg-lime text-dark transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-1"
+                    className="flex size-10 shrink-0 items-center justify-center rounded-full bg-dark text-lime transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-1"
                   >
                     <svg
                       width="16"
@@ -174,7 +208,8 @@ export default function HeroSection({
               {secondary && (
                 <Link
                   href={secondary.href ?? '#'}
-                  className="group inline-flex items-center gap-2 self-start text-ink font-semibold text-[0.95rem] py-2 transition-colors duration-200 hover:text-blue focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue rounded-sm"
+                  className="group inline-flex items-center gap-2 self-start font-semibold text-[0.95rem] py-2 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime rounded-sm"
+                  style={{color: 'rgba(255,255,255,0.75)'}}
                 >
                   <span className="relative">
                     {secondary.label}
@@ -272,8 +307,13 @@ export default function HeroSection({
 
               {/* Floating credentials chip — B2B reassurance, anchored bottom-left */}
               <div
-                className="absolute -left-3 sm:-left-5 -bottom-5 sm:-bottom-6 max-w-[16rem] bg-surface rounded-2xl p-4 sm:p-5 ring-1 ring-hairline shadow-[0_18px_40px_-18px_rgba(10,20,60,0.25)] hero-reveal"
-                style={{animationDelay: '780ms'}}
+                className="absolute -left-3 sm:-left-5 -bottom-5 sm:-bottom-6 max-w-[16rem] rounded-2xl p-4 sm:p-5 ring-1 hero-reveal"
+                style={{
+                  animationDelay: '780ms',
+                  background: 'oklch(0.32 0.14 258)',
+                  boxShadow: '0 24px 48px -12px rgba(0,10,60,0.55)',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                }}
               >
                 <div className="flex items-center gap-2.5">
                   <span
@@ -294,13 +334,13 @@ export default function HeroSection({
                     </svg>
                   </span>
                   <span
-                    className="text-[10px] font-medium uppercase tracking-[0.18em] text-ink-muted"
-                    style={{fontFamily: 'var(--font-poppins), sans-serif'}}
+                    className="text-[10px] font-medium uppercase tracking-[0.18em]"
+                    style={{fontFamily: 'var(--font-poppins), sans-serif', color: 'oklch(0.72 0.06 255)'}}
                   >
                     {chipLabel}
                   </span>
                 </div>
-                <p className="mt-3 font-display text-[0.95rem] leading-snug text-ink tracking-[-0.01em]">
+                <p className="mt-3 font-display text-[0.95rem] leading-snug tracking-[-0.01em]" style={{color: '#ffffff'}}>
                   {chipText}
                 </p>
               </div>
@@ -308,7 +348,8 @@ export default function HeroSection({
               {/* Lime corner accent — court line punctuation */}
               <span
                 aria-hidden="true"
-                className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 flex size-12 sm:size-14 items-center justify-center rounded-full bg-lime ring-4 ring-surface text-dark"
+                className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 flex size-12 sm:size-14 items-center justify-center rounded-full bg-lime text-dark"
+                style={{boxShadow: '0 0 0 4px oklch(0.26 0.12 258)'}}
               >
                 <svg
                   width="18"
@@ -329,8 +370,8 @@ export default function HeroSection({
         </div>
       </Container>
 
-      {/* Bottom hairline — connects hero to the next section editorially */}
-      <div aria-hidden="true" className="absolute bottom-0 left-0 right-0 h-px bg-hairline" />
+      {/* Bottom hairline */}
+      <div aria-hidden="true" className="absolute bottom-0 left-0 right-0 h-px" style={{background: 'rgba(255,255,255,0.12)'}} />
     </section>
   )
 }

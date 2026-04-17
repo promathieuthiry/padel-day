@@ -18,24 +18,36 @@ export default function CtaBannerSection({
 }: CtaBannerSectionProps) {
   return (
     <section
-      className="relative overflow-hidden bg-dark text-white isolate"
+      className="relative overflow-hidden text-white isolate"
+      style={{
+        background: 'oklch(0.56 0.20 258)',
+        borderTop: '1px solid rgba(255,255,255,0.15)',
+        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.15), 0 0 60px 0px rgba(49,100,213,0.4)',
+      }}
       aria-labelledby="cta-banner-heading"
     >
-      {/* Court tramlines — evokes a padel court painted on the floor */}
+      {/* Court tramlines */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.07]"
+        className="pointer-events-none absolute inset-0 opacity-[0.09]"
         style={{
           backgroundImage:
             'linear-gradient(90deg, transparent 0, transparent calc(50% - 0.5px), #fff calc(50% - 0.5px), #fff calc(50% + 0.5px), transparent calc(50% + 0.5px)), linear-gradient(0deg, transparent 0, transparent calc(33.33% - 0.5px), #fff calc(33.33% - 0.5px), #fff calc(33.33% + 0.5px), transparent calc(33.33% + 0.5px)), linear-gradient(0deg, transparent 0, transparent calc(66.66% - 0.5px), #fff calc(66.66% - 0.5px), #fff calc(66.66% + 0.5px), transparent calc(66.66% + 0.5px))',
         }}
       />
 
-      {/* Lime bloom — atmospheric glow anchoring the CTA */}
+      {/* Lime bloom */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-40 top-1/2 -translate-y-1/2 h-[56rem] w-[56rem] rounded-full blur-[140px] opacity-[0.22]"
+        className="pointer-events-none absolute -right-40 top-1/2 -translate-y-1/2 h-[56rem] w-[56rem] rounded-full blur-[140px] opacity-[0.28]"
         style={{background: 'radial-gradient(circle, var(--color-lime) 0%, transparent 65%)'}}
+      />
+
+      {/* Deep navy shadow bloom anchored left for depth */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-32 top-1/2 -translate-y-1/2 h-[40rem] w-[40rem] rounded-full blur-[120px] opacity-[0.35]"
+        style={{background: 'radial-gradient(circle, oklch(0.30 0.12 258) 0%, transparent 65%)'}}
       />
 
       {/* Oversized backdrop wordmark */}
@@ -147,8 +159,7 @@ export default function CtaBannerSection({
           )}
         </div>
 
-        {/* Bottom hairline echoing the site's existing border language */}
-        <div aria-hidden="true" className="border-t border-white/10" />
+        <div aria-hidden="true" style={{borderTop: '1px solid rgba(255,255,255,0.15)'}} />
       </Container>
     </section>
   )

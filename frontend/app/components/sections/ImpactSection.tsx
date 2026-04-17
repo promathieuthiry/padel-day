@@ -4,7 +4,6 @@ import type {BlockContent, Cta} from '@/sanity.types'
 import Button from '@/app/components/Button'
 import {urlForImage} from '@/sanity/lib/utils'
 import Container from '@/app/components/ui/Container'
-import SectionIntro from '@/app/components/ui/SectionIntro'
 import {Stagger, StaggerItem} from '@/app/components/Stagger'
 
 interface ImpactSectionProps {
@@ -27,15 +26,54 @@ export default function ImpactSection({
     : null
 
   return (
-    <section className="bg-surface py-20 md:py-28">
+    <section
+      className="py-20 md:py-28"
+      style={{
+        background: 'oklch(0.48 0.18 258)',
+        borderTop: '1px solid rgba(255,255,255,0.08)',
+        boxShadow: '0 16px 32px -8px rgba(10,20,80,0.25)',
+      }}
+    >
       <Container>
         <div className="grid gap-12 md:grid-cols-2 md:gap-16 md:items-center">
           <Stagger className="flex flex-col" staggerDelay={0.1}>
-            <SectionIntro eyebrow={eyebrow} heading={heading} className="mb-8 md:mb-10" />
+            <div className="mb-8 md:mb-10 max-w-[62rem]">
+              {eyebrow ? (
+                <p
+                  className="mb-6 flex items-center gap-3"
+                  style={{
+                    fontFamily: 'var(--font-poppins), sans-serif',
+                    fontWeight: 500,
+                    fontSize: '0.75rem',
+                    letterSpacing: '0.14em',
+                    textTransform: 'uppercase',
+                    color: 'var(--color-lime)',
+                  }}
+                >
+                  <span aria-hidden="true" className="relative inline-flex size-2.5">
+                    <span className="absolute inset-0 rounded-full bg-lime opacity-60 animate-ping" />
+                    <span className="relative inline-block size-2.5 rounded-full bg-lime" />
+                  </span>
+                  <span>{eyebrow}</span>
+                  <span aria-hidden="true" className="inline-block h-px w-10" style={{background: 'rgba(214,253,38,0.4)'}} />
+                </p>
+              ) : null}
+              <h2
+                className="font-display font-bold leading-[0.95] tracking-[-0.025em]"
+                style={{fontSize: 'clamp(1.75rem, 4vw, 3rem)', color: '#ffffff'}}
+              >
+                {heading}
+              </h2>
+            </div>
 
             {body && (
               <StaggerItem>
-                <div className="text-base md:text-lg text-ink-muted leading-relaxed font-body prose max-w-[58ch] prose-strong:text-ink prose-strong:font-medium">
+                <div
+                  className="text-base md:text-lg leading-relaxed font-body prose max-w-[58ch] prose-strong:font-medium"
+                  style={{
+                    color: 'oklch(0.82 0.04 255)',
+                  }}
+                >
                   <PortableText value={body} />
                 </div>
               </StaggerItem>
@@ -54,7 +92,10 @@ export default function ImpactSection({
 
           <StaggerItem as="figure">
             {imageUrl ? (
-              <div className="relative aspect-[4/5] overflow-hidden bg-surface-3">
+              <div
+                className="relative aspect-[4/5] overflow-hidden"
+                style={{background: 'oklch(0.40 0.15 258)'}}
+              >
                 <Image
                   src={imageUrl}
                   alt=""
@@ -65,8 +106,11 @@ export default function ImpactSection({
                 />
               </div>
             ) : (
-              <div className="aspect-[4/5] bg-surface-2 flex items-center justify-center">
-                <svg viewBox="0 0 120 120" className="w-20 h-20 text-ink-faint" fill="none">
+              <div
+                className="aspect-[4/5] flex items-center justify-center"
+                style={{background: 'oklch(0.40 0.15 258)'}}
+              >
+                <svg viewBox="0 0 120 120" className="w-20 h-20" style={{color: 'rgba(255,255,255,0.25)'}} fill="none">
                   <rect
                     x="10"
                     y="30"
