@@ -41,7 +41,7 @@ export default async function Page() {
   }
 
   return (
-    <>
+    <div style={{['--font-display' as string]: 'var(--font-fredoka), sans-serif'}}>
       <StructuredData data={localBusinessJsonLd} />
 
       <HeroSection
@@ -106,6 +106,6 @@ export default async function Page() {
           />
         </FadeIn>
       )}
-    </>
+    </div>
   )
 }
