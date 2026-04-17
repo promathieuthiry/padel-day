@@ -26,7 +26,7 @@ export default async function AProposPage() {
 
   const founder = teamMembers?.[0]
   const founderPhoto = founder?.photo?.asset
-    ? urlForImage(founder.photo).width(900).height(1125).fit('crop').quality(88).url()
+    ? urlForImage(founder.photo).width(600).height(600).fit('crop').quality(88).url()
     : null
 
   const storyImageUrl = page?.storyImage?.asset
@@ -190,7 +190,7 @@ export default async function AProposPage() {
         <div aria-hidden="true" className="absolute bottom-0 left-0 right-0 h-px bg-hairline" />
       </section>
 
-      {/* FOUNDER — single portrait, editorial treatment */}
+      {/* FOUNDER — magazine byline: portrait inline with header, bio full-width below */}
       {founder && (
         <section
           className="relative bg-surface-2 border-b border-hairline py-24 md:py-32 overflow-hidden"
@@ -203,40 +203,25 @@ export default async function AProposPage() {
           />
 
           <Container className="relative">
-            <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-x-6 md:gap-y-0 md:items-center">
-              {/* Header: mobile 1st, desktop top-right */}
-              <div className="md:col-span-7 md:col-start-6 md:row-start-1 md:pl-8 lg:pl-14">
-                <FadeIn delay={0.1}>
-                  <p className="eyebrow mb-6 flex items-center gap-3">
-                    <span aria-hidden="true" className="inline-block h-px w-10 bg-blue/40" />
-                    <span>{page?.teamHeading || 'Le fondateur'}</span>
-                  </p>
+            <FadeIn delay={0.05}>
+              <p className="eyebrow mb-8 flex items-center gap-3">
+                <span aria-hidden="true" className="inline-block h-px w-10 bg-blue/40" />
+                <span>{page?.teamHeading || 'Le fondateur'}</span>
+              </p>
+            </FadeIn>
 
-                  <h2
-                    id="founder-heading"
-                    className="font-display font-bold text-ink leading-[0.98] tracking-[-0.03em] text-balance"
-                    style={{fontSize: 'clamp(2rem, 4.8vw, 3.75rem)'}}
-                  >
-                    {founder.name}
-                  </h2>
-
-                  <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-dark text-lime px-4 py-1.5 font-body font-semibold text-sm md:text-base tracking-tight">
-                    <span aria-hidden="true" className="size-1.5 rounded-full bg-lime" />
-                    {founder.role}
-                  </p>
-                </FadeIn>
-              </div>
-
-              {/* Image: mobile middle, desktop full-left spanning both rows */}
-              <div className="md:col-span-5 md:col-start-1 md:row-start-1 md:row-span-2 flex justify-center">
-                <div className="relative aspect-square w-full max-w-[20rem] md:max-w-none">
-                  <div className="absolute inset-0 rounded-full overflow-hidden bg-dark ring-1 ring-dark/10 shadow-[0_30px_60px_-25px_rgba(10,20,60,0.45)]">
+            {/* Byline row: portrait + name/role on the same line */}
+            <FadeIn delay={0.1}>
+              <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center sm:gap-7">
+                {/* Circular portrait — accent, not hero */}
+                <div className="relative shrink-0 aspect-square w-[15rem] md:w-[17rem]">
+                  <div className="absolute inset-0 rounded-full overflow-hidden bg-dark ring-1 ring-dark/10 shadow-[0_16px_40px_-12px_rgba(10,20,60,0.30)]">
                     {founderPhoto ? (
                       <Image
                         src={founderPhoto}
                         alt={founder.name}
                         fill
-                        sizes="(min-width: 1024px) 42vw, 100vw"
+                        sizes="(min-width: 768px) 17rem, 15rem"
                         className="object-cover object-center"
                       />
                     ) : (
@@ -248,19 +233,33 @@ export default async function AProposPage() {
                     )}
                   </div>
                 </div>
-              </div>
 
-              {/* Bio: mobile last, desktop bottom-right */}
-              {founder.bio && (
-                <div className="md:col-span-7 md:col-start-6 md:row-start-2 md:pl-8 lg:pl-14">
-                  <FadeIn delay={0.15}>
-                    <p className="font-body text-ink-muted text-base md:text-lg leading-[1.65] max-w-[60ch]">
-                      {founder.bio}
-                    </p>
-                  </FadeIn>
+                {/* Name + role — baseline-aligned to bottom of portrait on desktop */}
+                <div className="flex flex-col items-center sm:items-start gap-4">
+                  <h2
+                    id="founder-heading"
+                    className="font-display font-bold text-ink leading-[0.98] tracking-[-0.03em] text-center sm:text-left"
+                    style={{fontSize: 'clamp(2rem, 4.8vw, 3.75rem)'}}
+                  >
+                    {founder.name}
+                  </h2>
+
+                  <p className="inline-flex items-center gap-2 rounded-full bg-dark text-lime px-4 py-1.5 font-body font-semibold text-sm md:text-base tracking-tight">
+                    <span aria-hidden="true" className="size-1.5 rounded-full bg-lime" />
+                    {founder.role}
+                  </p>
                 </div>
-              )}
-            </div>
+              </div>
+            </FadeIn>
+
+            {/* Bio — full container width, generous max-width for readability */}
+            {founder.bio && (
+              <FadeIn delay={0.18}>
+                <p className="mt-10 md:mt-12 font-body text-ink-muted text-base md:text-lg leading-[1.65] max-w-[68ch]">
+                  {founder.bio}
+                </p>
+              </FadeIn>
+            )}
           </Container>
         </section>
       )}
