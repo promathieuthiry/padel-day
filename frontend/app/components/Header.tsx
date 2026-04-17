@@ -44,26 +44,16 @@ export default async function Header() {
 
   return (
     <header className="fixed z-50 inset-x-0 top-0 h-16 bg-blue/92 backdrop-blur-lg border-b border-white/10 text-white isolate">
-      {/* Court tramlines — faint echo of the Footer motif */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.07]"
-        style={{
-          backgroundImage:
-            'linear-gradient(90deg, transparent 0, transparent calc(50% - 0.5px), #fff calc(50% - 0.5px), #fff calc(50% + 0.5px), transparent calc(50% + 0.5px))',
-        }}
-      />
-
       <Container className="relative flex h-full items-center justify-between">
         <Link href="/" aria-label="Padel Day — Accueil" className="group flex items-center gap-3">
           <span
             aria-hidden="true"
-            className="relative inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-lime text-dark ring-1 ring-lime/80 transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-rotate-6"
+            className="relative inline-flex size-9 shrink-0 items-center justify-center text-lime transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-rotate-6"
           >
-            <Logo className="h-5 w-5 text-dark" aria-hidden />
+            <Logo className="h-7 w-7 text-lime" aria-hidden />
           </span>
           <span
-            className="font-display text-lg font-semibold tracking-[-0.02em] text-white"
+            className="font-heading text-lg font-semibold uppercase tracking-[-0.02em] text-white"
           >
             Padel Day
           </span>

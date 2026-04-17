@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import {sanityFetch} from '@/sanity/lib/live'
 import {siteSettingsQuery} from '@/sanity/lib/queries'
 import Container from './ui/Container'
 import FooterWordmark from './FooterWordmark'
+import Logo from './Logo'
 
 export default async function Footer() {
   const {data: settings} = await sanityFetch({
@@ -42,16 +42,6 @@ export default async function Footer() {
       className="relative overflow-hidden bg-blue text-white isolate"
       aria-labelledby="footer-heading"
     >
-      {/* Court tramlines — echoes CtaBannerSection (softened for blue ground) */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.08]"
-        style={{
-          backgroundImage:
-            'linear-gradient(90deg, transparent 0, transparent calc(50% - 0.5px), #fff calc(50% - 0.5px), #fff calc(50% + 0.5px), transparent calc(50% + 0.5px)), linear-gradient(0deg, transparent 0, transparent calc(50% - 0.5px), #fff calc(50% - 0.5px), #fff calc(50% + 0.5px), transparent calc(50% + 0.5px))',
-        }}
-      />
-
       {/* Deep blue vignette — adds depth on the otherwise flat brand blue */}
       <div
         aria-hidden="true"
@@ -98,19 +88,12 @@ export default async function Footer() {
             >
               <span
                 aria-hidden="true"
-                className="relative inline-flex size-14 md:size-16 shrink-0 items-center justify-center rounded-full bg-lime ring-1 ring-lime text-dark"
+                className="relative inline-flex size-14 md:size-16 shrink-0 items-center justify-center text-lime"
               >
-                <Image
-                  src="/logo_padel_day.svg"
-                  alt=""
-                  width={40}
-                  height={40}
-                  className="size-8 md:size-10"
-                  style={{filter: 'none'}}
-                />
+                <Logo className="size-12 md:size-14 text-lime" aria-hidden />
               </span>
               <span
-                className="font-display font-bold leading-[0.9] tracking-[-0.035em] text-white"
+                className="font-heading font-bold uppercase leading-[0.9] tracking-[-0.035em] text-white"
                 style={{fontSize: 'clamp(2.5rem, 4.5vw, 3.75rem)'}}
               >
                 Padel Day
@@ -133,7 +116,7 @@ export default async function Footer() {
             {contactEmail && (
               <a
                 href={`mailto:${contactEmail}`}
-                className="group block max-w-full font-display text-base md:text-lg tracking-[-0.015em] text-white hover:text-lime transition-colors duration-200 break-words min-w-0"
+                className="group block max-w-full font-heading text-base md:text-lg tracking-[-0.015em] text-white hover:text-lime transition-colors duration-200 break-words min-w-0"
               >
                 <span className="relative inline-block max-w-full break-words">
                   {contactEmail}
