@@ -50,11 +50,9 @@ export default async function Header() {
             aria-hidden="true"
             className="relative inline-flex size-9 shrink-0 items-center justify-center text-lime transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:-rotate-6"
           >
-            <Logo className="h-7 w-7 text-lime" aria-hidden />
+            <Logo className="h-10 w-10 text-lime" aria-hidden />
           </span>
-          <span
-            className="font-heading text-lg font-semibold uppercase tracking-[-0.02em] text-white"
-          >
+          <span className="font-heading text-2xl font-semibold uppercase tracking-[-0.02em] text-white">
             Padel Day
           </span>
         </Link>
