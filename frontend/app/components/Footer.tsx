@@ -25,7 +25,7 @@ export default async function Footer() {
   const creditName = credit?.name ?? 'Mathieu Thiry'
   const creditUrl = credit?.url ?? 'https://github.com/promathieuthiry'
 
-  const contactHref = contactEmail ? `mailto:${contactEmail}` : '#contact'
+  const contactHref = '/contact'
 
   return (
     <footer
