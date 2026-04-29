@@ -49,31 +49,6 @@ export default function HowItWorksSection({
                     className="object-cover"
                     aria-hidden="true"
                   />
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 mix-blend-multiply"
-                    style={{
-                      background:
-                        'linear-gradient(160deg, rgba(10,18,28,0.55) 0%, rgba(10,18,28,0.15) 45%, rgba(132,204,22,0.18) 100%)',
-                    }}
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 opacity-[0.08]"
-                    style={{
-                      backgroundImage:
-                        'radial-gradient(rgba(255,255,255,0.9) 1px, transparent 1px)',
-                      backgroundSize: '3px 3px',
-                    }}
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="absolute left-4 top-4 h-6 w-6 border-l border-t border-lime"
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="absolute right-4 bottom-4 h-6 w-6 border-r border-b border-lime"
-                  />
                 </div>
               </figure>
             </aside>

@@ -184,32 +184,6 @@ export default function HeroSection({
                   />
                 )}
 
-                {/* Tramline overlay — service box + center line */}
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 100 100"
-                  preserveAspectRatio="none"
-                  className="absolute inset-0 h-full w-full opacity-[0.55] mix-blend-screen"
-                >
-                  <g
-                    fill="none"
-                    stroke="rgba(255,255,255,0.55)"
-                    strokeWidth="0.25"
-                    vectorEffect="non-scaling-stroke"
-                  >
-                    {/* outer */}
-                    <rect x="6" y="6" width="88" height="88" />
-                    {/* tramlines */}
-                    <line x1="12" y1="6" x2="12" y2="94" />
-                    <line x1="88" y1="6" x2="88" y2="94" />
-                    {/* service line / net */}
-                    <line x1="6" y1="50" x2="94" y2="50" strokeWidth="0.4" />
-                    {/* glass back wall hint */}
-                    <line x1="6" y1="22" x2="94" y2="22" strokeDasharray="1 1.5" />
-                    <line x1="6" y1="78" x2="94" y2="78" strokeDasharray="1 1.5" />
-                  </g>
-                </svg>
-
                 {/* Subtle vignette so the image holds the eye */}
                 <div
                   aria-hidden="true"

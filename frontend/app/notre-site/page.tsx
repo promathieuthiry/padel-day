@@ -186,27 +186,6 @@ export default async function NotreSitePage() {
                   </div>
                 )}
 
-                {/* Court tramlines overlay */}
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 100 100"
-                  preserveAspectRatio="none"
-                  className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.22] mix-blend-screen"
-                >
-                  <g
-                    fill="none"
-                    stroke="rgba(255,255,255,0.7)"
-                    strokeWidth="0.18"
-                    vectorEffect="non-scaling-stroke"
-                  >
-                    <rect x="4" y="4" width="92" height="92" />
-                    <line x1="4" y1="50" x2="96" y2="50" strokeWidth="0.3" />
-                    <line x1="4" y1="22" x2="96" y2="22" strokeDasharray="1 1.5" />
-                    <line x1="4" y1="78" x2="96" y2="78" strokeDasharray="1 1.5" />
-                    <line x1="50" y1="22" x2="50" y2="78" />
-                  </g>
-                </svg>
-
                 {/* Bottom vignette for caption legibility */}
                 <div
                   aria-hidden="true"
