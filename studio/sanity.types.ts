@@ -58,6 +58,41 @@ export type Cta = {
   style: 'primary' | 'secondary'
 }
 
+export type HomePageReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'homePage'
+}
+
+export type InstallerPageReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'installerPage'
+}
+
+export type NotreSitePageReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'notreSitePage'
+}
+
+export type AProposPageReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'aProposPage'
+}
+
+export type ContactPageReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'contactPage'
+}
+
 export type PageReference = {
   _ref: string
   _type: 'reference'
@@ -70,7 +105,13 @@ export type Link = {
   title: string
   linkType?: 'href' | 'page'
   href?: string
-  page?: PageReference
+  page?:
+    | HomePageReference
+    | InstallerPageReference
+    | NotreSitePageReference
+    | AProposPageReference
+    | ContactPageReference
+    | PageReference
   openInNewTab?: boolean
 }
 
@@ -780,6 +821,11 @@ export type AllSanitySchemaTypes =
   | Benefit
   | Step
   | Cta
+  | HomePageReference
+  | InstallerPageReference
+  | NotreSitePageReference
+  | AProposPageReference
+  | ContactPageReference
   | PageReference
   | Link
   | SanityImageAssetReference

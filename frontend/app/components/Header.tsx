@@ -1,41 +1,24 @@
 import Link from 'next/link'
-import {sanityFetch} from '@/sanity/lib/live'
 import Logo from '@/app/components/Logo'
-import {siteSettingsQuery} from '@/sanity/lib/queries'
+import {getSiteSettings} from '@/sanity/lib/queries'
+import {linkResolver} from '@/sanity/lib/utils'
 import MobileNav from '@/app/components/MobileNav'
 import Container from '@/app/components/ui/Container'
 
 export default async function Header() {
-  const {data: settings} = await sanityFetch({
-    query: siteSettingsQuery,
-  })
+  const {data: settings} = await getSiteSettings()
 
   const rawNavLinks = settings?.navLinks ?? []
 
-  const resolvedLinks = rawNavLinks.map(
-    (link: {
-      _key: string
-      linkType?: string
-      href?: string
-      page?: unknown
-      title?: string
-      openInNewTab?: boolean
-    }) => {
-      const pageSlug = typeof link.page === 'string' ? link.page : null
-      const href =
-        link.linkType === 'href'
-          ? link.href || '#'
-          : link.linkType === 'page' && pageSlug
-            ? `/${pageSlug}`
-            : '#'
-      return {
-        _key: link._key,
-        title: link.title || href,
-        href,
-        openInNewTab: link.openInNewTab,
-      }
-    },
-  )
+  const resolvedLinks = rawNavLinks.map((link) => {
+    const href = linkResolver(link) ?? '#'
+    return {
+      _key: link._key,
+      title: link.title || href,
+      href,
+      openInNewTab: link.openInNewTab,
+    }
+  })
 
   const mobileLinks = resolvedLinks.map((link) => ({
     label: link.title,

@@ -1,13 +1,11 @@
 import Link from 'next/link'
-import {sanityFetch} from '@/sanity/lib/live'
-import {siteSettingsQuery} from '@/sanity/lib/queries'
+import {getSiteSettings} from '@/sanity/lib/queries'
+import {linkResolver} from '@/sanity/lib/utils'
 import Container from './ui/Container'
 import Logo from './Logo'
 
 export default async function Footer() {
-  const {data: settings} = await sanityFetch({
-    query: siteSettingsQuery,
-  })
+  const {data: settings} = await getSiteSettings()
 
   const footerLinks = settings?.footerLinks ?? []
   const copyrightText = settings?.copyrightText ?? `\u00A9 ${new Date().getFullYear()} Padel Day`
@@ -26,13 +24,6 @@ export default async function Footer() {
   const creditSuffix = credit?.suffix ?? 'by'
   const creditName = credit?.name ?? 'Mathieu Thiry'
   const creditUrl = credit?.url ?? 'https://github.com/promathieuthiry'
-
-  const resolveHref = (link: any) =>
-    link.linkType === 'href'
-      ? link.href || '#'
-      : link.linkType === 'page' && link.page
-        ? `/${link.page}`
-        : '#'
 
   const contactHref = contactEmail ? `mailto:${contactEmail}` : '#contact'
 
@@ -225,22 +216,25 @@ export default async function Footer() {
                 {navLabel}
               </h3>
               <ul className="flex flex-col gap-2.5">
-                {footerLinks.map((link: any, index: number) => (
-                  <li key={index} className="min-w-0">
-                    <Link
-                      href={resolveHref(link)}
-                      target={link.openInNewTab ? '_blank' : undefined}
-                      rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
-                      className="group inline-flex items-center gap-2 text-[0.9rem] text-white/75 hover:text-white transition-colors duration-200"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="inline-block h-px w-3 shrink-0 bg-white/30 transition-[width,background-color] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-5 group-hover:bg-lime"
-                      />
-                      <span className="break-words">{link.title || resolveHref(link)}</span>
-                    </Link>
-                  </li>
-                ))}
+                {footerLinks.map((link) => {
+                  const href = linkResolver(link) ?? '#'
+                  return (
+                    <li key={link._key} className="min-w-0">
+                      <Link
+                        href={href}
+                        target={link.openInNewTab ? '_blank' : undefined}
+                        rel={link.openInNewTab ? 'noopener noreferrer' : undefined}
+                        className="group inline-flex items-center gap-2 text-[0.9rem] text-white/75 hover:text-white transition-colors duration-200"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="inline-block h-px w-3 shrink-0 bg-white/30 transition-[width,background-color] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:w-5 group-hover:bg-lime"
+                        />
+                        <span className="break-words">{link.title || href}</span>
+                      </Link>
+                    </li>
+                  )
+                })}
               </ul>
             </nav>
           )}

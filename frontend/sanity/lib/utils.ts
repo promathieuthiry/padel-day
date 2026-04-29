@@ -22,22 +22,52 @@ export function resolveOpenGraphImage(
   return {url, alt: (image as {alt?: string})?.alt || '', width, height}
 }
 
-export function linkResolver(link: {linkType?: string; href?: string; page?: string | {slug?: {current?: string}}} | undefined): string | null {
+const SINGLETON_PAGE_HREFS: Record<string, string> = {
+  homePage: '/',
+  installerPage: '/installer-un-terrain',
+  notreSitePage: '/notre-site',
+  aProposPage: '/a-propos',
+  contactPage: '/contact',
+}
+
+type ResolvableLinkPage =
+  | string
+  | {
+      _type?: string
+      slug?: string | {current?: string} | null
+    }
+  | null
+
+export function pageHref(page: ResolvableLinkPage): string | null {
+  if (!page) return null
+  if (typeof page === 'string') return `/${page}`
+
+  if (page._type && SINGLETON_PAGE_HREFS[page._type]) {
+    return SINGLETON_PAGE_HREFS[page._type]
+  }
+
+  const slug = typeof page.slug === 'string' ? page.slug : (page.slug?.current ?? null)
+  return slug ? `/${slug}` : null
+}
+
+export function linkResolver(
+  link:
+    | {
+        linkType?: string
+        href?: string
+        page?: ResolvableLinkPage
+      }
+    | undefined,
+): string | null {
   if (!link) return null
 
-  const effectiveLinkType = link.linkType || (link.href ? 'href' : undefined)
+  const effectiveLinkType = link.linkType ?? (link.href ? 'href' : 'page')
 
   switch (effectiveLinkType) {
     case 'href':
       return link.href || null
     case 'page':
-      if (typeof link.page === 'string') {
-        return `/${link.page}`
-      }
-      if (link.page?.slug?.current) {
-        return `/${link.page.slug.current}`
-      }
-      return null
+      return pageHref(link.page ?? null)
     default:
       return null
   }

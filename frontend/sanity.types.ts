@@ -58,6 +58,41 @@ export type Cta = {
   style: 'primary' | 'secondary'
 }
 
+export type HomePageReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'homePage'
+}
+
+export type InstallerPageReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'installerPage'
+}
+
+export type NotreSitePageReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'notreSitePage'
+}
+
+export type AProposPageReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'aProposPage'
+}
+
+export type ContactPageReference = {
+  _ref: string
+  _type: 'reference'
+  _weak?: boolean
+  [internalGroqTypeReferenceTo]?: 'contactPage'
+}
+
 export type PageReference = {
   _ref: string
   _type: 'reference'
@@ -70,7 +105,13 @@ export type Link = {
   title: string
   linkType?: 'href' | 'page'
   href?: string
-  page?: PageReference
+  page?:
+    | HomePageReference
+    | InstallerPageReference
+    | NotreSitePageReference
+    | AProposPageReference
+    | ContactPageReference
+    | PageReference
   openInNewTab?: boolean
 }
 
@@ -780,6 +821,11 @@ export type AllSanitySchemaTypes =
   | Benefit
   | Step
   | Cta
+  | HomePageReference
+  | InstallerPageReference
+  | NotreSitePageReference
+  | AProposPageReference
+  | ContactPageReference
   | PageReference
   | Link
   | SanityImageAssetReference
@@ -821,7 +867,7 @@ export type AllSanitySchemaTypes =
 
 // Source: sanity/lib/queries.ts
 // Variable: siteSettingsQuery
-// Query: *[_type == "settings"][0]
+// Query: *[_type == "settings"][0]{  ...,  navLinks[]{    ...,    page->{_id, _type, "slug": slug.current}  },  footerLinks[]{    ...,    page->{_id, _type, "slug": slug.current}  }}
 export type SiteSettingsQueryResult = {
   _id: string
   _type: 'settings'
@@ -847,21 +893,91 @@ export type SiteSettingsQueryResult = {
     _type: 'image'
   }
   googleAnalyticsId?: string
-  navLinks?: Array<
-    {
-      _key: string
-    } & Link
-  >
+  navLinks: Array<{
+    _key: string
+    _type: 'link'
+    title: string
+    linkType?: 'href' | 'page'
+    href?: string
+    page:
+      | {
+          _id: string
+          _type: 'aProposPage'
+          slug: null
+        }
+      | {
+          _id: string
+          _type: 'contactPage'
+          slug: null
+        }
+      | {
+          _id: string
+          _type: 'homePage'
+          slug: null
+        }
+      | {
+          _id: string
+          _type: 'installerPage'
+          slug: null
+        }
+      | {
+          _id: string
+          _type: 'notreSitePage'
+          slug: null
+        }
+      | {
+          _id: string
+          _type: 'page'
+          slug: string
+        }
+      | null
+    openInNewTab?: boolean
+  }> | null
   footerEyebrow?: string
   footerTagline?: string
   footerContactLabel?: string
   footerNavLabel?: string
   footerContactCtaLabel?: string
-  footerLinks?: Array<
-    {
-      _key: string
-    } & Link
-  >
+  footerLinks: Array<{
+    _key: string
+    _type: 'link'
+    title: string
+    linkType?: 'href' | 'page'
+    href?: string
+    page:
+      | {
+          _id: string
+          _type: 'aProposPage'
+          slug: null
+        }
+      | {
+          _id: string
+          _type: 'contactPage'
+          slug: null
+        }
+      | {
+          _id: string
+          _type: 'homePage'
+          slug: null
+        }
+      | {
+          _id: string
+          _type: 'installerPage'
+          slug: null
+        }
+      | {
+          _id: string
+          _type: 'notreSitePage'
+          slug: null
+        }
+      | {
+          _id: string
+          _type: 'page'
+          slug: string
+        }
+      | null
+    openInNewTab?: boolean
+  }> | null
   copyrightText?: string
   footerCredit?: {
     prefix?: string
@@ -1259,7 +1375,7 @@ export type SitemapDataQueryResult = Array<{
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type == "settings"][0]': SiteSettingsQueryResult
+    '*[_type == "settings"][0]{\n  ...,\n  navLinks[]{\n    ...,\n    page->{_id, _type, "slug": slug.current}\n  },\n  footerLinks[]{\n    ...,\n    page->{_id, _type, "slug": slug.current}\n  }\n}': SiteSettingsQueryResult
     '*[_type == "homePage"][0]': HomePageQueryResult
     '*[_type == "faqItem"] | order(order asc)': FaqItemsQueryResult
     '*[_type == "installerPage"][0]': InstallerPageQueryResult

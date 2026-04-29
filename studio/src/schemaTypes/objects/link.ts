@@ -44,7 +44,14 @@ export const link = defineType({
       name: 'page',
       title: 'Page',
       type: 'reference',
-      to: [{type: 'page'}],
+      to: [
+        {type: 'homePage'},
+        {type: 'installerPage'},
+        {type: 'notreSitePage'},
+        {type: 'aProposPage'},
+        {type: 'contactPage'},
+        {type: 'page'},
+      ],
       hidden: ({parent}) => (parent as {linkType?: string})?.linkType !== 'page',
       validation: (Rule) =>
         Rule.custom((value, context) => {

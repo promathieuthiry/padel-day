@@ -1,6 +1,18 @@
+import {cache} from 'react'
 import {defineQuery} from 'next-sanity'
+import {sanityFetch} from '@/sanity/lib/live'
 
-export const siteSettingsQuery = defineQuery(`*[_type == "settings"][0]`)
+export const siteSettingsQuery = defineQuery(`*[_type == "settings"][0]{
+  ...,
+  navLinks[]{
+    ...,
+    page->{_id, _type, "slug": slug.current}
+  },
+  footerLinks[]{
+    ...,
+    page->{_id, _type, "slug": slug.current}
+  }
+}`)
 
 export const homePageQuery = defineQuery(`*[_type == "homePage"][0]`)
 
@@ -36,3 +48,5 @@ export const allPageSlugsQuery = defineQuery(
 export const sitemapDataQuery = defineQuery(
   `*[_type == "page" && defined(slug.current)]{ "slug": slug.current, _updatedAt }`,
 )
+
+export const getSiteSettings = cache(() => sanityFetch({query: siteSettingsQuery}))
