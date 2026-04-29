@@ -117,6 +117,7 @@ export default function HeroSection({
                 <span className="relative inline-block size-2.5 rounded-full bg-lime" />
               </span>
               <span>{eyebrowText}</span>
+              <span aria-hidden="true" className="inline-block h-px w-10 bg-blue/40" />
             </p>
 
             {/* Headline */}
