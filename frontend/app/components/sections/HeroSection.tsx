@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import {urlForImage} from '@/sanity/lib/utils'
 import Container from '@/app/components/ui/Container'
+import HeroCta from '@/app/components/ui/HeroCta'
 interface HeroImage {
   asset?: {_ref: string}
   alt?: string | null
@@ -146,59 +146,10 @@ export default function HeroSection({
               style={{animationDelay: '700ms'}}
             >
               {primary && (
-                <Link
-                  href={primary.href ?? '#'}
-                  className="group relative inline-flex items-center gap-3 self-start bg-dark text-lime rounded-full pl-7 pr-2 py-2 font-semibold text-[0.95rem] whitespace-nowrap transition-transform duration-200 ease-out active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue"
-                >
-                  <span>{primary.label}</span>
-                  <span
-                    aria-hidden="true"
-                    className="flex size-10 shrink-0 items-center justify-center rounded-full bg-lime text-dark transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-1"
-                  >
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M4 9h10" />
-                      <path d="M10 4l5 5-5 5" />
-                    </svg>
-                  </span>
-                </Link>
+                <HeroCta variant="primary" label={primary.label ?? ''} href={primary.href} />
               )}
               {secondary && (
-                <Link
-                  href={secondary.href ?? '#'}
-                  className="group inline-flex items-center gap-2 self-start text-ink font-semibold text-[0.95rem] py-2 transition-colors duration-200 hover:text-blue focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue rounded-sm"
-                >
-                  <span className="relative">
-                    {secondary.label}
-                    <span
-                      aria-hidden="true"
-                      className="absolute left-0 right-0 -bottom-1 h-px bg-current origin-left scale-x-100 transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]"
-                    />
-                  </span>
-                  <svg
-                    aria-hidden="true"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-1"
-                  >
-                    <path d="M4 9h10" />
-                    <path d="M10 4l5 5-5 5" />
-                  </svg>
-                </Link>
+                <HeroCta variant="secondary" label={secondary.label ?? ''} href={secondary.href} />
               )}
             </div>
           </div>
