@@ -1,15 +1,14 @@
 import type {Metadata} from 'next'
 import {notFound} from 'next/navigation'
 import {PortableText} from '@portabletext/react'
-import Link from 'next/link'
 import Image from 'next/image'
 import {sanityFetch} from '@/sanity/lib/live'
 import {installerPageQuery} from '@/sanity/lib/queries'
 import {urlForImage} from '@/sanity/lib/utils'
 import FadeIn from '@/app/components/FadeIn'
 import Container from '@/app/components/ui/Container'
-import Button from '@/app/components/Button'
 import HeroCta from '@/app/components/ui/HeroCta'
+import SectionCta from '@/app/components/ui/SectionCta'
 import SectionIntro from '@/app/components/ui/SectionIntro'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -461,35 +460,13 @@ export default async function InstallerPage() {
               )}
 
               {page.cta && (
-                <div className="mt-12 flex flex-col sm:flex-row sm:items-center gap-6">
-                  <Button label={page.cta.label} href={page.cta.href} variant="primary" />
-                  <Link
+                <div className="mt-12 flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-6 sm:gap-8">
+                  <SectionCta label={page.cta.label} href={page.cta.href} />
+                  <SectionCta
+                    variant="secondary"
+                    label={ctaSecondary.label || 'Poser une question'}
                     href={ctaSecondary.href || '/contact'}
-                    className="group inline-flex items-center gap-2 text-white/80 font-semibold text-[0.95rem] hover:text-lime transition-colors"
-                  >
-                    <span className="relative">
-                      {ctaSecondary.label}
-                      <span
-                        aria-hidden="true"
-                        className="absolute left-0 right-0 -bottom-1 h-px bg-current"
-                      />
-                    </span>
-                    <svg
-                      aria-hidden="true"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-1"
-                    >
-                      <path d="M4 9h10" />
-                      <path d="M10 4l5 5-5 5" />
-                    </svg>
-                  </Link>
+                  />
                 </div>
               )}
             </div>

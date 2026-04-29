@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import Container from '@/app/components/ui/Container'
+import SectionCta from '@/app/components/ui/SectionCta'
 
 type BannerCta = {label?: string; href?: string}
 
@@ -87,61 +87,21 @@ export default function CtaBannerSection({
           {/* CTA cluster */}
           {(primaryCta || secondaryCta) && (
             <div className="col-span-12 lg:col-span-4 flex flex-col gap-5 lg:items-end">
-              {primaryCta && (
-                <Link
+              {primaryCta && primaryCta.label && (
+                <SectionCta
+                  label={primaryCta.label}
                   href={primaryCta.href || '#'}
-                  className="group relative inline-flex items-center gap-4 self-start lg:self-end bg-lime text-dark rounded-full pl-7 pr-2 py-2 font-semibold text-base whitespace-nowrap transition-transform duration-200 ease-out active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime"
-                >
-                  <span>{primaryCta.label}</span>
-                  <span
-                    aria-hidden="true"
-                    className="flex size-11 shrink-0 items-center justify-center rounded-full bg-dark text-lime transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-1"
-                  >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M4 9h10" />
-                      <path d="M10 4l5 5-5 5" />
-                    </svg>
-                  </span>
-                </Link>
+                  className="lg:self-end"
+                />
               )}
 
-              {secondaryCta && (
-                <Link
+              {secondaryCta && secondaryCta.label && (
+                <SectionCta
+                  variant="secondary"
+                  label={secondaryCta.label}
                   href={secondaryCta.href || '#'}
-                  className="group inline-flex items-center gap-2 self-start lg:self-end text-white/80 hover:text-white transition-colors duration-200 text-sm font-medium tracking-wide"
-                >
-                  <span className="relative">
-                    {secondaryCta.label}
-                    <span
-                      aria-hidden="true"
-                      className="absolute left-0 right-0 -bottom-1 h-px bg-white/40 origin-right scale-x-100 transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:origin-left group-hover:scale-x-100"
-                    />
-                  </span>
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 14 14"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    aria-hidden="true"
-                  >
-                    <path d="M3 11L11 3" />
-                    <path d="M5 3h6v6" />
-                  </svg>
-                </Link>
+                  className="lg:self-end"
+                />
               )}
             </div>
           )}

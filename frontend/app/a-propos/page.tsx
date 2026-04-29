@@ -1,6 +1,5 @@
 import type {Metadata} from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import {PortableText} from '@portabletext/react'
 import {sanityFetch} from '@/sanity/lib/live'
 import {aProposPageQuery, teamMembersQuery} from '@/sanity/lib/queries'
@@ -8,6 +7,7 @@ import {urlForImage} from '@/sanity/lib/utils'
 
 import FadeIn from '@/app/components/FadeIn'
 import Container from '@/app/components/ui/Container'
+import SectionCta from '@/app/components/ui/SectionCta'
 import SectionIntro from '@/app/components/ui/SectionIntro'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -356,57 +356,15 @@ export default async function AProposPage() {
 
           <FadeIn delay={0.15}>
             <div className="mt-12 md:mt-14 flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-6 sm:gap-8">
-              <Link
+              <SectionCta
+                label={ctaPrimary.label || 'Installer un terrain'}
                 href={ctaPrimary.href || '/installer-un-terrain'}
-                className="group relative inline-flex items-center gap-3 self-start bg-lime text-dark rounded-full pl-7 pr-2 py-2 font-semibold text-[0.95rem] whitespace-nowrap transition-transform duration-200 ease-out active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime"
-              >
-                <span>{ctaPrimary.label}</span>
-                <span
-                  aria-hidden="true"
-                  className="flex size-10 shrink-0 items-center justify-center rounded-full bg-dark text-lime transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0.5"
-                >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M4 9h10" />
-                    <path d="M10 4l5 5-5 5" />
-                  </svg>
-                </span>
-              </Link>
-              <Link
+              />
+              <SectionCta
+                variant="secondary"
+                label={ctaSecondary.label || 'Nous contacter'}
                 href={ctaSecondary.href || '/contact'}
-                className="group inline-flex items-center gap-2 self-start text-white/85 font-semibold text-[0.95rem] py-2 transition-colors duration-200 hover:text-lime focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime rounded-sm"
-              >
-                <span className="relative">
-                  {ctaSecondary.label}
-                  <span
-                    aria-hidden="true"
-                    className="absolute left-0 right-0 -bottom-1 h-px bg-current"
-                  />
-                </span>
-                <svg
-                  aria-hidden="true"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 18 18"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-1"
-                >
-                  <path d="M4 9h10" />
-                  <path d="M10 4l5 5-5 5" />
-                </svg>
-              </Link>
+              />
             </div>
           </FadeIn>
         </Container>
