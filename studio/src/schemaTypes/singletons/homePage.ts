@@ -8,6 +8,7 @@ export const homePage = defineType({
   icon: HomeIcon,
   groups: [
     {name: 'hero', title: 'Hero', default: true},
+    {name: 'dna', title: 'Notre ADN'},
     {name: 'facts', title: 'Facts'},
     {name: 'howItWorks', title: 'How it works'},
     {name: 'impact', title: 'Impact'},
@@ -111,6 +112,28 @@ export const homePage = defineType({
         defineField({name: 'label', title: 'Label', type: 'string'}),
         defineField({name: 'text', title: 'Text', type: 'text', rows: 2}),
       ],
+    }),
+
+    // ── Notre ADN ──────────────────────────────────────────
+    defineField({
+      name: 'dnaHeading',
+      title: 'Heading',
+      type: 'string',
+      group: 'dna',
+    }),
+    defineField({
+      name: 'dnaEyebrow',
+      title: 'Eyebrow',
+      type: 'string',
+      group: 'dna',
+    }),
+    defineField({
+      name: 'dnaCards',
+      title: 'Cards',
+      type: 'array',
+      of: [defineArrayMember({type: 'dnaCard'})],
+      validation: (rule) => rule.min(1).max(4),
+      group: 'dna',
     }),
 
     // ── Facts ──────────────────────────────────────────────

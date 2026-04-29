@@ -1,5 +1,60 @@
 [
   {
+    "name": "dnaCard",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "dnaCard"
+          }
+        },
+        "icon": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "map"
+              },
+              {
+                "type": "string",
+                "value": "court"
+              },
+              {
+                "type": "string",
+                "value": "coins"
+              },
+              {
+                "type": "string",
+                "value": "racket"
+              }
+            ]
+          },
+          "optional": true
+        },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        },
+        "description": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        }
+      }
+    }
+  },
+  {
     "name": "fact",
     "type": "type",
     "value": {
@@ -2604,6 +2659,42 @@
                 "type": "string"
               },
               "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "dnaHeading": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "dnaEyebrow": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "dnaCards": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "dnaCard"
             }
           }
         },

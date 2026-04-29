@@ -16,6 +16,7 @@ import {benefit} from './objects/benefit'
 import {feature} from './objects/feature'
 import {missionCard} from './objects/missionCard'
 import {fact} from './objects/fact'
+import {dnaCard} from './objects/dnaCard'
 
 export const schemaTypes = [
   // Singletons
@@ -39,4 +40,5 @@ export const schemaTypes = [
   feature,
   missionCard,
   fact,
+  dnaCard,
 ]

@@ -10,6 +10,7 @@ import HowItWorksSection from '@/app/components/sections/HowItWorksSection'
 import ImpactSection from '@/app/components/sections/ImpactSection'
 import CtaBannerSection from '@/app/components/sections/CtaBannerSection'
 import FaqSection from '@/app/components/sections/FaqSection'
+import DnaSection from '@/app/components/sections/DnaSection'
 
 export async function generateMetadata(): Promise<Metadata> {
   const {data: homePage} = await sanityFetch({query: homePageQuery, stega: false})
@@ -54,6 +55,16 @@ export default async function Page() {
         secondaryCta={homePage?.heroSecondaryCta}
         credentialsChip={homePage?.heroCredentialsChip}
       />
+      {homePage?.dnaCards && homePage.dnaCards.length > 0 && (
+        <FadeIn>
+          <DnaSection
+            heading={homePage.dnaHeading || 'Notre ADN'}
+            eyebrow={homePage.dnaEyebrow ?? undefined}
+            cards={homePage.dnaCards}
+          />
+        </FadeIn>
+      )}
+
       <FadeIn direction="up">
         <FactsSection
           eyebrow={homePage?.factsEyebrow ?? undefined}

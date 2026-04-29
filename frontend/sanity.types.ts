@@ -15,6 +15,13 @@
 export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: ../sanity.schema.json
+export type DnaCard = {
+  _type: 'dnaCard'
+  icon?: 'map' | 'court' | 'coins' | 'racket'
+  title: string
+  description: string
+}
+
 export type Fact = {
   _type: 'fact'
   label: string
@@ -452,6 +459,13 @@ export type HomePage = {
     label?: string
     text?: string
   }
+  dnaHeading?: string
+  dnaEyebrow?: string
+  dnaCards?: Array<
+    {
+      _key: string
+    } & DnaCard
+  >
   factsEyebrow?: string
   factsHeading?: string
   factsBody?: string
@@ -815,6 +829,7 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
+  | DnaCard
   | Fact
   | MissionCard
   | Feature
@@ -1032,6 +1047,13 @@ export type HomePageQueryResult = {
     label?: string
     text?: string
   }
+  dnaHeading?: string
+  dnaEyebrow?: string
+  dnaCards?: Array<
+    {
+      _key: string
+    } & DnaCard
+  >
   factsEyebrow?: string
   factsHeading?: string
   factsBody?: string
