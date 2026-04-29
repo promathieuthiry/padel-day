@@ -9,9 +9,9 @@ export const homePage = defineType({
   groups: [
     {name: 'hero', title: 'Hero', default: true},
     {name: 'dna', title: 'Notre ADN'},
+    {name: 'impact', title: 'Impact'},
     {name: 'facts', title: 'Facts'},
     {name: 'howItWorks', title: 'How it works'},
-    {name: 'impact', title: 'Impact'},
     {name: 'ctaBanner', title: 'CTA banner'},
     {name: 'faq', title: 'FAQ'},
     {name: 'meta', title: 'SEO'},
@@ -136,6 +136,39 @@ export const homePage = defineType({
       group: 'dna',
     }),
 
+    // ── Impact ─────────────────────────────────────────────
+    defineField({
+      name: 'impactEyebrow',
+      title: 'Eyebrow',
+      type: 'string',
+      group: 'impact',
+    }),
+    defineField({
+      name: 'impactHeading',
+      title: 'Heading',
+      type: 'string',
+      group: 'impact',
+    }),
+    defineField({
+      name: 'impactBody',
+      title: 'Body',
+      type: 'blockContent',
+      group: 'impact',
+    }),
+    defineField({
+      name: 'impactCta',
+      title: 'CTA',
+      type: 'cta',
+      group: 'impact',
+    }),
+    defineField({
+      name: 'impactImage',
+      title: 'Image',
+      type: 'image',
+      options: {hotspot: true},
+      group: 'impact',
+    }),
+
     // ── Facts ──────────────────────────────────────────────
     defineField({
       name: 'factsEyebrow',
@@ -192,39 +225,6 @@ export const homePage = defineType({
       type: 'image',
       options: {hotspot: true},
       group: 'howItWorks',
-    }),
-
-    // ── Impact ─────────────────────────────────────────────
-    defineField({
-      name: 'impactEyebrow',
-      title: 'Eyebrow',
-      type: 'string',
-      group: 'impact',
-    }),
-    defineField({
-      name: 'impactHeading',
-      title: 'Heading',
-      type: 'string',
-      group: 'impact',
-    }),
-    defineField({
-      name: 'impactBody',
-      title: 'Body',
-      type: 'blockContent',
-      group: 'impact',
-    }),
-    defineField({
-      name: 'impactCta',
-      title: 'CTA',
-      type: 'cta',
-      group: 'impact',
-    }),
-    defineField({
-      name: 'impactImage',
-      title: 'Image',
-      type: 'image',
-      options: {hotspot: true},
-      group: 'impact',
     }),
 
     // ── CTA Banner ─────────────────────────────────────────

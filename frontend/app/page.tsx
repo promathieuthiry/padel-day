@@ -65,6 +65,18 @@ export default async function Page() {
         </FadeIn>
       )}
 
+      {homePage?.impactHeading && (
+        <FadeIn>
+          <ImpactSection
+            heading={homePage.impactHeading}
+            eyebrow={homePage.impactEyebrow ?? undefined}
+            body={homePage.impactBody ?? undefined}
+            cta={homePage.impactCta}
+            image={homePage.impactImage}
+          />
+        </FadeIn>
+      )}
+
       <FadeIn direction="up">
         <FactsSection
           eyebrow={homePage?.factsEyebrow ?? undefined}
@@ -81,18 +93,6 @@ export default async function Page() {
             eyebrow={homePage.howItWorksEyebrow ?? undefined}
             steps={homePage.howItWorksSteps}
             image={homePage.howItWorksImage}
-          />
-        </FadeIn>
-      )}
-
-      {homePage?.impactHeading && (
-        <FadeIn>
-          <ImpactSection
-            heading={homePage.impactHeading}
-            eyebrow={homePage.impactEyebrow ?? undefined}
-            body={homePage.impactBody ?? undefined}
-            cta={homePage.impactCta}
-            image={homePage.impactImage}
           />
         </FadeIn>
       )}

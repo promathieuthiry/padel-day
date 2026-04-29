@@ -27,7 +27,7 @@ export default function ImpactSection({
     : null
 
   return (
-    <section className="bg-surface py-20 md:py-28">
+    <section className="bg-surface-2 border-t border-b border-hairline py-20 md:py-28">
       <Container>
         <div className="grid gap-12 md:grid-cols-2 md:gap-16 md:items-center">
           <Stagger className="flex flex-col" staggerDelay={0.1}>

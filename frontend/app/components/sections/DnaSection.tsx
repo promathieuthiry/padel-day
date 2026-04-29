@@ -108,21 +108,20 @@ export default function DnaSection({heading, eyebrow, cards}: DnaSectionProps) {
           {cards.map((card) => (
             <StaggerItem
               key={card._key}
-              className="bg-surface p-8 md:p-10 flex flex-col gap-6 transition-colors duration-200 hover:bg-surface-2"
+              className="bg-surface p-8 md:p-10 flex flex-col gap-3 transition-colors duration-200 hover:bg-surface-2"
             >
-              <DnaCardIcon icon={card.icon} className="text-blue w-7 h-7 shrink-0" />
-
-              <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <DnaCardIcon icon={card.icon} className="text-blue w-7 h-7 shrink-0" />
                 <h3
                   className="font-heading font-semibold text-ink tracking-tight leading-[1.2]"
                   style={{fontSize: 'clamp(1.1rem, 1.8vw, 1.35rem)'}}
                 >
                   {card.title}
                 </h3>
-                <p className="font-body text-ink-muted text-[0.95rem] leading-[1.65] max-w-[52ch]">
-                  {card.description}
-                </p>
               </div>
+              <p className="font-body text-ink-muted text-[0.95rem] leading-[1.65] max-w-[52ch]">
+                {card.description}
+              </p>
             </StaggerItem>
           ))}
         </Stagger>
